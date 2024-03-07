@@ -1,0 +1,5 @@
+.bsp/
+build/
+out/
+temp/
+test_run_dir/
