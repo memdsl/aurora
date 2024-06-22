@@ -2,9 +2,9 @@ export PATH := $(PATH):$(abspath ./util)
 
 CFG_CFLAGS_TOP_NAME = UART GPIO HDMI
 
-BUILD_DIR = $(METEOR_IP_HOME)/rtl/build
+BUILD_DIR = $(METEOR_IP_HOME)/chisel/rtl/build
 
-SRCSS_DIR           = $(abspath $(METEOR_CPU_HOME)/rtl/src)
+SRCSS_DIR           = $(abspath $(METEOR_IP_HOME)/chisel/rtl/src)
 SRCSS_SRC_BLACKLIST =
 SRCSS_DIR_BLACKLIST =
 SRCSS_BLACKLIST     = $(SRCSS_SRC_BLACKLIST)                                  \
@@ -12,7 +12,7 @@ SRCSS_BLACKLIST     = $(SRCSS_SRC_BLACKLIST)                                  \
 SRCSS_WHITELIST     = $(shell find $(SRCSS_DIR) -name "*.scala")
 SRCSS               = $(filter-out $(SRCSS_BLACKLIST), $(SRCSS_WHITELIST))
 
-SRCVS_DIR = $(METEOR_CPU_HOME)/rtl/srcv
+SRCVS_DIR = $(METEOR_IP_HOME)/chisel/rtl/srcv
 SRCVS_GEN = $(addsuffix .v, $(addprefix $(BUILD_DIR)/, $(CFG_CFLAGS_TOP_NAME)))
 SRCVS     = $(shell find $(SRCVS_DIR) -name "*.v")
 
