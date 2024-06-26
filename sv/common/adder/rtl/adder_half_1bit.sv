@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-22 20:56:45
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-06-24 01:09:56
+ * @LastEditTime: 2024-06-28 14:18:17
  * @FilePath    : /memdsl-cpu/meteor/ip/sv/common/adder/rtl/adder_half_1bit.sv
  * @Description : 1bit half adder
  *
@@ -23,7 +23,6 @@ module adder_half_1bit(
     output logic o_cry
 );
 
-    assign o_res = i_num_a ^ i_num_b;
-    assign o_cry = i_num_a & i_num_b;
+    assign { o_cry, o_res } = i_num_a + i_num_b;
 
 endmodule
