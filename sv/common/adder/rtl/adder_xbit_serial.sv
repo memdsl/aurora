@@ -1,6 +1,25 @@
-`include "adder_full_1bit.sv"
+/*
+ * @Author      : myyerrol
+ * @Date        : 2024-06-24 01:15:01
+ * @LastEditors : myyerrol
+ * @LastEditTime: 2024-06-28 14:46:21
+ * @FilePath    : /memdsl-cpu/meteor/ip/sv/common/adder/rtl/adder_xbit_serial.sv
+ * @Description : xbit serial carry adder
+ *
+ *  Copyright (c) 2024 by myyerrol, All Rights Reserved.
+ */
 
-module adder_seq #(
+`include "adder_1bit_full.sv"
+
+/**
+ * @description: xbit serial carry adder
+ * @param i_num_a {logic} Number a
+ * @param i_num_b {logic} Number b
+ * @param i_cry   {logic} Carry from lowest bit
+ * @param o_res   {logic} Result
+ * @param o_cry   {logic} Carry to highest bit
+ */
+module adder_xbit_serial #(
     parameter DATA_WIDTH = 8
 ) (
     input  logic [DATA_WIDTH - 1] i_num_a,
@@ -16,8 +35,8 @@ module adder_seq #(
     generate
         genvar i;
         for (i = 0; i < DATA_WIDTH; i = i + 1)
-        begin: adder_seq
-            adder_full_1bit adder_full_1bit_inst(
+        begin: adder_xbit_serial
+            adder_1bit_full adder_1bit_full_inst(
                 .i_num_a(i_num_a[i]),
                 .i_num_b(i_num_b[i]),
                 .i_cry((i == 0) ? i_cry : w_cry[i - 1]),

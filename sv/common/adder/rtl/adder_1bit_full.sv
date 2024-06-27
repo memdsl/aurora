@@ -2,9 +2,9 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-22 20:56:57
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-06-24 01:10:04
- * @FilePath    : /memdsl-cpu/meteor/ip/sv/common/adder/rtl/adder_full_1bit.sv
- * @Description : 1bit Full Adder
+ * @LastEditTime: 2024-06-28 14:44:46
+ * @FilePath    : /memdsl-cpu/meteor/ip/sv/common/adder/rtl/adder_1bit_full.sv
+ * @Description : 1bit full adder
  *
  *  Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
@@ -17,7 +17,7 @@
  * @param o_res   {logic} Result
  * @param o_cry   {logic} Carry to high bit
  */
-module adder_full_1bit (
+module adder_1bit_full (
     input  logic i_num_a,
     input  logic i_num_b,
     input  logic i_cry,

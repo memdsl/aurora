@@ -2,8 +2,8 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-22 20:56:45
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-06-28 14:18:17
- * @FilePath    : /memdsl-cpu/meteor/ip/sv/common/adder/rtl/adder_half_1bit.sv
+ * @LastEditTime: 2024-06-28 14:42:51
+ * @FilePath    : /memdsl-cpu/meteor/ip/sv/common/adder/rtl/adder_1bit_half.sv
  * @Description : 1bit half adder
  *
  *  Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -16,7 +16,7 @@
  * @param o_res   {logic} Result
  * @param o_cry   {logic} Carry
  */
-module adder_half_1bit(
+module adder_1bit_half(
     input  logic i_num_a,
     input  logic i_num_b,
     output logic o_res,
