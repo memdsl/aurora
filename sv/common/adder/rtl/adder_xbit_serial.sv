@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-24 01:15:01
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-06-28 14:46:21
+ * @LastEditTime: 2024-06-28 18:43:02
  * @FilePath    : /memdsl-cpu/meteor/ip/sv/common/adder/rtl/adder_xbit_serial.sv
  * @Description : xbit serial carry adder
  *
@@ -29,9 +29,17 @@ module adder_xbit_serial #(
     output logic                  o_cry
 );
 
+    /** Temporary result */
     logic [DATA_WIDTH - 1 : 0] w_res;
+    /** Temporary carry bits */
     logic [DATA_WIDTH - 1 : 0] w_cry;
 
+    /**
+     * Instantiate multiple 1bit full adders according to DATA_WIDTH to build a
+     * serial full adder, becaouse the sum of each bit must wait until the
+     * carry of the lower bit is generated before it can be established, so the
+     * execution efficiency of serial full adder is not high.
+     */
     generate
         genvar i;
         for (i = 0; i < DATA_WIDTH; i = i + 1)
@@ -46,6 +54,7 @@ module adder_xbit_serial #(
         end
     endgenerate
 
+    /** Output result and carry bits. */
     assign o_res = w_res;
     assign o_cry = w_cry[DATA_WIDTH - 1];
 

@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-22 20:56:57
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-06-28 14:44:46
+ * @LastEditTime: 2024-06-28 18:23:47
  * @FilePath    : /memdsl-cpu/meteor/ip/sv/common/adder/rtl/adder_1bit_full.sv
  * @Description : 1bit full adder
  *
@@ -25,6 +25,7 @@ module adder_1bit_full (
     output logic o_cry
 );
 
+    /** Output result and carry bits. */
     assign { o_cry, o_res } = i_num_a + i_num_b + i_cry;
 
 endmodule
