@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-28 14:41:49
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-06-28 19:01:11
+ * @LastEditTime: 2024-06-28 21:39:54
  * @FilePath    : /memdsl-cpu/meteor/ip/sv/common/adder/rtl/adder_xbit_ahead.sv
  * @Description : xbit ahead carry adder
  *
@@ -20,10 +20,10 @@
 module adder_xbit_ahead #(
     parameter DATA_WIDTH = 8
 ) (
-    input  logic [DATA_WIDTH - 1] i_num_a,
-    input  logic [DATA_WIDTH - 1] i_num_b,
+    input  logic [DATA_WIDTH - 1 : 0] i_num_a,
+    input  logic [DATA_WIDTH - 1 : 0] i_num_b,
     input  logic                  i_cry,
-    output logic [DATA_WIDTH - 1] o_res,
+    output logic [DATA_WIDTH - 1 : 0] o_res,
     output logic                  o_cry
 );
 
