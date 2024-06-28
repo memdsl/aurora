@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-24 01:15:01
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-06-28 18:43:02
+ * @LastEditTime: 2024-06-28 21:36:57
  * @FilePath    : /memdsl-cpu/meteor/ip/sv/common/adder/rtl/adder_xbit_serial.sv
  * @Description : xbit serial carry adder
  *
@@ -22,11 +22,11 @@
 module adder_xbit_serial #(
     parameter DATA_WIDTH = 8
 ) (
-    input  logic [DATA_WIDTH - 1] i_num_a,
-    input  logic [DATA_WIDTH - 1] i_num_b,
-    input  logic                  i_cry,
-    output logic [DATA_WIDTH - 1] o_res,
-    output logic                  o_cry
+    input  logic [DATA_WIDTH - 1 : 0] i_num_a,
+    input  logic [DATA_WIDTH - 1 : 0] i_num_b,
+    input  logic                      i_cry,
+    output logic [DATA_WIDTH - 1 : 0] o_res,
+    output logic                      o_cry
 );
 
     /** Temporary result */
