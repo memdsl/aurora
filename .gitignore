@@ -3,3 +3,5 @@ build/
 out/
 temp/
 test_run_dir/
+*.vcd
+*.fsdb
