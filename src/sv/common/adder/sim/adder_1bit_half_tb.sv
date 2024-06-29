@@ -2,11 +2,11 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-28 14:52:17
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-06-29 10:48:05
+ * @LastEditTime: 2024-06-29 10:57:17
  * @FilePath    : /memdsl-cpu/meteor/ip/src/sv/common/adder/sim/adder_1bit_half_tb.sv
  * @Description : 1bit half adder testbench
  *
- *  Copyright (c) 2024 by myyerrol, All Rights Reserved.
+ * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
 
 `timescale 1ns / 1ps
