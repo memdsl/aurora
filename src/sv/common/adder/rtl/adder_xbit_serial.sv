@@ -2,8 +2,8 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-24 01:15:01
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-06-28 21:36:57
- * @FilePath    : /memdsl-cpu/meteor/ip/sv/common/adder/rtl/adder_xbit_serial.sv
+ * @LastEditTime: 2024-06-29 10:47:54
+ * @FilePath    : /memdsl-cpu/meteor/ip/src/sv/common/adder/rtl/adder_xbit_serial.sv
  * @Description : xbit serial carry adder
  *
  *  Copyright (c) 2024 by myyerrol, All Rights Reserved.

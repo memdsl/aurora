@@ -1,9 +1,20 @@
+/*
+ * @Author      : myyerrol
+ * @Date        : 2024-06-28 14:52:18
+ * @LastEditors : myyerrol
+ * @LastEditTime: 2024-06-29 10:48:10
+ * @FilePath    : /memdsl-cpu/meteor/ip/src/sv/common/adder/sim/adder_xbit_ahead_tb.sv
+ * @Description : xbit ahead carry adder testbench
+ *
+ *  Copyright (c) 2024 by myyerrol, All Rights Reserved.
+ */
+
 `timescale 1ns / 1ps
 
-module adder_xbit_serial_tb();
+module adder_xbit_ahead_tb();
 
 initial begin
-    $dumpfile("build/adder_xbit_serial.vcd");
+    $dumpfile("build/adder_xbit_ahead.vcd");
     $dumpvars();
 end
 
@@ -25,9 +36,9 @@ initial begin
     #10 $finish;
 end
 
-adder_xbit_serial #(
+adder_xbit_ahead #(
     .DATA_WIDTH(DATA_WIDTH)
-) adder_xbit_serial_inst(
+) adder_xbit_ahead_inst(
     .i_num_a(w_num_a),
     .i_num_b(w_num_b),
     .i_cry(w_cry),

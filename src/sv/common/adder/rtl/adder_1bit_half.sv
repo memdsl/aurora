@@ -2,8 +2,8 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-22 20:56:45
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-06-28 21:16:25
- * @FilePath    : /memdsl-cpu/meteor/ip/sv/common/adder/rtl/adder_1bit_half.sv
+ * @LastEditTime: 2024-06-29 10:47:42
+ * @FilePath    : /memdsl-cpu/meteor/ip/src/sv/common/adder/rtl/adder_1bit_half.sv
  * @Description : 1bit half adder
  *
  *  Copyright (c) 2024 by myyerrol, All Rights Reserved.
