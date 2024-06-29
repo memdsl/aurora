@@ -2,11 +2,11 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-28 14:52:18
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-06-29 10:48:17
+ * @LastEditTime: 2024-06-29 10:57:25
  * @FilePath    : /memdsl-cpu/meteor/ip/src/sv/common/adder/sim/adder_xbit_serial_tb.sv
  * @Description : xbit serial carry adder testbench
  *
- *  Copyright (c) 2024 by myyerrol, All Rights Reserved.
+ * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
 
 `timescale 1ns / 1ps
