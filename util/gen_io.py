@@ -2,7 +2,7 @@
 Author      : myyerrol
 Date        : 2024-06-28 22:12:21
 LastEditors : myyerrol
-LastEditTime: 2024-06-30 22:34:04
+LastEditTime: 2024-06-30 22:49:59
 path    : /memdsl-cpu/meteor/ip/util/gen_io.py
 Description : generate io of ip
 
@@ -25,7 +25,7 @@ class gen_io:
         file_arr = os.listdir(path)
         for file in file_arr:
             file = os.path.join(path, file)
-            if os.path.isdir(file) and 1:
+            if os.path.isdir(file):
                 self.__read_sv(file)
             else:
                 if "rtl" in file:
@@ -61,7 +61,7 @@ class gen_io:
                     json_params_obj["data"] = int(param[1])
                     json_params_arr.append(json_params_obj)
                 else:
-                    assert 0, "Error: parameter format is incorrect"
+                    assert 0, "error: the parameter format is incorrect"
             else:
                 pass
         file.close()
@@ -75,12 +75,17 @@ class gen_io:
         self.__read_sv(self.prj_dir_sv)
         self.__gen_json()
 
-    prj_dir    = ""
-    prj_dir_sv = ""
-    prj_dir_io = ""
+    prj_dir     = ""
+    prj_dir_sv  = ""
+    prj_dir_io  = ""
     sv_file_arr = []
-    json_arr = []
+    json_arr    = []
 
-# if __name__ == "main":
-gen_io_obj = gen_io()
-gen_io_obj.run()
+if __name__ == "__main__":
+    try:
+        gen_io_obj = gen_io()
+        gen_io_obj.run()
+    except IOError:
+        print("error: the file is not found or failed to read/write file")
+    else:
+        print("success")
