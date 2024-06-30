@@ -1,8 +1,0 @@
-- module: "adder_xbit_serial"
-  params:
-    - name: "DATA_WIDTH"
-      type: "number"
-- module: "adder_xbit_ahead"
-  params:
-    - name: "DATA_WIDTH"
-      type: "number"
