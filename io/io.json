@@ -1,0 +1,22 @@
+[
+    {
+        "module": "adder_xbit_ahead",
+        "params": [
+            {
+                "name": "DATA_WIDTH",
+                "type": "number",
+                "data": 8
+            }
+        ]
+    },
+    {
+        "module": "adder_xbit_serial",
+        "params": [
+            {
+                "name": "DATA_WIDTH",
+                "type": "number",
+                "data": 8
+            }
+        ]
+    }
+]
