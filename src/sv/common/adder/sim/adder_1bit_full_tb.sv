@@ -2,8 +2,8 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-28 14:52:06
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-06-29 10:57:14
- * @FilePath    : /memdsl-cpu/meteor/ip/src/sv/common/adder/sim/adder_1bit_full_tb.sv
+ * @LastEditTime: 2024-06-30 22:57:46
+ * @FilePath    : /memdsl-cpu/aurora/src/sv/common/adder/sim/adder_1bit_full_tb.sv
  * @Description : 1bit full adder testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.

@@ -2,8 +2,8 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-28 14:41:49
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-06-29 10:57:01
- * @FilePath    : /memdsl-cpu/meteor/ip/src/sv/common/adder/rtl/adder_xbit_ahead.sv
+ * @LastEditTime: 2024-06-30 22:57:38
+ * @FilePath    : /memdsl-cpu/aurora/src/sv/common/adder/rtl/adder_xbit_ahead.sv
  * @Description : xbit ahead carry adder
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
