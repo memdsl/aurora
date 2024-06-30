@@ -2,8 +2,8 @@
 Author      : myyerrol
 Date        : 2024-06-28 22:12:21
 LastEditors : myyerrol
-LastEditTime: 2024-06-30 22:49:59
-path    : /memdsl-cpu/meteor/ip/util/gen_io.py
+LastEditTime: 2024-06-30 22:58:09
+path        : /memdsl-cpu/aurora/util/gen_io.py
 Description : generate io of ip
 
 Copyright (c) 2024 by myyerrol, All Rights Reserved.
