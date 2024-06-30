@@ -1,3 +1,14 @@
+'''
+Author      : myyerrol
+Date        : 2024-06-28 22:12:21
+LastEditors : myyerrol
+LastEditTime: 2024-06-30 18:05:42
+FilePath    : /memdsl-cpu/meteor/ip/util/gen_io.py
+Description : generate io of ip
+
+Copyright (c) 2024 by myyerrol, All Rights Reserved.
+'''
+
 #!/usr/bin/python3
 
 class gen_io:
@@ -5,40 +16,50 @@ class gen_io:
         pass
 
     def __read_sv(self):
-        self.__sv = open("../sv/common/adder/rtl/adder_xbit_serial.sv", "r")
+        self.sv = open("/home/myyerrol/Workspaces/memdsl-cpu/meteor/ip/src/sv/common/adder/rtl/adder_xbit_serial.sv", "r")
 
     def __pars_sv(self):
-        for line in self.__sv:
+        json_obj = {}
+        json_module = ""
+        json_params_arr = []
+        for line in self.sv:
             line = line.strip()
-            print(line)
             if line.startswith("module"):
-                self.__yaml_module = line[len("module") : ].rstrip("#(").strip()
+                json_module = line[len("module") : ].rstrip("#(").strip()
+            if line.startswith("endmodule"):
+                if (len(json_params_arr) > 0):
+                    json_obj["module"] = json_module
+                    json_obj["params"] = json_params_arr
+                    self.json_arr.append(json_obj)
+                    json_params_arr = []
+                    json_obj = {}
+                else:
+                    pass
             if line.startswith("parameter"):
+                json_params_obj = {}
                 param = line[len("parameter") : ].rstrip(",").strip()
-                print(param)
                 param = param.split(" = ")
-                print(param)
                 if (len(param) == 2):
-                    self.__yaml_param["name"] = param[0]
-                    self.__yaml_param["type"] = param[1]
+                    json_params_obj["name"] = param[0]
+                    json_params_obj["type"] = "number"
+                    json_params_obj["data"] = int(param[1])
+                    json_params_arr.append(json_params_obj)
+                else:
+                    assert 0, "Error: parameter format is incorrect"
+            else:
+                pass
+        self.sv.close()
 
-        self.__sv.close()
-
-    def __gen_yaml(self):
-        print(self.__yaml_module)
-        print(self.__yaml_param)
-        pass
+    def __gen_json(self):
+        print(self.json_arr)
 
     def run(self):
         self.__read_sv()
         self.__pars_sv()
-        self.__gen_yaml()
-        pass
+        self.__gen_json()
 
-    __sv = None
-    __yaml_module = ""
-    __yaml_params = []
-    __yaml_param  = { "name": "", "type": "number" }
+    sv = None
+    json_arr = []
 
 # if __name__ == "main":
 gen_io_obj = gen_io()
