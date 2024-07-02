@@ -15,7 +15,7 @@ module adder_1bit_half_tb();
 
 initial begin
     $dumpfile("build/adder_1bit_half.vcd");
-    $dumpvars();
+    $dumpvars(0, adder_1bit_half_tb);
 end
 
 logic w_num_a;

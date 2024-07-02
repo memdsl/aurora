@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-28 14:52:18
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-06-30 22:57:55
+ * @LastEditTime: 2024-07-02 23:43:33
  * @FilePath    : /memdsl-cpu/aurora/src/sv/common/adder/sim/adder_xbit_ahead_tb.sv
  * @Description : xbit ahead carry adder testbench
  *
@@ -15,7 +15,7 @@ module adder_xbit_ahead_tb();
 
 initial begin
     $dumpfile("build/adder_xbit_ahead.vcd");
-    $dumpvars();
+    $dumpvars(0, adder_xbit_ahead_tb);
 end
 
 parameter DATA_WIDTH = 4;

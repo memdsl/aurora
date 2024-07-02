@@ -22,9 +22,9 @@ module adder_xbit_ahead #(
 ) (
     input  logic [DATA_WIDTH - 1 : 0] i_num_a,
     input  logic [DATA_WIDTH - 1 : 0] i_num_b,
-    input  logic                  i_cry,
+    input  logic                      i_cry,
     output logic [DATA_WIDTH - 1 : 0] o_res,
-    output logic                  o_cry
+    output logic                      o_cry
 );
 
     /** Intermediate carry bits */
