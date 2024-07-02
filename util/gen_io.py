@@ -2,7 +2,7 @@
 Author      : myyerrol
 Date        : 2024-06-28 22:12:21
 LastEditors : myyerrol
-LastEditTime: 2024-06-30 22:58:09
+LastEditTime: 2024-07-02 12:43:34
 path        : /memdsl-cpu/aurora/util/gen_io.py
 Description : generate io of ip
 
@@ -15,13 +15,24 @@ import json
 import os
 
 class gen_io:
-    def __init__(self):
+    '''
+    description: Initialize directories of project.
+    param  {None} self
+    return {None}
+    '''
+    def __init__(self) -> None:
         self.prj_dir = os.path.abspath(
             os.path.dirname(os.path.dirname(__file__)))
         self.prj_dir_sv = os.path.join(self.prj_dir, "src/sv")
         self.prj_dir_io = os.path.join(self.prj_dir, "io")
 
-    def __read_sv(self, path):
+    '''
+    description: Read systemverilog file.
+    param  {None}   self
+    param  {String} path
+    return {None}
+    '''
+    def __read_sv(self, path) -> None:
         file_arr = os.listdir(path)
         for file in file_arr:
             file = os.path.join(path, file)
@@ -34,7 +45,13 @@ class gen_io:
                 else:
                     pass
 
-    def __pars_sv(self, file):
+    '''
+    description: Parse parameters of module in systemverilog file.
+    param  {None}   self
+    param  {String} file
+    return {None}
+    '''
+    def __pars_sv(self, file) -> None:
         json_obj = {}
         json_module = ""
         json_params_arr = []
@@ -66,12 +83,22 @@ class gen_io:
                 pass
         file.close()
 
-    def __gen_json(self):
+    '''
+    description: Generate json file.
+    param  {None} self
+    return {None}
+    '''
+    def __gen_json(self) -> None:
         self.json_file = open(os.path.join(self.prj_dir_io, "io.json"),
                               mode = "w")
         self.json_file.write(json.dumps(self.json_arr, indent = 4))
 
-    def run(self):
+    '''
+    description: Run the complete process of generating io.
+    param  {None} self
+    return {None}
+    '''
+    def run(self) -> None:
         self.__read_sv(self.prj_dir_sv)
         self.__gen_json()
 
