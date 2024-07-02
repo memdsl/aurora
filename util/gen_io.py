@@ -2,7 +2,7 @@
 Author      : myyerrol
 Date        : 2024-06-28 22:12:21
 LastEditors : myyerrol
-LastEditTime: 2024-07-02 14:16:16
+LastEditTime: 2024-07-02 16:16:13
 path        : /memdsl-cpu/aurora/util/gen_io.py
 Description : generate io of ip
 
@@ -40,7 +40,7 @@ class GenIO:
                 self.__read_sv(file)
             else:
                 if "rtl" in file:
-                    self.__pars_sv(open(file, mode = "r"))
+                    self.__pars_sv(open(file, mode="r"))
                     pass
                 else:
                     pass
@@ -90,8 +90,8 @@ class GenIO:
     '''
     def __gen_json(self) -> None:
         self.json_file = open(os.path.join(self.prj_dir_io, "io.json"),
-                              mode = "w")
-        self.json_file.write(json.dumps(self.json_arr, indent = 4))
+                              mode="w")
+        self.json_file.write(json.dumps(self.json_arr, indent=4))
 
     '''
     description: Run the complete process of generating io.
@@ -107,6 +107,7 @@ class GenIO:
     prj_dir_io  = ""
     sv_file_arr = []
     json_arr    = []
+
 
 if __name__ == "__main__":
     try:
