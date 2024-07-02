@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-22 20:56:57
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-06-30 22:55:30
+ * @LastEditTime: 2024-07-02 12:36:13
  * @FilePath    : /memdsl-cpu/aurora/src/sv/common/adder/rtl/adder_1bit_full.sv
  * @Description : 1bit full adder
  *
@@ -11,11 +11,11 @@
 
 /**
  * @description: 1bit full adder
- * @param i_num_a {logic} Number a
- * @param i_num_b {logic} Number b
- * @param i_cry   {logic} Carry from low bit
- * @param o_res   {logic} Result
- * @param o_cry   {logic} Carry to high bit
+ * @param {logic} i_num_a: Number a
+ * @param {logic} i_num_b: Number b
+ * @param {logic} i_cry  : Carry from low bit
+ * @param {logic} o_res  : Result
+ * @param {logic} o_cry  : Carry to high bit
  */
 module adder_1bit_full (
     input  logic i_num_a,

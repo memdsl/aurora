@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-22 20:56:45
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-06-30 22:55:37
+ * @LastEditTime: 2024-07-02 12:35:34
  * @FilePath    : /memdsl-cpu/aurora/src/sv/common/adder/rtl/adder_1bit_half.sv
  * @Description : 1bit half adder
  *
@@ -11,10 +11,10 @@
 
 /**
  * @description: 1bit half adder
- * @param i_num_a {logic} Number a
- * @param i_num_b {logic} Number b
- * @param o_res   {logic} Result
- * @param o_cry   {logic} Carry
+ * @param {logic} i_num_a: Number a
+ * @param {logic} i_num_b: Number b
+ * @param {logic} o_res  : Result
+ * @param {logic} o_cry  : Carry
  */
 module adder_1bit_half(
     input  logic i_num_a,

@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-28 14:41:49
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-06-30 22:57:38
+ * @LastEditTime: 2024-07-02 12:35:43
  * @FilePath    : /memdsl-cpu/aurora/src/sv/common/adder/rtl/adder_xbit_ahead.sv
  * @Description : xbit ahead carry adder
  *
@@ -11,11 +11,11 @@
 
 /**
  * @description: xbit ahead carry adder
- * @param i_num_a {logic} Number a
- * @param i_num_b {logic} Number b
- * @param i_cry   {logic} Carry from lowest bit
- * @param o_res   {logic} Result
- * @param o_cry   {logic} Carry to highest bit
+ * @param {logic} i_num_a: Number a
+ * @param {logic} i_num_b: Number b
+ * @param {logic} i_cry  : Carry from lowest bit
+ * @param {logic} o_res  : Result
+ * @param {logic} o_cry  : Carry to highest bit
  */
 module adder_xbit_ahead #(
     parameter DATA_WIDTH = 8

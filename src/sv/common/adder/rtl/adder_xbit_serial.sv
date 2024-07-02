@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-24 01:15:01
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-06-30 22:55:56
+ * @LastEditTime: 2024-07-02 12:36:31
  * @FilePath    : /memdsl-cpu/aurora/src/sv/common/adder/rtl/adder_xbit_serial.sv
  * @Description : xbit serial carry adder
  *
@@ -13,11 +13,11 @@
 
 /**
  * @description: xbit serial carry adder
- * @param i_num_a {logic} Number a
- * @param i_num_b {logic} Number b
- * @param i_cry   {logic} Carry from lowest bit
- * @param o_res   {logic} Result
- * @param o_cry   {logic} Carry to highest bit
+ * @param {logic} i_num_a: Number a
+ * @param {logic} i_num_b: Number b
+ * @param {logic} i_cry  : Carry from lowest bit
+ * @param {logic} o_res  : Result
+ * @param {logic} o_cry  : Carry to highest bit
  */
 module adder_xbit_serial #(
     parameter DATA_WIDTH = 8
