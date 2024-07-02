@@ -2,7 +2,7 @@
 Author      : myyerrol
 Date        : 2024-06-28 22:12:21
 LastEditors : myyerrol
-LastEditTime: 2024-07-02 12:43:34
+LastEditTime: 2024-07-02 14:16:16
 path        : /memdsl-cpu/aurora/util/gen_io.py
 Description : generate io of ip
 
@@ -14,7 +14,7 @@ Copyright (c) 2024 by myyerrol, All Rights Reserved.
 import json
 import os
 
-class gen_io:
+class GenIO:
     '''
     description: Initialize directories of project.
     param  {None} self
@@ -110,7 +110,7 @@ class gen_io:
 
 if __name__ == "__main__":
     try:
-        gen_io_obj = gen_io()
+        gen_io_obj = GenIO()
         gen_io_obj.run()
     except IOError:
         print("error: the file is not found or failed to read/write file")
