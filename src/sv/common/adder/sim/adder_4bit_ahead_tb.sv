@@ -2,27 +2,25 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-28 14:52:18
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-02 23:43:33
- * @FilePath    : /memdsl-cpu/aurora/src/sv/common/adder/sim/adder_xbit_ahead_tb.sv
- * @Description : xbit ahead carry adder testbench
+ * @LastEditTime: 2024-07-03 19:55:22
+ * @FilePath    : /memdsl-cpu/aurora/src/sv/common/adder/sim/adder_4bit_ahead_tb.sv
+ * @Description : 4bit ahead carry adder testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
 
 `timescale 1ns / 1ps
 
-module adder_xbit_ahead_tb();
+module adder_4bit_ahead_tb();
 
 initial begin
-    $dumpfile("build/adder_xbit_ahead.vcd");
-    $dumpvars(0, adder_xbit_ahead_tb);
+    $dumpfile("build/adder_4bit_ahead.vcd");
+    $dumpvars(0, adder_4bit_ahead_tb);
 end
 
-parameter DATA_WIDTH = 4;
-
-logic [DATA_WIDTH - 1 : 0] w_num_a;
-logic [DATA_WIDTH - 1 : 0] w_num_b;
-logic                      w_cry;
+logic [3 : 0] w_num_a;
+logic [3 : 0] w_num_b;
+logic         w_cry;
 
 initial begin
         w_num_a = 4'b0000; w_num_b = 4'b0000; w_cry = 0;
@@ -36,9 +34,7 @@ initial begin
     #10 $finish;
 end
 
-adder_xbit_ahead #(
-    .DATA_WIDTH(DATA_WIDTH)
-) adder_xbit_ahead_inst(
+adder_4bit_ahead adder_4bit_ahead_inst(
     .i_num_a(w_num_a),
     .i_num_b(w_num_b),
     .i_cry(w_cry),

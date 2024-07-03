@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-22 20:56:57
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-02 12:36:13
+ * @LastEditTime: 2024-07-03 17:49:10
  * @FilePath    : /memdsl-cpu/aurora/src/sv/common/adder/rtl/adder_1bit_full.sv
  * @Description : 1bit full adder
  *
@@ -26,6 +26,11 @@ module adder_1bit_full (
 );
 
     /** Output result and carry bits. */
-    assign { o_cry, o_res } = i_num_a + i_num_b + i_cry;
+    // assign { o_cry, o_res } = i_num_a + i_num_b + i_cry;
+    assign o_res = (~i_num_a & ~i_num_b &  i_cry) |
+                   (~i_num_a &  i_num_b & ~i_cry) |
+                   ( i_num_a & ~i_num_b & ~i_cry) |
+                   ( i_num_a &  i_num_b &  i_cry);
+    assign o_cry = (i_num_a & i_num_b) | (i_num_a & i_cry) | (i_num_b & i_cry);
 
 endmodule
