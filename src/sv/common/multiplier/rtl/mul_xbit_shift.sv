@@ -13,31 +13,6 @@ module mul_xbit_shift #(
     logic [DATA_WIDTH     - 1 : 0] r_num_b;
     logic [DATA_WIDTH * 2 - 1 : 0] r_res;
 
-    // always_ff @(posedge i_clk) begin
-    //     if (!i_rst_n) begin
-    //         r_num_a <= i_num_a;
-    //         r_num_b <= i_num_b;
-    //         r_res   <= {(DATA_WIDTH * 2){1'b0}};
-    //     end
-    //     else begin
-    //         if (r_num_b == {DATA_WIDTH{1'b0}}) begin
-    //             o_end <= 1'b1;
-    //             o_res <= r_res;
-    //         end
-    //         else begin
-    //             o_end <= 1'b0;
-    //             if (r_num_b[0]) begin
-    //                 r_res <= r_res + r_num_a;
-    //             end
-    //             else begin
-    //                 r_res <= r_res;
-    //             end
-    //             r_num_b <= {1'b0, r_num_b[DATA_WIDTH - 1 : 1]};
-    //             r_num_a <= {r_num_a[DATA_WIDTH * 2 - 2 : 0], 1'b0};
-    //         end
-    //     end
-    // end
-
     int count;
 
     always_ff @(posedge i_clk) begin
