@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-22 20:56:45
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-02 12:35:34
+ * @LastEditTime: 2024-07-03 21:17:01
  * @FilePath    : /memdsl-cpu/aurora/src/sv/common/adder/rtl/adder_1bit_half.sv
  * @Description : 1bit half adder
  *
@@ -24,7 +24,6 @@ module adder_1bit_half(
 );
 
     /** Output result and carry bits. */
-    // assign { o_cry, o_res } = i_num_a + i_num_b;
     assign o_res = i_num_a ^ i_num_b;
     assign o_cry = i_num_a & i_num_b;
 

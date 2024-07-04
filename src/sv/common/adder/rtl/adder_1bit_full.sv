@@ -26,7 +26,6 @@ module adder_1bit_full (
 );
 
     /** Output result and carry bits. */
-    // assign { o_cry, o_res } = i_num_a + i_num_b + i_cry;
     assign o_res = (~i_num_a & ~i_num_b &  i_cry) |
                    (~i_num_a &  i_num_b & ~i_cry) |
                    ( i_num_a & ~i_num_b & ~i_cry) |

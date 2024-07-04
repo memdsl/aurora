@@ -13,6 +13,8 @@ module mul_xbit_shift #(
     logic [DATA_WIDTH     - 1 : 0] r_num_b;
     logic [DATA_WIDTH * 2 - 1 : 0] r_res;
 
+    logic [DATA_WIDTH * 2 - 1 : 0] w_res;
+
     int count;
 
     always_ff @(posedge i_clk) begin
@@ -23,24 +25,22 @@ module mul_xbit_shift #(
             count   <= 0;
         end
         else begin
-            if (count == DATA_WIDTH - 1) begin
+            if (count == DATA_WIDTH) begin
                 o_end <= 1'b1;
-                o_res <= r_res + (~r_num_a + 1'b1);
+                o_res <= r_res + (~w_res + 1'b1);
                 count <= count;
             end
             else begin
-                o_end <= 1'b0;
-                if (r_num_b[0]) begin
-                    r_res <= r_res + r_num_a;
-                end
-                else begin
-                    r_res <= r_res;
-                end
-                r_num_b <= {1'b0, r_num_b[DATA_WIDTH - 1 : 1]};
-                r_num_a <= {r_num_a[DATA_WIDTH * 2 - 2 : 0], 1'b0};
-                count <= count + 1'b1;
+                o_end   <= 1'b0;
+                o_res   <= {(DATA_WIDTH * 2){1'b0}};
+                r_res   <= r_res + w_res;
+                r_num_a <= (r_num_a << 1);
+                r_num_b <= (r_num_b >> 1);
+                count   <= count + 1'b1;
             end
         end
     end
+
+    assign w_res = (r_num_b[0]) ? r_num_a : {(DATA_WIDTH * 2){1'b0}};
 
 endmodule
