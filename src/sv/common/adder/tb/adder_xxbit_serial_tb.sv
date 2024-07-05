@@ -2,25 +2,27 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-28 14:52:18
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-03 19:55:22
- * @FilePath    : /memdsl/aurora/src/sv/common/adder/tb/adder_4bit_ahead_tb.sv
- * @Description : 4bit ahead carry adder testbench
+ * @LastEditTime: 2024-07-02 23:43:41
+ * @FilePath    : /memdsl/aurora/src/sv/common/adder/tb/adder_xxbit_serial_tb.sv
+ * @Description : xxbit serial carry adder testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
 
 `timescale 1ns / 1ps
 
-module adder_4bit_ahead_tb();
+module adder_xxbit_serial_tb();
 
 initial begin
-    $dumpfile("build/adder_4bit_ahead.vcd");
-    $dumpvars(0, adder_4bit_ahead_tb);
+    $dumpfile("build/adder_xxbit_serial.vcd");
+    $dumpvars(0, adder_xxbit_serial_tb);
 end
 
-logic [3 : 0] w_num_a;
-logic [3 : 0] w_num_b;
-logic         w_cry;
+parameter DATA_WIDTH = 4;
+
+logic [DATA_WIDTH - 1 : 0] w_num_a;
+logic [DATA_WIDTH - 1 : 0] w_num_b;
+logic                      w_cry;
 
 initial begin
         w_num_a = 4'b0000; w_num_b = 4'b0000; w_cry = 0;
@@ -34,7 +36,9 @@ initial begin
     #10 $finish;
 end
 
-adder_4bit_ahead adder_4bit_ahead_inst(
+adder_xxbit_serial #(
+    .DATA_WIDTH(DATA_WIDTH)
+) adder_xxbit_serial_inst(
     .i_num_a(w_num_a),
     .i_num_b(w_num_b),
     .i_cry(w_cry),

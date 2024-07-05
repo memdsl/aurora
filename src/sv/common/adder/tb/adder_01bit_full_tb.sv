@@ -3,19 +3,19 @@
  * @Date        : 2024-06-28 14:52:06
  * @LastEditors : myyerrol
  * @LastEditTime: 2024-07-02 23:43:22
- * @FilePath    : /memdsl/aurora/src/sv/common/adder/tb/adder_1bit_full_tb.sv
- * @Description : 1bit full adder testbench
+ * @FilePath    : /memdsl/aurora/src/sv/common/adder/tb/adder_01bit_full_tb.sv
+ * @Description : 01bit full adder testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
 
 `timescale 1ns / 1ps
 
-module adder_1bit_full_tb();
+module adder_01bit_full_tb();
 
 initial begin
-    $dumpfile("build/adder_1bit_full.vcd");
-    $dumpvars(0, adder_1bit_full_tb);
+    $dumpfile("build/adder_01bit_full.vcd");
+    $dumpvars(0, adder_01bit_full_tb);
 end
 
 logic w_num_a;
@@ -34,7 +34,7 @@ initial begin
     #10 $finish;
 end
 
-adder_1bit_full adder_1bit_full_inst(
+adder_01bit_full adder_01bit_full_inst(
     .i_num_a(w_num_a),
     .i_num_b(w_num_b),
     .i_cry(w_cry),

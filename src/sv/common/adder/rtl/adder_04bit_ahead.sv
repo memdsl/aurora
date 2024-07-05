@@ -2,22 +2,22 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-28 14:41:49
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-03 20:17:20
- * @FilePath    : /memdsl/aurora/src/sv/common/adder/rtl/adder_4bit_ahead.sv
- * @Description : 4bit ahead carry adder
+ * @LastEditTime: 2024-07-07 15:27:03
+ * @FilePath    : /memdsl/aurora/src/sv/common/adder/rtl/adder_04bit_ahead.sv
+ * @Description : 04bit ahead carry adder
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
 
 /**
- * @description: 4bit ahead carry adder
+ * @description: 04bit ahead carry adder
  * @param {logic} i_num_a: Number a
  * @param {logic} i_num_b: Number b
  * @param {logic} i_cry  : Carry from lowest bit
  * @param {logic} o_res  : Result
  * @param {logic} o_cry  : Carry to highest bit
  */
-module adder_4bit_ahead(
+module adder_04bit_ahead(
     input  logic [3 : 0] i_num_a,
     input  logic [3 : 0] i_num_b,
     input  logic         i_cry,

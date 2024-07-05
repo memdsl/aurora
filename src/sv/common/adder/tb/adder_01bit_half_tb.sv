@@ -3,19 +3,19 @@
  * @Date        : 2024-06-28 14:52:17
  * @LastEditors : myyerrol
  * @LastEditTime: 2024-06-30 22:57:50
- * @FilePath    : /memdsl/aurora/src/sv/common/adder/tb/adder_1bit_half_tb.sv
- * @Description : 1bit half adder testbench
+ * @FilePath    : /memdsl/aurora/src/sv/common/adder/tb/adder_01bit_half_tb.sv
+ * @Description : 01bit half adder testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
 
 `timescale 1ns / 1ps
 
-module adder_1bit_half_tb();
+module adder_01bit_half_tb();
 
 initial begin
-    $dumpfile("build/adder_1bit_half.vcd");
-    $dumpvars(0, adder_1bit_half_tb);
+    $dumpfile("build/adder_01bit_half.vcd");
+    $dumpvars(0, adder_01bit_half_tb);
 end
 
 logic w_num_a;
@@ -31,7 +31,7 @@ initial begin
     #10 $finish;
 end
 
-adder_1bit_half adder_1bit_half_inst(
+adder_01bit_half adder_01bit_half_inst(
     .i_num_a(w_num_a),
     .i_num_b(w_num_b),
     .o_res(),

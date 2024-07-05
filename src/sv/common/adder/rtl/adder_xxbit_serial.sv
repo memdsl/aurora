@@ -3,23 +3,23 @@
  * @Date        : 2024-06-24 01:15:01
  * @LastEditors : myyerrol
  * @LastEditTime: 2024-07-02 12:36:31
- * @FilePath    : /memdsl/aurora/src/sv/common/adder/rtl/adder_xbit_serial.sv
- * @Description : xbit serial carry adder
+ * @FilePath    : /memdsl/aurora/src/sv/common/adder/rtl/adder_xxbit_serial.sv
+ * @Description : xxbit serial carry adder
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
 
-`include "adder_1bit_full.sv"
+`include "adder_01bit_full.sv"
 
 /**
- * @description: xbit serial carry adder
+ * @description: xxbit serial carry adder
  * @param {logic} i_num_a: Number a
  * @param {logic} i_num_b: Number b
  * @param {logic} i_cry  : Carry from lowest bit
  * @param {logic} o_res  : Result
  * @param {logic} o_cry  : Carry to highest bit
  */
-module adder_xbit_serial #(
+module adder_xxbit_serial #(
     parameter DATA_WIDTH = 8
 ) (
     input  logic [DATA_WIDTH - 1 : 0] i_num_a,
@@ -35,7 +35,7 @@ module adder_xbit_serial #(
     logic [DATA_WIDTH - 1 : 0] w_cry;
 
     /**
-     * Instantiate multiple 1bit full adders according to DATA_WIDTH to build a
+     * Instantiate multiple 01bit full adders according to DATA_WIDTH to build a
      * serial full adder, becaouse the sum of each bit must wait until the
      * carry of the lower bit is generated before it can be established, so the
      * execution efficiency of serial full adder is not high.
@@ -43,8 +43,8 @@ module adder_xbit_serial #(
     generate
         genvar i;
         for (i = 0; i < DATA_WIDTH; i = i + 1)
-        begin: adder_xbit_serial
-            adder_1bit_full adder_1bit_full_inst(
+        begin: adder_xxbit_serial
+            adder_01bit_full adder_01bit_full_inst(
                 .i_num_a(i_num_a[i]),
                 .i_num_b(i_num_b[i]),
                 .i_cry((i == 0) ? i_cry : w_cry[i - 1]),
