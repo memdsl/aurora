@@ -1,10 +1,21 @@
+/*
+ * @Author      : myyerrol
+ * @Date        : 2024-07-02 19:01:58
+ * @LastEditors : myyerrol
+ * @LastEditTime: 2024-07-07 11:54:55
+ * @FilePath    : /memdsl/aurora/src/sv/common/mul/tb/mul_xxbit_shift_tb.sv
+ * @Description : xxbit shfit multiplier testbench
+ *
+ * Copyright (c) 2024 by myyerrol, All Rights Reserved.
+ */
+
 `timescale 1ns / 1ps
 
-module mul_xbit_booth_tb();
+module mul_xxbit_shift_tb();
 
 initial begin
-    $dumpfile("build/mul_xbit_booth.vcd");
-    $dumpvars(0, mul_xbit_booth_tb);
+    $dumpfile("build/mul_xxbit_shift.vcd");
+    $dumpvars(0, mul_xxbit_shift_tb);
 end
 
 parameter CYCLE      = 10;
@@ -34,9 +45,9 @@ initial begin
     $finish;
 end
 
-mul_xbit_booth #(
+mul_xxbit_shift #(
     .DATA_WIDTH(DATA_WIDTH)
-) mul_xbit_booth_inst(
+) mul_xxbit_shift_inst(
     .i_clk(w_clk),
     .i_rst_n(w_rst_n),
     .i_num_a(w_num_a),
