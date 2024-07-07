@@ -3,7 +3,7 @@ Author      : myyerrol
 Date        : 2024-06-28 22:12:21
 LastEditors : myyerrol
 LastEditTime: 2024-07-02 16:16:13
-path        : /memdsl-cpu/aurora/util/gen_io.py
+path        : /memdsl/aurora/util/gen_io.py
 Description : generate io of ip
 
 Copyright (c) 2024 by myyerrol, All Rights Reserved.

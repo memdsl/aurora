@@ -2,8 +2,8 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-22 20:56:57
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-03 17:49:10
- * @FilePath    : /memdsl-cpu/aurora/src/sv/common/adder/rtl/adder_1bit_full.sv
+ * @LastEditTime: 2024-07-07 09:18:36
+ * @FilePath    : /memdsl/aurora/src/sv/common/adder/rtl/adder_1bit_full.sv
  * @Description : 1bit full adder
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.

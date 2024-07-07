@@ -3,7 +3,7 @@
  * @Date        : 2024-06-28 14:52:17
  * @LastEditors : myyerrol
  * @LastEditTime: 2024-06-30 22:57:50
- * @FilePath    : /memdsl-cpu/aurora/src/sv/common/adder/sim/adder_1bit_half_tb.sv
+ * @FilePath    : /memdsl/aurora/src/sv/common/adder/tb/adder_1bit_half_tb.sv
  * @Description : 1bit half adder testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.

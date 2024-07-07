@@ -3,7 +3,7 @@
  * @Date        : 2024-07-03 19:53:31
  * @LastEditors : myyerrol
  * @LastEditTime: 2024-07-03 20:13:49
- * @FilePath    : /memdsl-cpu/aurora/src/sv/common/adder/sim/adder_xbit_ahead_serial_tb.sv
+ * @FilePath    : /memdsl/aurora/src/sv/common/adder/tb/adder_xbit_ahead_serial_tb.sv
  * @Description :xbit ahead carry adder testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.

@@ -3,7 +3,7 @@
  * @Date        : 2024-07-03 18:18:33
  * @LastEditors : myyerrol
  * @LastEditTime: 2024-07-03 20:16:12
- * @FilePath    : /memdsl-cpu/aurora/src/sv/common/adder/rtl/adder_xbit_ahead_serial.sv
+ * @FilePath    : /memdsl/aurora/src/sv/common/adder/rtl/adder_xbit_ahead_serial.sv
  * @Description : xbit ahead carry serial adder
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.

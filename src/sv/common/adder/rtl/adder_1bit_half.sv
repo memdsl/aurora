@@ -3,7 +3,7 @@
  * @Date        : 2024-06-22 20:56:45
  * @LastEditors : myyerrol
  * @LastEditTime: 2024-07-03 21:17:01
- * @FilePath    : /memdsl-cpu/aurora/src/sv/common/adder/rtl/adder_1bit_half.sv
+ * @FilePath    : /memdsl/aurora/src/sv/common/adder/rtl/adder_1bit_half.sv
  * @Description : 1bit half adder
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.

@@ -3,7 +3,7 @@
  * @Date        : 2024-06-28 14:52:18
  * @LastEditors : myyerrol
  * @LastEditTime: 2024-07-03 19:55:22
- * @FilePath    : /memdsl-cpu/aurora/src/sv/common/adder/sim/adder_4bit_ahead_tb.sv
+ * @FilePath    : /memdsl/aurora/src/sv/common/adder/tb/adder_4bit_ahead_tb.sv
  * @Description : 4bit ahead carry adder testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
