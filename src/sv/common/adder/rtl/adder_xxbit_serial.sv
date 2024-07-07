@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-24 01:15:01
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-02 12:36:31
+ * @LastEditTime: 2024-07-07 22:00:58
  * @FilePath    : /memdsl/aurora/src/sv/common/adder/rtl/adder_xxbit_serial.sv
  * @Description : xxbit serial carry adder
  *
@@ -43,7 +43,7 @@ module adder_xxbit_serial #(
     generate
         genvar i;
         for (i = 0; i < DATA_WIDTH; i = i + 1)
-        begin: adder_xxbit_serial
+        begin: calc_result
             adder_01bit_full adder_01bit_full_inst(
                 .i_num_a(i_num_a[i]),
                 .i_num_b(i_num_b[i]),

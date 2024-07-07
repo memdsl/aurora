@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-03 18:18:33
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-03 20:16:12
+ * @LastEditTime: 2024-07-07 21:57:54
  * @FilePath    : /memdsl/aurora/src/sv/common/adder/rtl/adder_xxbit_ahead_serial.sv
  * @Description : xxbit ahead carry serial adder
  *
@@ -37,7 +37,7 @@ module adder_xxbit_ahead_serial #(
     generate
         genvar i;
         for (i = 0; i < DATA_WIDTH / 4; i = i + 1)
-        begin: adder_xxbit_ahead_serial
+        begin: calc_result
             adder_04bit_ahead adder_04bit_ahead_inst(
                 .i_num_a(i_num_a[i * 4 + 3 : i * 4]),
                 .i_num_b(i_num_b[i * 4 + 3 : i * 4]),

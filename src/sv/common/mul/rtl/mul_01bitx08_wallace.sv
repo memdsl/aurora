@@ -1,5 +1,3 @@
-`include "adder_01bit_full.sv"
-
 module mul_01bitx08_wallace(
     input  logic [7 : 0] i_num,
     input  logic [5 : 0] i_cry,
