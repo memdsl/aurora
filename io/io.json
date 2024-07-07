@@ -1,6 +1,6 @@
 [
     {
-        "module": "adder_xbit_ahead",
+        "module": "adder_xxbit_ahead",
         "params": [
             {
                 "name": "DATA_WIDTH",
@@ -10,7 +10,7 @@
         ]
     },
     {
-        "module": "adder_xbit_serial",
+        "module": "adder_xxbit_serial",
         "params": [
             {
                 "name": "DATA_WIDTH",
