@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-05 08:43:24
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-09 16:46:40
+ * @LastEditTime: 2024-07-09 16:57:52
  * @FilePath    : /memdsl/aurora/src/sv/common/mul/rtl/mul_16bit_wallace.sv
  * @Description : 16bit wallace tree multiplier
  *
@@ -29,9 +29,37 @@ module mul_16bit_wallace(
     assign w_num_x = {{16{i_num_x[15]}}, i_num_x};
     assign w_num_y = {i_num_y, 1'b0};
 
+    logic [31 : 0] r_booth_res[7 : 0];
+    logic [ 7 : 0] r_booth_cry;
+
     logic [16 : 0] w_wallace_num_y[7 : 0];
     logic [31 : 0] w_booth_res[7 : 0];
     logic [ 7 : 0] w_booth_cry;
+
+    always_ff @(posedge i_clk) begin
+        if (!i_rst_n) begin
+            r_booth_res[0] <= 32'h0000_0000;
+            r_booth_res[1] <= 32'h0000_0000;
+            r_booth_res[2] <= 32'h0000_0000;
+            r_booth_res[3] <= 32'h0000_0000;
+            r_booth_res[4] <= 32'h0000_0000;
+            r_booth_res[5] <= 32'h0000_0000;
+            r_booth_res[6] <= 32'h0000_0000;
+            r_booth_res[7] <= 32'h0000_0000;
+            r_booth_cry    <= 8'h0;
+        end
+        else begin
+            r_booth_res[0] <= w_booth_res[0];
+            r_booth_res[1] <= w_booth_res[1];
+            r_booth_res[2] <= w_booth_res[2];
+            r_booth_res[3] <= w_booth_res[3];
+            r_booth_res[4] <= w_booth_res[4];
+            r_booth_res[5] <= w_booth_res[5];
+            r_booth_res[6] <= w_booth_res[6];
+            r_booth_res[7] <= w_booth_res[7];
+            r_booth_cry    <= w_booth_cry;
+        end
+    end
 
     generate
         genvar i;
@@ -46,64 +74,23 @@ module mul_16bit_wallace(
         end
     endgenerate
 
+    /* ===================================================================== */
 
-    logic [7          : 0] w_switch_res[31 : 0];
-    logic [7          : 0] r_switch_res[31 : 0];
-    logic [         7 : 0] r_switch_cry;
+    logic [7 : 0] w_switch_res[31 : 0];
+    logic [7 : 0] w_switch_cry;
 
     generate
         genvar j;
         for (i = 0; i < 32; i = i + 1) begin: gen_wallace
             for (j = 0; j < 8; j = j + 1) begin
-                assign w_switch_res[i][j] = w_booth_res[j][i];
+                assign w_switch_res[i][j] = r_booth_res[j][i];
             end
         end
     endgenerate
 
-    always_ff @(posedge i_clk) begin
-        if (!i_rst_n) begin
-            // r_switch_res <= {(32 * 8){1'b0}};
-            r_switch_cry <= 8'b0000_0000;
-        end
-        else begin
-            r_switch_res[ 0] <= w_switch_res[ 0];
-            r_switch_res[ 1] <= w_switch_res[ 1];
-            r_switch_res[ 2] <= w_switch_res[ 2];
-            r_switch_res[ 3] <= w_switch_res[ 3];
-            r_switch_res[ 4] <= w_switch_res[ 4];
-            r_switch_res[ 5] <= w_switch_res[ 5];
-            r_switch_res[ 6] <= w_switch_res[ 6];
-            r_switch_res[ 7] <= w_switch_res[ 7];
-            r_switch_res[ 8] <= w_switch_res[ 8];
-            r_switch_res[ 9] <= w_switch_res[ 9];
-            r_switch_res[10] <= w_switch_res[10];
-            r_switch_res[11] <= w_switch_res[11];
-            r_switch_res[12] <= w_switch_res[12];
-            r_switch_res[13] <= w_switch_res[13];
-            r_switch_res[14] <= w_switch_res[14];
-            r_switch_res[15] <= w_switch_res[15];
-            r_switch_res[16] <= w_switch_res[16];
-            r_switch_res[17] <= w_switch_res[17];
-            r_switch_res[18] <= w_switch_res[18];
-            r_switch_res[19] <= w_switch_res[19];
-            r_switch_res[20] <= w_switch_res[20];
-            r_switch_res[21] <= w_switch_res[21];
-            r_switch_res[22] <= w_switch_res[22];
-            r_switch_res[23] <= w_switch_res[23];
-            r_switch_res[24] <= w_switch_res[24];
-            r_switch_res[25] <= w_switch_res[25];
-            r_switch_res[26] <= w_switch_res[26];
-            r_switch_res[27] <= w_switch_res[27];
-            r_switch_res[28] <= w_switch_res[28];
-            r_switch_res[29] <= w_switch_res[29];
-            r_switch_res[30] <= w_switch_res[30];
-            r_switch_res[31] <= w_switch_res[31];
+    assign w_switch_cry = r_booth_cry;
 
-            r_switch_cry    <= w_booth_cry;
-        end
-    end
-
-
+    /* ===================================================================== */
 
     logic [ 7 : 0] w_wallace_num[31 : 0];
     logic [31 : 0] w_wallace_res;
@@ -111,11 +98,11 @@ module mul_16bit_wallace(
     logic [ 5 : 0] w_wallace_cry_06bit_i[31 : 0];
     logic [ 5 : 0] w_wallace_cry_06bit_o[31 : 0];
 
-    assign w_wallace_cry_06bit_i[0] = r_switch_cry[5 : 0];
+    assign w_wallace_cry_06bit_i[0] = w_switch_cry[5 : 0];
 
     generate
         for (i = 0; i < 32; i = i + 1) begin: calc_wallace
-            assign w_wallace_num[i] = r_switch_res[i];
+            assign w_wallace_num[i] = w_switch_res[i];
             mul_01bitx08_wallace mul_01bitx08_wallace_inst(
                 .i_num(w_wallace_num[i]),
                 .i_cry_06bit(w_wallace_cry_06bit_i[i]),
@@ -129,7 +116,7 @@ module mul_16bit_wallace(
         end
     endgenerate
 
-
+    /* ===================================================================== */
 
     logic [31 : 0] r_adder_num_a;
     logic [31 : 0] r_adder_num_b;
@@ -142,13 +129,13 @@ module mul_16bit_wallace(
             r_adder_cry   <= 1'b0;
         end
         else begin
-            r_adder_num_a <= (w_wallace_cry[30 : 0] << 1) | r_switch_cry[6];
+            r_adder_num_a <= (w_wallace_cry[30 : 0] << 1) | w_switch_cry[6];
             r_adder_num_b <= w_wallace_res;
-            r_adder_cry   <= r_switch_cry[7];
+            r_adder_cry   <= w_switch_cry[7];
         end
     end
 
-
+    /* ===================================================================== */
 
     int count = 0;
 
