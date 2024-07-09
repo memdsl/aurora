@@ -2,392 +2,179 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-05 08:43:24
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-07 22:03:22
+ * @LastEditTime: 2024-07-09 09:29:11
  * @FilePath    : /memdsl/aurora/src/sv/common/mul/rtl/mul_16bit_wallace.sv
- * @Description : xxbit wallace tree multiplier
+ * @Description : nnbit wallace tree multiplier
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
 
+`include "adder_nnbit_serial.sv"
 `include "mul_01bitx08_wallace.sv"
-`include "adder_xxbit_serial.sv"
+`include "mul_02bit_booth.sv"
 
 module mul_16bit_wallace(
     input  logic          i_clk,
     input  logic          i_rst_n,
-    input  logic [15 : 0] i_num_a,
-    input  logic [15 : 0] i_num_b,
+    input  logic [15 : 0] i_num_x,
+    input  logic [15 : 0] i_num_y,
     output logic          o_end,
     output logic [31 : 0] o_res,
     output logic          o_cry
 );
 
-    logic [31 : 0] r_num_a;
+    logic [31 : 0] w_num_x;
+    logic [16 : 0] w_num_y;
 
-    // always_ff @(posedge i_clk) begin
-    //     if (!i_rst_n) begin
-    //         r_num_a <= {{16{i_num_a[15]}}, i_num_a};
-    //     end
-    //     else begin
+    assign w_num_x = {{16{i_num_x[15]}}, i_num_x};
+    assign w_num_y = {i_num_y, 1'b0};
 
-    //     end
-    // end
+    logic [16 : 0] w_wallace_num_y[7 : 0];
+    logic [31 : 0] w_booth_res[7 : 0];
+    logic [ 7 : 0] w_booth_cry;
 
-    // mul_xxbit_booth #(
-    //     .16(2)
-    // ) mul_xxbit_booth_inst_0(
-    //     .i_clk(i_clk),
-    //     .i_rst_n(i_rst_n),
-    //     .i_num_a(i_num_a),
-    //     .i_num_b(i_num_b[1 : 0]),
-    //     .o_end(),
-    //     .o_res()
-    // );
-    // mul_xxbit_booth #(
-    //     .16(2)
-    // ) mul_xxbit_booth_inst_1(
-    //     .i_clk(i_clk),
-    //     .i_rst_n(i_rst_n),
-    //     .i_num_a(i_num_a),
-    //     .i_num_b(i_num_b[3 : 2]),
-    //     .o_end(),
-    //     .o_res()
-    // );
-    // mul_xxbit_booth #(
-    //     .16(2)
-    // ) mul_xxbit_booth_inst_2(
-    //     .i_clk(i_clk),
-    //     .i_rst_n(i_rst_n),
-    //     .i_num_a(r_num_a[5 : 4]),
-    //     .i_num_b(i_num_b[5 : 4]),
-    //     .o_end(),
-    //     .o_res()
-    // );
-    // mul_xxbit_booth #(
-    //     .16(2)
-    // ) mul_xxbit_booth_inst_3(
-    //     .i_clk(i_clk),
-    //     .i_rst_n(i_rst_n),
-    //     .i_num_a(r_num_a[7 : 6]),
-    //     .i_num_b(i_num_b[7 : 6]),
-    //     .o_end(),
-    //     .o_res()
-    // );
-    // mul_xxbit_booth #(
-    //     .16(2)
-    // ) mul_xxbit_booth_inst_4(
-    //     .i_clk(i_clk),
-    //     .i_rst_n(i_rst_n),
-    //     .i_num_a(r_num_a[9 : 8]),
-    //     .i_num_b(i_num_b[9 : 8]),
-    //     .o_end(),
-    //     .o_res()
-    // );
-    // mul_xxbit_booth #(
-    //     .16(2)
-    // ) mul_xxbit_booth_inst_5(
-    //     .i_clk(i_clk),
-    //     .i_rst_n(i_rst_n),
-    //     .i_num_a(r_num_a[11 : 10]),
-    //     .i_num_b(i_num_b[11 : 10]),
-    //     .o_end(),
-    //     .o_res()
-    // );
-    // mul_xxbit_booth #(
-    //     .16(2)
-    // ) mul_xxbit_booth_inst_6(
-    //     .i_clk(i_clk),
-    //     .i_rst_n(i_rst_n),
-    //     .i_num_a(r_num_a[13 : 12]),
-    //     .i_num_b(i_num_b[13 : 12]),
-    //     .o_end(),
-    //     .o_res()
-    // );
-    // mul_xxbit_booth #(
-    //     .16(2)
-    // ) mul_xxbit_booth_inst_7(
-    //     .i_clk(i_clk),
-    //     .i_rst_n(i_rst_n),
-    //     .i_num_a(r_num_a[15 : 14]),
-    //     .i_num_b(i_num_b[15 : 14]),
-    //     .o_end(),
-    //     .o_res()
-    // );
+    generate
+        genvar i;
+        for (i = 0; i < 8; i = i + 1) begin: calc_booth
+            assign w_wallace_num_y[i] = w_num_y >> (i * 2);
+            mul_02bit_booth #(.DATA_WIDTH(16)) mul_02bit_booth_inst(
+                .i_num_x(w_num_x << (i * 2)),
+                .i_num_y(w_wallace_num_y[i][2 : 0]),
+                .o_res(w_booth_res[i]),
+                .o_cry(w_booth_cry[i])
+            );
+        end
+    endgenerate
+
+
+    logic [7          : 0] w_switch_res[31 : 0];
+    logic [7          : 0] r_switch_res[31 : 0];
+    logic [         7 : 0] r_switch_cry;
+
+    generate
+        genvar j;
+        for (i = 0; i < 32; i = i + 1) begin: gen_wallace
+            for (j = 0; j < 8; j = j + 1) begin
+                assign w_switch_res[i][j] = w_booth_res[j][i];
+            end
+        end
+    endgenerate
+
+    always_ff @(posedge i_clk) begin
+        if (!i_rst_n) begin
+            // r_switch_res <= {(32 * 8){1'b0}};
+            r_switch_cry <= 8'b0000_0000;
+        end
+        else begin
+            r_switch_res[ 0] <= w_switch_res[ 0];
+            r_switch_res[ 1] <= w_switch_res[ 1];
+            r_switch_res[ 2] <= w_switch_res[ 2];
+            r_switch_res[ 3] <= w_switch_res[ 3];
+            r_switch_res[ 4] <= w_switch_res[ 4];
+            r_switch_res[ 5] <= w_switch_res[ 5];
+            r_switch_res[ 6] <= w_switch_res[ 6];
+            r_switch_res[ 7] <= w_switch_res[ 7];
+            r_switch_res[ 8] <= w_switch_res[ 8];
+            r_switch_res[ 9] <= w_switch_res[ 9];
+            r_switch_res[10] <= w_switch_res[10];
+            r_switch_res[11] <= w_switch_res[11];
+            r_switch_res[12] <= w_switch_res[12];
+            r_switch_res[13] <= w_switch_res[13];
+            r_switch_res[14] <= w_switch_res[14];
+            r_switch_res[15] <= w_switch_res[15];
+            r_switch_res[16] <= w_switch_res[16];
+            r_switch_res[17] <= w_switch_res[17];
+            r_switch_res[18] <= w_switch_res[18];
+            r_switch_res[19] <= w_switch_res[19];
+            r_switch_res[20] <= w_switch_res[20];
+            r_switch_res[21] <= w_switch_res[21];
+            r_switch_res[22] <= w_switch_res[22];
+            r_switch_res[23] <= w_switch_res[23];
+            r_switch_res[24] <= w_switch_res[24];
+            r_switch_res[25] <= w_switch_res[25];
+            r_switch_res[26] <= w_switch_res[26];
+            r_switch_res[27] <= w_switch_res[27];
+            r_switch_res[28] <= w_switch_res[28];
+            r_switch_res[29] <= w_switch_res[29];
+            r_switch_res[30] <= w_switch_res[30];
+            r_switch_res[31] <= w_switch_res[31];
+
+            r_switch_cry    <= w_booth_cry;
+        end
+    end
 
 
 
+    logic [ 7 : 0] w_wallace_num[31 : 0];
+    logic [31 : 0] w_wallace_res;
+    logic [31 : 0] w_wallace_cry;
+    logic [ 5 : 0] w_wallace_cry_06bit_i[31 : 0];
+    logic [ 5 : 0] w_wallace_cry_06bit_o[31 : 0];
 
-    logic [7 : 0] w_switch_num[31 : 0];
-    logic         w_switch_num_00;
-    logic [5 : 0] w_switch_cry_00;
-    logic [5 : 0] w_switch_cry_01;
-    logic [5 : 0] w_switch_cry_02;
-    logic [5 : 0] w_switch_cry_03;
-    logic [5 : 0] w_switch_cry_04;
-    logic [5 : 0] w_switch_cry_05;
-    logic [5 : 0] w_switch_cry_06;
-    logic [5 : 0] w_switch_cry_07;
-    logic [5 : 0] w_switch_cry_08;
-    logic [5 : 0] w_switch_cry_09;
-    logic [5 : 0] w_switch_cry_10;
-    logic [5 : 0] w_switch_cry_11;
-    logic [5 : 0] w_switch_cry_12;
-    logic [5 : 0] w_switch_cry_13;
-    logic [5 : 0] w_switch_cry_14;
-    logic [5 : 0] w_switch_cry_15;
-    logic [5 : 0] w_switch_cry_16;
-    logic [5 : 0] w_switch_cry_17;
-    logic [5 : 0] w_switch_cry_18;
-    logic [5 : 0] w_switch_cry_19;
-    logic [5 : 0] w_switch_cry_20;
-    logic [5 : 0] w_switch_cry_21;
-    logic [5 : 0] w_switch_cry_22;
-    logic [5 : 0] w_switch_cry_23;
-    logic [5 : 0] w_switch_cry_24;
-    logic [5 : 0] w_switch_cry_25;
-    logic [5 : 0] w_switch_cry_26;
-    logic [5 : 0] w_switch_cry_27;
-    logic [5 : 0] w_switch_cry_28;
-    logic [5 : 0] w_switch_cry_29;
-    logic [5 : 0] w_switch_cry_30;
-    logic [5 : 0] w_switch_cry_31;
-    logic         w_switch_cry_imd;
+    assign w_wallace_cry_06bit_i[0] = r_switch_cry[5 : 0];
+
+    generate
+        for (i = 0; i < 32; i = i + 1) begin: calc_wallace
+            assign w_wallace_num[i] = r_switch_res[i];
+            mul_01bitx08_wallace mul_01bitx08_wallace_inst(
+                .i_num(w_wallace_num[i]),
+                .i_cry_06bit(w_wallace_cry_06bit_i[i]),
+                .o_cry_06bit(w_wallace_cry_06bit_o[i]),
+                .o_res(w_wallace_res[i]),
+                .o_cry(w_wallace_cry[i])
+            );
+            if (i != 31) begin
+                assign w_wallace_cry_06bit_i[i + 1] = w_wallace_cry_06bit_o[i];
+            end
+        end
+    endgenerate
+
+
+
+    logic [31 : 0] r_adder_num_a;
+    logic [31 : 0] r_adder_num_b;
+    logic          r_adder_cry;
+
+    always_ff @(posedge i_clk) begin
+        if (!i_rst_n) begin
+            r_adder_num_a <= 32'h0000_0000;
+            r_adder_num_b <= 32'h0000_0000;
+            r_adder_cry   <= 1'b0;
+        end
+        else begin
+            r_adder_num_a <= (w_wallace_cry[30 : 0] << 1) | r_switch_cry[6];
+            r_adder_num_b <= w_wallace_res;
+            r_adder_cry   <= r_switch_cry[7];
+        end
+    end
+
+
+
+    int count = 0;
+
+    always_ff @(posedge i_clk) begin
+        if (!i_rst_n) begin
+            count <= 32'h0000_0000;
+        end
+        else begin
+            if (count == 32'h3) begin
+                count <= count;
+            end
+            else begin
+                count <= count + 1'b1;
+            end
+        end
+    end
 
     logic [31 : 0] w_adder_num_a;
     logic [31 : 0] w_adder_num_b;
     logic          w_adder_cry;
 
-    assign w_adder_num_b[0] = w_switch_num_00;
-    assign w_adder_cry      = w_switch_cry_imd;
+    assign w_adder_num_a = (count == 32'h3) ? r_adder_num_a : 32'h0000_0000;
+    assign w_adder_num_b = (count == 32'h3) ? r_adder_num_b : 32'h0000_0000;
+    assign w_adder_cry   = (count == 32'h3) ? r_adder_cry   : 1'b0;
 
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_0(
-        .i_num(w_switch_num[0]),
-        .i_cry(w_switch_cry_00),
-        .o_res(w_adder_num_a[0]),
-        .o_cry(w_switch_cry_01),
-        .o_cry_01bit(w_adder_num_b[1])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_1(
-        .i_num(w_switch_num[1]),
-        .i_cry(w_switch_cry_01),
-        .o_res(w_adder_num_a[1]),
-        .o_cry(w_switch_cry_02),
-        .o_cry_01bit(w_adder_num_b[2])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_2(
-        .i_num(w_switch_num[2]),
-        .i_cry(w_switch_cry_02),
-        .o_res(w_adder_num_a[2]),
-        .o_cry(w_switch_cry_03),
-        .o_cry_01bit(w_adder_num_b[3])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_3(
-        .i_num(w_switch_num[3]),
-        .i_cry(w_switch_cry_03),
-        .o_res(w_adder_num_a[3]),
-        .o_cry(w_switch_cry_04),
-        .o_cry_01bit(w_adder_num_b[4])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_4(
-        .i_num(w_switch_num[4]),
-        .i_cry(w_switch_cry_04),
-        .o_res(w_adder_num_a[4]),
-        .o_cry(w_switch_cry_05),
-        .o_cry_01bit(w_adder_num_b[5])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_5(
-        .i_num(w_switch_num[5]),
-        .i_cry(w_switch_cry_05),
-        .o_res(w_adder_num_a[5]),
-        .o_cry(w_switch_cry_06),
-        .o_cry_01bit(w_adder_num_b[6])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_6(
-        .i_num(w_switch_num[6]),
-        .i_cry(w_switch_cry_06),
-        .o_res(w_adder_num_a[6]),
-        .o_cry(w_switch_cry_07),
-        .o_cry_01bit(w_adder_num_b[7])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_7(
-        .i_num(w_switch_num[7]),
-        .i_cry(w_switch_cry_07),
-        .o_res(w_adder_num_a[7]),
-        .o_cry(w_switch_cry_08),
-        .o_cry_01bit(w_adder_num_b[8])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_8(
-        .i_num(w_switch_num[8]),
-        .i_cry(w_switch_cry_08),
-        .o_res(w_adder_num_a[8]),
-        .o_cry(w_switch_cry_09),
-        .o_cry_01bit(w_adder_num_b[9])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_9(
-        .i_num(w_switch_num[9]),
-        .i_cry(w_switch_cry_09),
-        .o_res(w_adder_num_a[9]),
-        .o_cry(w_switch_cry_10),
-        .o_cry_01bit(w_adder_num_b[10])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_10(
-        .i_num(w_switch_num[10]),
-        .i_cry(w_switch_cry_10),
-        .o_res(w_adder_num_a[10]),
-        .o_cry(w_switch_cry_11),
-        .o_cry_01bit(w_adder_num_b[11])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_11(
-        .i_num(w_switch_num[11]),
-        .i_cry(w_switch_cry_11),
-        .o_res(w_adder_num_a[11]),
-        .o_cry(w_switch_cry_12),
-        .o_cry_01bit(w_adder_num_b[12])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_12(
-        .i_num(w_switch_num[12]),
-        .i_cry(w_switch_cry_12),
-        .o_res(w_adder_num_a[12]),
-        .o_cry(w_switch_cry_13),
-        .o_cry_01bit(w_adder_num_b[13])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_13(
-        .i_num(w_switch_num[13]),
-        .i_cry(w_switch_cry_13),
-        .o_res(w_adder_num_a[13]),
-        .o_cry(w_switch_cry_14),
-        .o_cry_01bit(w_adder_num_b[14])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_14(
-        .i_num(w_switch_num[14]),
-        .i_cry(w_switch_cry_14),
-        .o_res(w_adder_num_a[14]),
-        .o_cry(w_switch_cry_15),
-        .o_cry_01bit(w_adder_num_b[15])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_15(
-        .i_num(w_switch_num[15]),
-        .i_cry(w_switch_cry_15),
-        .o_res(w_adder_num_a[15]),
-        .o_cry(w_switch_cry_16),
-        .o_cry_01bit(w_adder_num_b[16])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_16(
-        .i_num(w_switch_num[16]),
-        .i_cry(w_switch_cry_16),
-        .o_res(w_adder_num_a[16]),
-        .o_cry(w_switch_cry_17),
-        .o_cry_01bit(w_adder_num_b[17])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_17(
-        .i_num(w_switch_num[17]),
-        .i_cry(w_switch_cry_17),
-        .o_res(w_adder_num_a[17]),
-        .o_cry(w_switch_cry_18),
-        .o_cry_01bit(w_adder_num_b[18])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_18(
-        .i_num(w_switch_num[18]),
-        .i_cry(w_switch_cry_18),
-        .o_res(w_adder_num_a[18]),
-        .o_cry(w_switch_cry_19),
-        .o_cry_01bit(w_adder_num_b[19])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_19(
-        .i_num(w_switch_num[19]),
-        .i_cry(w_switch_cry_19),
-        .o_res(w_adder_num_a[19]),
-        .o_cry(w_switch_cry_20),
-        .o_cry_01bit(w_adder_num_b[20])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_20(
-        .i_num(w_switch_num[20]),
-        .i_cry(w_switch_cry_20),
-        .o_res(w_adder_num_a[20]),
-        .o_cry(w_switch_cry_21),
-        .o_cry_01bit(w_adder_num_b[21])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_21(
-        .i_num(w_switch_num[21]),
-        .i_cry(w_switch_cry_21),
-        .o_res(w_adder_num_a[21]),
-        .o_cry(w_switch_cry_22),
-        .o_cry_01bit(w_adder_num_b[22])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_22(
-        .i_num(w_switch_num[22]),
-        .i_cry(w_switch_cry_22),
-        .o_res(w_adder_num_a[22]),
-        .o_cry(w_switch_cry_23),
-        .o_cry_01bit(w_adder_num_b[23])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_23(
-        .i_num(w_switch_num[23]),
-        .i_cry(w_switch_cry_23),
-        .o_res(w_adder_num_a[23]),
-        .o_cry(w_switch_cry_24),
-        .o_cry_01bit(w_adder_num_b[24])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_24(
-        .i_num(w_switch_num[24]),
-        .i_cry(w_switch_cry_24),
-        .o_res(w_adder_num_a[24]),
-        .o_cry(w_switch_cry_25),
-        .o_cry_01bit(w_adder_num_b[25])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_25(
-        .i_num(w_switch_num[25]),
-        .i_cry(w_switch_cry_25),
-        .o_res(w_adder_num_a[25]),
-        .o_cry(w_switch_cry_26),
-        .o_cry_01bit(w_adder_num_b[26])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_26(
-        .i_num(w_switch_num[26]),
-        .i_cry(w_switch_cry_26),
-        .o_res(w_adder_num_a[26]),
-        .o_cry(w_switch_cry_27),
-        .o_cry_01bit(w_adder_num_b[27])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_27(
-        .i_num(w_switch_num[27]),
-        .i_cry(w_switch_cry_27),
-        .o_res(w_adder_num_a[27]),
-        .o_cry(w_switch_cry_28),
-        .o_cry_01bit(w_adder_num_b[28])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_28(
-        .i_num(w_switch_num[28]),
-        .i_cry(w_switch_cry_28),
-        .o_res(w_adder_num_a[28]),
-        .o_cry(w_switch_cry_29),
-        .o_cry_01bit(w_adder_num_b[29])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_29(
-        .i_num(w_switch_num[29]),
-        .i_cry(w_switch_cry_29),
-        .o_res(w_adder_num_a[29]),
-        .o_cry(w_switch_cry_30),
-        .o_cry_01bit(w_adder_num_b[30])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_30(
-        .i_num(w_switch_num[30]),
-        .i_cry(w_switch_cry_30),
-        .o_res(w_adder_num_a[30]),
-        .o_cry(w_switch_cry_31),
-        .o_cry_01bit(w_adder_num_b[31])
-    );
-    mul_01bitx08_wallace mul_01bitx08_wallace_inst_31(
-        .i_num(w_switch_num[31]),
-        .i_cry(w_switch_cry_31),
-        .o_res(w_adder_num_a[31]),
-        .o_cry(),
-        .o_cry_01bit()
-    );
-
-    adder_xxbit_serial #(
-        .DATA_WIDTH(32)
-    ) adder_xxbit_serial_inst(
+    adder_nnbit_serial #(.DATA_WIDTH(32)) adder_nnbit_serial_inst(
         .i_num_a(w_adder_num_a),
         .i_num_b(w_adder_num_b),
         .i_cry(w_adder_cry),
@@ -395,4 +182,5 @@ module mul_16bit_wallace(
         .o_cry(o_cry)
     );
 
+    assign o_end = (count == 32'h3) ? 1'b1 : 1'b0;
 endmodule
