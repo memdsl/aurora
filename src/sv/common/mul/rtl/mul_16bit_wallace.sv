@@ -2,9 +2,9 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-05 08:43:24
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-09 09:29:11
+ * @LastEditTime: 2024-07-09 16:46:40
  * @FilePath    : /memdsl/aurora/src/sv/common/mul/rtl/mul_16bit_wallace.sv
- * @Description : nnbit wallace tree multiplier
+ * @Description : 16bit wallace tree multiplier
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */

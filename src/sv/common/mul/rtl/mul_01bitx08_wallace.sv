@@ -2,9 +2,9 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-07 12:43:56
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-09 09:31:05
+ * @LastEditTime: 2024-07-09 16:42:30
  * @FilePath    : /memdsl/aurora/src/sv/common/mul/rtl/mul_01bitx08_wallace.sv
- * @Description :
+ * @Description : 01bit wallace tree for adding 8 numbers
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */

@@ -1,3 +1,14 @@
+/*
+ * @Author      : myyerrol
+ * @Date        : 2024-07-07 22:00:52
+ * @LastEditors : myyerrol
+ * @LastEditTime: 2024-07-09 16:44:36
+ * @FilePath    : /memdsl/aurora/src/sv/common/mul/tb/mul_01bitx08_wallace_tb.sv
+ * @Description : 01bit wallace tree for adding 8 numbers testbench
+ *
+ * Copyright (c) 2024 by myyerrol, All Rights Reserved.
+ */
+
 `timescale 1ns / 1ps
 
 `include "adder_01bit_full.sv"
