@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-28 14:41:49
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-07 15:27:03
+ * @LastEditTime: 2024-07-08 20:56:56
  * @FilePath    : /memdsl/aurora/src/sv/common/adder/rtl/adder_04bit_ahead.sv
  * @Description : 04bit ahead carry adder
  *
@@ -36,17 +36,15 @@ module adder_04bit_ahead(
 
     /** Calculate result.*/
     generate
-        for (i = 0; i < 4; i = i + 1)
-        begin: calc_result
+        genvar i;
+        for (i = 0; i < 4; i = i + 1) begin
             assign w_res[i] = i_num_a[i] ^ i_num_b[i] ^ w_cry[i];
         end
     endgenerate
 
     /** Calculate temporary carry bits. */
     generate
-        genvar i;
-        for (i = 0; i < 4; i = i + 1)
-        begin: calc_carry
+        for (i = 0; i < 4; i = i + 1) begin
             assign w_cry_imd[i] = (i_num_a[i] & i_num_b[i]) ||
                                  ((i_num_a[i] | i_num_b[i]) & w_cry[i]);
         end

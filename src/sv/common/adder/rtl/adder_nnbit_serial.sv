@@ -2,9 +2,9 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-24 01:15:01
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-07 22:00:58
- * @FilePath    : /memdsl/aurora/src/sv/common/adder/rtl/adder_xxbit_serial.sv
- * @Description : xxbit serial carry adder
+ * @LastEditTime: 2024-07-08 20:57:17
+ * @FilePath    : /memdsl/aurora/src/sv/common/adder/rtl/adder_nnbit_serial.sv
+ * @Description : nnbit serial carry adder
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
@@ -12,14 +12,14 @@
 `include "adder_01bit_full.sv"
 
 /**
- * @description: xxbit serial carry adder
+ * @description: nnbit serial carry adder
  * @param {logic} i_num_a: Number a
  * @param {logic} i_num_b: Number b
  * @param {logic} i_cry  : Carry from lowest bit
  * @param {logic} o_res  : Result
  * @param {logic} o_cry  : Carry to highest bit
  */
-module adder_xxbit_serial #(
+module adder_nnbit_serial #(
     parameter DATA_WIDTH = 8
 ) (
     input  logic [DATA_WIDTH - 1 : 0] i_num_a,
@@ -42,8 +42,7 @@ module adder_xxbit_serial #(
      */
     generate
         genvar i;
-        for (i = 0; i < DATA_WIDTH; i = i + 1)
-        begin: calc_result
+        for (i = 0; i < DATA_WIDTH; i = i + 1) begin
             adder_01bit_full adder_01bit_full_inst(
                 .i_num_a(i_num_a[i]),
                 .i_num_b(i_num_b[i]),
