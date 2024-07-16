@@ -1,3 +1,14 @@
+/*
+ * @Author      : myyerrol
+ * @Date        : 2024-07-16 20:05:41
+ * @LastEditors : myyerrol
+ * @LastEditTime: 2024-07-17 23:05:47
+ * @FilePath    : /memdsl/aurora/src/sv/common/div/rtl/div_nnbit_s01_abs_itera.sv
+ * @Description : 01bit absolute value iterative divider
+ *
+ * Copyright (c) 2024 by myyerrol, All Rights Reserved.
+ */
+
 module div_nnbit_s01_abs_itera #(
     parameter DATA_WIDTH = 8
 ) (
@@ -57,7 +68,12 @@ module div_nnbit_s01_abs_itera #(
     always_comb begin
         case (r_state_curr)
             S_IDLE: begin
-                r_state_next = S_DATA_IN;
+                if (i_valid) begin
+                    r_state_next = S_DATA_IN;
+                end
+                else begin
+                    r_state_next = r_state_curr;
+                end
             end
             S_DATA_IN: begin
                 r_state_next = S_CALC;
@@ -83,24 +99,24 @@ module div_nnbit_s01_abs_itera #(
         if (!i_rst_n) begin
             o_res   <= {DATA_WIDTH{1'b0}};
             o_rem   <= {DATA_WIDTH{1'b0}};
-            o_valid <=  1'd0;
+            o_valid <=  1'b0;
         end
         else begin
             case (r_state_curr)
                 S_IDLE: begin
                     o_res   <= {DATA_WIDTH{1'b0}};
                     o_rem   <= {DATA_WIDTH{1'b0}};
-                    o_valid <=  1'd0;
+                    o_valid <=  1'b0;
                 end
                 S_DATA_IN: begin
                     o_res   <= {DATA_WIDTH{1'b0}};
                     o_rem   <= {DATA_WIDTH{1'b0}};
-                    o_valid <=  1'd0;
+                    o_valid <=  1'b0;
                 end
                 S_CALC: begin
                     o_res   <= {DATA_WIDTH{1'b0}};
                     o_rem   <= {DATA_WIDTH{1'b0}};
-                    o_valid <=  1'd0;
+                    o_valid <=  1'b0;
                 end
                 S_DATA_OUT: begin
                     if (i_signed) begin
@@ -118,7 +134,7 @@ module div_nnbit_s01_abs_itera #(
                 default: begin
                     o_res   <= {DATA_WIDTH{1'b0}};
                     o_rem   <= {DATA_WIDTH{1'b0}};
-                    o_valid <=  1'd0;
+                    o_valid <=  1'b0;
                 end
             endcase
         end
@@ -151,15 +167,15 @@ module div_nnbit_s01_abs_itera #(
                             (i_num_x[DATA_WIDTH - 1] == 1'b0) ? i_num_x :
                             (~i_num_x + 1'b1) };
                         r_num_y_abs <= {
-                            1'd0,
+                            1'b0,
                             (i_num_y[DATA_WIDTH - 1] == 1'b0) ? i_num_y :
-                            (~i_num_y + 1'b1), DATA_WIDTH - 1'd0 };
+                            (~i_num_y + 1'b1), {(DATA_WIDTH - 1){1'b0}} };
                     end
                     else begin
                         r_res_pos   <= 1'b0;
                         r_rem_pos   <= 1'b0;
                         r_num_x_abs <= {{DATA_WIDTH{1'b0}}, i_num_x };
-                        r_num_y_abs <= {1'd0, i_num_y, DATA_WIDTH - 1'd0 };
+                        r_num_y_abs <= {1'b0, i_num_y, {(DATA_WIDTH - 1){1'b0}} };
                     end
                 end
                 S_CALC: begin
