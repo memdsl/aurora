@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-09-05 14:17:09
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-08 06:13:20
+ * @LastEditTime: 2024-09-08 06:58:07
  * @FilePath    : /memdsl/aurora/src/interface/sram/rtl/sram_slave.sv
  * @Description : SRAM with AXI4 slave interface
  *
@@ -119,15 +119,15 @@ module sram_slave(
     // ========================================================================
     logic [ 7 : 0] r_arlen_cnt;
     logic          w_arwrap_en;
-    logic [31 : 0] w_arwrap_size;
+    logic [ 7 : 0] w_arwrap_size;
     logic          w_arshake;
 
     logic          w_rshake;
     logic          w_rend;
 
-    logic          w_awwrap_en;
-    logic [31 : 0] w_awwrap_size;
     logic [ 7 : 0] r_awlen_cnt;
+    logic          w_awwrap_en;
+    logic [ 7 : 0] w_awwrap_size;
     logic          w_awshake;
 
     logic          w_wshake;
@@ -207,23 +207,90 @@ module sram_slave(
 
     always_ff @(i_aclk) begin
         if (!i_areset_n) begin
+            r_araddr    <=  8'd0;
+            r_arlen     <=  8'd0;
+            r_arsize    <=  3'd0;
+            r_arburst   <=  2'd0;
+            r_arready   <=  1'b1;
+            r_rdata     <= 64'd0;
+            r_rresp     <= 2'b00;
+            r_rlast     <=  1'b0;
+            r_ruser     <=  4'd0;
+            r_rvalid    <=  1'b0;
 
+            r_arlen_cnt <=  8'd0;
         end
         else begin
             case (r_state_curr)
                 S_IDLE: begin
+                    r_araddr    <=  8'd0;
+                    r_arlen     <=  8'd0;
+                    r_arsize    <=  3'd0;
+                    r_arburst   <=  2'd0;
+                    r_arready   <=  1'b1;
+                    r_rdata     <= 64'd0;
+                    r_rresp     <= 2'b00;
+                    r_rlast     <=  1'b0;
+                    r_ruser     <=  4'd0;
+                    r_rvalid    <=  1'b0;
 
+                    r_arlen_cnt <=  8'd0;
                 end
                 S_RD_ADDR: begin
-
+                    r_araddr  <= i_araddr[7 : 0];
+                    r_arlen   <= i_arlen;
+                    r_arsize  <= i_arsize;
+                    r_arburst <= i_arburst;
+                    r_rvalid  <= 1'b1;
                 end
                 S_RD_DATA: begin
-
+                    if (!w_rend) begin
+                        case (r_arburst)
+                            2'b00: begin
+                                r_araddr <= r_araddr;
+                            end
+                            2'b01: begin
+                                r_araddr[7 : ADDR_LSB]     <= r_araddr[7 : ADDR_LSB] + 1'b1;
+                                r_araddr[ADDR_LSB - 1 : 0] <= {ADDR_LSB{1'b0}};
+                            end
+                            2'b10: begin
+                                if (w_arwrap_en) begin
+                                    r_araddr <= r_araddr - w_arwrap_size;
+                                end
+                                else begin
+                                    r_araddr[7 : ADDR_LSB]     <= r_araddr[7 : ADDR_LSB] + 1'b1;
+                                    r_araddr[ADDR_LSB - 1 : 0] <= {ADDR_LSB{1'b0}};
+                                end
+                            end
+                            default: begin
+                                r_araddr <= r_araddr;
+                            end
+                        endcase
+                        r_rlast     <= 1'b0;
+                        r_arlen_cnt <= r_arlen_cnt + 1'b1;
+                    end
+                    else begin
+                        r_rlast     <= 1'b1;
+                        r_arlen_cnt <= r_arlen_cnt;
+                    end
+                    r_rvalid <= 1'b0;
                 end
                 default: begin
+                    r_araddr  <= r_araddr;
+                    r_arlen   <= r_arlen;
+                    r_arsize  <= r_arsize;
+                    r_arburst <= r_arburst;
+                    r_arready <= r_arready;
+                    r_rdata   <= r_rdata;
+                    r_rresp   <= r_rresp;
+                    r_rlast   <= r_rlast;
+                    r_ruser   <= r_ruser;
+                    r_rvalid  <= r_rvalid;
                 end
             endcase
         end
     end
+
+
 
 endmodule
