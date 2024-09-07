@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-09-05 14:17:09
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-08 06:58:07
+ * @LastEditTime: 2024-09-08 18:13:47
  * @FilePath    : /memdsl/aurora/src/interface/sram/rtl/sram_slave.sv
  * @Description : SRAM with AXI4 slave interface
  *
@@ -66,7 +66,7 @@ module sram_slave(
 );
 
     // ========================================================================
-    // Create temporary variables and assign them to output ports.
+    //
     // ========================================================================
     // AXI4 read address
     logic [ 7 : 0] r_araddr;
@@ -273,6 +273,7 @@ module sram_slave(
                         r_rlast     <= 1'b1;
                         r_arlen_cnt <= r_arlen_cnt;
                     end
+                    r_rdata  <= r_ram[r_araddr];
                     r_rvalid <= 1'b0;
                 end
                 default: begin
@@ -290,7 +291,5 @@ module sram_slave(
             endcase
         end
     end
-
-
 
 endmodule
