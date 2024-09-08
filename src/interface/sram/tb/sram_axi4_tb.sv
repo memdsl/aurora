@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-09-08 04:02:30
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-08 18:48:57
+ * @LastEditTime: 2024-09-08 19:00:13
  * @FilePath    : /memdsl/aurora/src/interface/sram/tb/sram_axi4_tb.sv
  * @Description : SRAM with AXI4 slave interface testbench.
  *
@@ -11,7 +11,7 @@
 
 `timescale 1ns / 1ps
 
-module sram_axi_tb();
+module sram_axi4_tb();
 
 initial begin
     $dumpfile("build/sram_axi4.vcd");
@@ -38,7 +38,15 @@ logic          w_bready;
 always #(CYCLE / 2) w_aclk = ~w_aclk;
 
 initial begin
-
+    w_aclk     = 1'b0;
+    w_areset_n = 1'b0;
+    w_rready   = 1'b1;
+    #(CYCLE * 1);
+    w_areset_n = 1'b1;
+    w_araddr   = 8'd10;
+    w_arvalid  = 1'b1;
+    #(CYCLE * 5);
+    $finish;
 end
 
 sram_axi4 u_sram_axi4(

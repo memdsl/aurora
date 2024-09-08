@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-09-05 14:17:09
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-08 18:41:29
+ * @LastEditTime: 2024-09-08 19:35:35
  * @FilePath    : /memdsl/aurora/src/interface/sram/rtl/sram_axi4.sv
  * @Description : SRAM with AXI4 slave interface
  *
@@ -164,7 +164,7 @@ module sram_axi4(
     logic [3 : 0] r_state_curr;
     logic [3 : 0] r_state_next;
 
-    always_ff @(i_aclk) begin
+    always_ff @(posedge i_aclk) begin
         if (!i_areset_n) begin
             r_state_curr <= S_IDLE;
         end
@@ -205,7 +205,7 @@ module sram_axi4(
         endcase
     end
 
-    always_ff @(i_aclk) begin
+    always_ff @(posedge i_aclk) begin
         if (!i_areset_n) begin
             r_araddr    <=  8'd0;
             r_arlen     <=  8'd0;
