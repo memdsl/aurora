@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-09-08 04:02:30
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-08 19:00:13
+ * @LastEditTime: 2024-09-08 20:37:50
  * @FilePath    : /memdsl/aurora/src/interface/sram/tb/sram_axi4_tb.sv
  * @Description : SRAM with AXI4 slave interface testbench.
  *
@@ -26,6 +26,7 @@ logic          w_areset_n;
 logic [ 7 : 0] w_araddr;
 logic          w_arvalid;
 logic          w_rready;
+logic          w_rlast;
 
 logic [ 7 : 0] w_awaddr;
 logic          w_awvalid;
@@ -43,11 +44,17 @@ initial begin
     w_rready   = 1'b1;
     #(CYCLE * 1);
     w_areset_n = 1'b1;
-    w_araddr   = 8'd10;
-    w_arvalid  = 1'b1;
-    #(CYCLE * 5);
+    #(CYCLE * 100);
     $finish;
 end
+
+sram_addr u_sram_addr(
+    .i_aclk    (w_aclk),
+    .i_areset_n(w_areset_n),
+    .i_rlast   (w_rlast),
+    .o_araddr  (w_araddr),
+    .o_arvalid (w_arvalid)
+);
 
 sram_axi4 u_sram_axi4(
     .i_aclk    (w_aclk),
@@ -69,7 +76,7 @@ sram_axi4 u_sram_axi4(
     .o_rid     (),
     .o_rdata   (),
     .o_rresp   (),
-    .o_rlast   (),
+    .o_rlast   (w_rlast),
     .o_ruser   (),
     .o_rvalid  (),
     .i_awid    (4'd1),
