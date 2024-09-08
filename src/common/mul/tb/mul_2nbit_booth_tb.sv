@@ -2,8 +2,8 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-03 23:00:09
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-07 23:58:18
- * @FilePath    : /memdsl/aurora/src/sv/common/mul/tb/mul_2nbit_booth_tb.sv
+ * @LastEditTime: 2024-09-08 18:24:17
+ * @FilePath    : /memdsl/aurora/src/common/mul/tb/mul_2nbit_booth_tb.sv
  * @Description : 2nbit booth multiplier testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -47,7 +47,7 @@ end
 
 mul_2nbit_booth #(
     .DATA_WIDTH(DATA_WIDTH)
-) mul_2nbit_booth_inst(
+) u_mul_2nbit_booth(
     .i_clk(w_clk),
     .i_rst_n(w_rst_n),
     .i_num_x(w_num_x),

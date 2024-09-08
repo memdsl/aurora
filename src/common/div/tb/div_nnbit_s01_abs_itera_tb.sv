@@ -2,8 +2,8 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-16 20:05:41
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-17 22:55:11
- * @FilePath    : /memdsl/aurora/src/sv/common/div/tb/div_nnbit_s01_abs_itera_tb.sv
+ * @LastEditTime: 2024-09-08 18:23:12
+ * @FilePath    : /memdsl/aurora/src/common/div/tb/div_nnbit_s01_abs_itera_tb.sv
  * @Description : 01bit absolute value iterative divider testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -43,7 +43,7 @@ end
 
 div_nnbit_s01_abs_itera #(
     .DATA_WIDTH(8)
-) div_nnbit_s01_abs_itera_inst(
+) u_div_nnbit_s01_abs_itera(
     .i_clk(w_clk),
     .i_rst_n(w_rst_n),
     .i_valid(w_valid_i),

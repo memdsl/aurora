@@ -2,8 +2,8 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-28 14:52:17
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-06-30 22:57:50
- * @FilePath    : /memdsl/aurora/src/sv/common/adder/tb/adder_01bit_half_tb.sv
+ * @LastEditTime: 2024-09-08 18:22:39
+ * @FilePath    : /memdsl/aurora/src/common/adder/tb/adder_01bit_half_tb.sv
  * @Description : 01bit half adder testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -31,7 +31,7 @@ initial begin
     #10 $finish;
 end
 
-adder_01bit_half adder_01bit_half_inst(
+adder_01bit_half u_adder_01bit_half(
     .i_num_a(w_num_a),
     .i_num_b(w_num_b),
     .o_res(),

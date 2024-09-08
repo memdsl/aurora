@@ -2,8 +2,8 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-24 01:15:01
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-08 20:57:17
- * @FilePath    : /memdsl/aurora/src/sv/common/adder/rtl/adder_nnbit_serial.sv
+ * @LastEditTime: 2024-09-08 18:22:18
+ * @FilePath    : /memdsl/aurora/src/common/adder/rtl/adder_nnbit_serial.sv
  * @Description : nnbit serial carry adder
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -43,7 +43,7 @@ module adder_nnbit_serial #(
     generate
         genvar i;
         for (i = 0; i < DATA_WIDTH; i = i + 1) begin
-            adder_01bit_full adder_01bit_full_inst(
+            adder_01bit_full u_adder_01bit_full(
                 .i_num_a(i_num_a[i]),
                 .i_num_b(i_num_b[i]),
                 .i_cry((i == 0) ? i_cry : w_cry[i - 1]),

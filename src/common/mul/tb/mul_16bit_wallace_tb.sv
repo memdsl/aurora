@@ -2,8 +2,8 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-05 08:45:17
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-09 09:29:50
- * @FilePath    : /memdsl/aurora/src/sv/common/mul/tb/mul_16bit_wallace_tb.sv
+ * @LastEditTime: 2024-09-08 18:24:24
+ * @FilePath    : /memdsl/aurora/src/common/mul/tb/mul_16bit_wallace_tb.sv
  * @Description : 16bit wallace tree multiplier testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -45,7 +45,7 @@ initial begin
     $finish;
 end
 
-mul_16bit_wallace mul_16bit_wallace_inst(
+mul_16bit_wallace u_mul_16bit_wallace(
     .i_clk(w_clk),
     .i_rst_n(w_rst_n),
     .i_num_x(w_num_x),

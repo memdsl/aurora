@@ -2,8 +2,8 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-28 14:52:06
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-02 23:43:22
- * @FilePath    : /memdsl/aurora/src/sv/common/adder/tb/adder_01bit_full_tb.sv
+ * @LastEditTime: 2024-09-08 18:22:29
+ * @FilePath    : /memdsl/aurora/src/common/adder/tb/adder_01bit_full_tb.sv
  * @Description : 01bit full adder testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -34,7 +34,7 @@ initial begin
     #10 $finish;
 end
 
-adder_01bit_full adder_01bit_full_inst(
+adder_01bit_full u_adder_01bit_full(
     .i_num_a(w_num_a),
     .i_num_b(w_num_b),
     .i_cry(w_cry),

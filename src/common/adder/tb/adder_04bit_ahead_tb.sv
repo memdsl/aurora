@@ -2,8 +2,8 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-28 14:52:18
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-03 19:55:22
- * @FilePath    : /memdsl/aurora/src/sv/common/adder/tb/adder_04bit_ahead_tb.sv
+ * @LastEditTime: 2024-09-08 18:22:47
+ * @FilePath    : /memdsl/aurora/src/common/adder/tb/adder_04bit_ahead_tb.sv
  * @Description : 04bit ahead carry adder testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -34,7 +34,7 @@ initial begin
     #10 $finish;
 end
 
-adder_04bit_ahead adder_04bit_ahead_inst(
+adder_04bit_ahead u_adder_04bit_ahead(
     .i_num_a(w_num_a),
     .i_num_b(w_num_b),
     .i_cry(w_cry),

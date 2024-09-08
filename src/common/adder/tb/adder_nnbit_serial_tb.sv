@@ -2,8 +2,8 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-28 14:52:18
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-02 23:43:41
- * @FilePath    : /memdsl/aurora/src/sv/common/adder/tb/adder_nnbit_serial_tb.sv
+ * @LastEditTime: 2024-09-08 18:22:56
+ * @FilePath    : /memdsl/aurora/src/common/adder/tb/adder_nnbit_serial_tb.sv
  * @Description : nnbit serial carry adder testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -38,7 +38,7 @@ end
 
 adder_nnbit_serial #(
     .DATA_WIDTH(DATA_WIDTH)
-) adder_nnbit_serial_inst(
+) u_adder_nnbit_serial(
     .i_num_a(w_num_a),
     .i_num_b(w_num_b),
     .i_cry(w_cry),

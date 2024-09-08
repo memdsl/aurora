@@ -2,8 +2,8 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-05 08:43:24
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-09 16:57:52
- * @FilePath    : /memdsl/aurora/src/sv/common/mul/rtl/mul_16bit_wallace.sv
+ * @LastEditTime: 2024-09-08 18:23:32
+ * @FilePath    : /memdsl/aurora/src/common/mul/rtl/mul_16bit_wallace.sv
  * @Description : 16bit wallace tree multiplier
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -65,7 +65,7 @@ module mul_16bit_wallace(
         genvar i;
         for (i = 0; i < 8; i = i + 1) begin: calc_booth
             assign w_wallace_num_y[i] = w_num_y >> (i * 2);
-            mul_02bit_booth #(.DATA_WIDTH(16)) mul_02bit_booth_inst(
+            mul_02bit_booth #(.DATA_WIDTH(16)) u_mul_02bit_booth(
                 .i_num_x(w_num_x << (i * 2)),
                 .i_num_y(w_wallace_num_y[i][2 : 0]),
                 .o_res(w_booth_res[i]),
@@ -103,7 +103,7 @@ module mul_16bit_wallace(
     generate
         for (i = 0; i < 32; i = i + 1) begin: calc_wallace
             assign w_wallace_num[i] = w_switch_res[i];
-            mul_01bitx08_wallace mul_01bitx08_wallace_inst(
+            mul_01bitx08_wallace u_mul_01bitx08_wallace(
                 .i_num(w_wallace_num[i]),
                 .i_cry_06bit(w_wallace_cry_06bit_i[i]),
                 .o_cry_06bit(w_wallace_cry_06bit_o[i]),
@@ -161,7 +161,9 @@ module mul_16bit_wallace(
     assign w_adder_num_b = (count == 32'h3) ? r_adder_num_b : 32'h0000_0000;
     assign w_adder_cry   = (count == 32'h3) ? r_adder_cry   : 1'b0;
 
-    adder_nnbit_serial #(.DATA_WIDTH(32)) adder_nnbit_serial_inst(
+    adder_nnbit_serial #(
+        .DATA_WIDTH(32)
+    ) u_adder_nnbit_serial(
         .i_num_a(w_adder_num_a),
         .i_num_b(w_adder_num_b),
         .i_cry(w_adder_cry),

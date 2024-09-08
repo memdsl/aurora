@@ -2,8 +2,8 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-07 22:00:52
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-09 16:44:36
- * @FilePath    : /memdsl/aurora/src/sv/common/mul/tb/mul_01bitx08_wallace_tb.sv
+ * @LastEditTime: 2024-09-08 18:24:10
+ * @FilePath    : /memdsl/aurora/src/common/mul/tb/mul_01bitx08_wallace_tb.sv
  * @Description : 01bit wallace tree for adding 8 numbers testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -51,7 +51,7 @@ initial begin
     $finish;
 end
 
-mul_01bitx08_wallace mul_01bitx08_wallace_inst(
+mul_01bitx08_wallace u_mul_01bitx08_wallace(
     .i_num(w_num),
     .i_cry_06bit(w_cry),
     .o_cry_06bit(),

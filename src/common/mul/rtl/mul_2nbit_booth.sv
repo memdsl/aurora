@@ -2,8 +2,8 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-02 18:48:41
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-09 16:45:47
- * @FilePath    : /memdsl/aurora/src/sv/common/mul/rtl/mul_2nbit_booth.sv
+ * @LastEditTime: 2024-09-08 18:23:20
+ * @FilePath    : /memdsl/aurora/src/common/mul/rtl/mul_2nbit_booth.sv
  * @Description : 2nbit booth multiplier
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -62,7 +62,7 @@ module mul_2nbit_booth #(
 
     mul_02bit_booth #(
         .DATA_WIDTH(DATA_WIDTH)
-    ) mul_02bit_booth_inst(
+    ) u_mul_02bit_booth(
         .i_num_x(r_num_x),
         .i_num_y(r_num_y[2 : 0]),
         .o_res(w_res),
