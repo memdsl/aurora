@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-09-05 14:17:09
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-08 18:16:44
+ * @LastEditTime: 2024-09-08 18:41:29
  * @FilePath    : /memdsl/aurora/src/interface/sram/rtl/sram_axi4.sv
  * @Description : SRAM with AXI4 slave interface
  *
@@ -289,6 +289,16 @@ module sram_axi4(
                     r_rvalid  <= r_rvalid;
                 end
             endcase
+        end
+    end
+
+    always_ff @(posedge i_aclk) begin
+        if (!i_areset_n) begin
+            for (int i = 0; i < 256; i = i + 1) begin
+                r_ram[i] = {32'd0, i};
+            end
+        end
+        else begin
         end
     end
 

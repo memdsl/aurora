@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-09-08 04:02:30
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-08 18:20:57
+ * @LastEditTime: 2024-09-08 18:48:57
  * @FilePath    : /memdsl/aurora/src/interface/sram/tb/sram_axi4_tb.sv
  * @Description : SRAM with AXI4 slave interface testbench.
  *
@@ -20,63 +20,75 @@ end
 
 parameter CYCLE = 10;
 
-logic w_clk;
-logic w_rst_n;
+logic          w_aclk;
+logic          w_areset_n;
 
-always #(CYCLE / 2) w_clk = ~w_clk;
+logic [ 7 : 0] w_araddr;
+logic          w_arvalid;
+logic          w_rready;
+
+logic [ 7 : 0] w_awaddr;
+logic          w_awvalid;
+logic          w_wvalid;
+logic [63 : 0] w_wdata;
+logic [ 7 : 0] w_wstrb;
+logic          w_wlast;
+logic          w_bready;
+
+always #(CYCLE / 2) w_aclk = ~w_aclk;
 
 initial begin
 
 end
 
 sram_axi4 u_sram_axi4(
-    input  logic          i_aclk,
-    input  logic          i_areset_n,
-    input  logic [ 3 : 0] i_arid,
-    input  logic [ 7 : 0] i_araddr,
-    input  logic [ 7 : 0] i_arlen,
-    input  logic [ 2 : 0] i_arsize,
-    input  logic [ 1 : 0] i_arburst,
-    input  logic [ 1 : 0] i_arlock,
-    input  logic [ 3 : 0] i_arcache,
-    input  logic [ 2 : 0] i_arprot,
-    input  logic [ 3 : 0] i_arqos,
-    input  logic [ 3 : 0] i_arregion,
-    input  logic [ 3 : 0] i_aruser,
-    input  logic          i_arvalid,
-    output logic          o_arready,
-    input  logic          i_rready,
-    output logic [ 3 : 0] o_rid,
-    output logic [63 : 0] o_rdata,
-    output logic [ 1 : 0] o_rresp,
-    output logic          o_rlast,
-    output logic [ 3 : 0] o_ruser,
-    output logic          o_rvalid,
-    input  logic [ 3 : 0] i_awid,
-    input  logic [ 7 : 0] i_awaddr,
-    input  logic [ 7 : 0] i_awlen,
-    input  logic [ 2 : 0] i_awsize,
-    input  logic [ 1 : 0] i_awburst,
-    input  logic [ 1 : 0] i_awlock,
-    input  logic [ 3 : 0] i_awcache,
-    input  logic [ 2 : 0] i_awprot,
-    input  logic [ 3 : 0] i_awqos,
-    input  logic [ 3 : 0] i_awregion,
-    input  logic [ 3 : 0] i_awuser,
-    input  logic          i_awvalid,
-    output logic          o_awready,
-    input  logic [ 3 : 0] i_wid,
-    input  logic [63 : 0] i_wdata,
-    input  logic [ 7 : 0] i_wstrb,
-    input  logic          i_wlast,
-    input  logic [ 3 : 0] i_wuser,
-    input  logic          i_wvalid,
-    output logic          o_wready,
-    input  logic          i_bready,
-    output logic [ 3 : 0] o_bid,
-    output logic [ 1 : 0] o_bresp,
-    output logic [ 3 : 0] o_buser,
-    output logic          o_bvalid
-)
+    .i_aclk    (w_aclk),
+    .i_areset_n(w_areset_n),
+    .i_arid    (4'd1),
+    .i_araddr  (w_araddr),
+    .i_arlen   (8'd0),
+    .i_arsize  (3'd0),
+    .i_arburst (2'b00),
+    .i_arlock  (2'd0),
+    .i_arcache (4'd0),
+    .i_arprot  (3'd0),
+    .i_arqos   (4'd0),
+    .i_arregion(4'd0),
+    .i_aruser  (4'd0),
+    .i_arvalid (w_arvalid),
+    .o_arready (),
+    .i_rready  (w_rready),
+    .o_rid     (),
+    .o_rdata   (),
+    .o_rresp   (),
+    .o_rlast   (),
+    .o_ruser   (),
+    .o_rvalid  (),
+    .i_awid    (4'd1),
+    .i_awaddr  (w_awaddr),
+    .i_awlen   (8'd0),
+    .i_awsize  (3'd0),
+    .i_awburst (2'd0),
+    .i_awlock  (2'd0),
+    .i_awcache (4'd0),
+    .i_awprot  (3'd0),
+    .i_awqos   (4'd0),
+    .i_awregion(4'd0),
+    .i_awuser  (4'd0),
+    .i_awvalid (w_awvalid),
+    .o_awready (),
+    .i_wid     (4'd1),
+    .i_wdata   (w_wdata),
+    .i_wstrb   (w_wstrb),
+    .i_wlast   (w_wlast),
+    .i_wuser   (4'd0),
+    .i_wvalid  (w_wvalid),
+    .o_wready  (),
+    .i_bready  (w_bready),
+    .o_bid     (),
+    .o_bresp   (),
+    .o_buser   (),
+    .o_bvalid  ()
+);
 
 endmodule
