@@ -1,6 +1,6 @@
 .PHONY: run sim clean
 
-INCS_DIR = $(shell find ${AURORA_HOME}/src/sv/ -type d -name "rtl")
+INCS_DIR = $(shell find ${AURORA_HOME}/src/ -type d -name "rtl")
 INCS     = $(addprefix -I, $(INCS_DIR))
 
 run:
