@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-09-08 04:02:30
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-09 01:58:02
+ * @LastEditTime: 2024-09-09 09:42:36
  * @FilePath    : /memdsl/aurora/src/interface/sram/tb/sram_axi4_tb.sv
  * @Description : SRAM with AXI4 slave interface testbench.
  *
@@ -20,6 +20,8 @@ end
 
 parameter CYCLE = 10;
 
+logic          w_rw_type;
+
 logic          w_aclk;
 logic          w_areset_n;
 
@@ -36,7 +38,7 @@ logic          w_awready;
 
 logic [63 : 0] w_wdata;
 logic [ 7 : 0] w_wstrb;
-logic          w_wlast;
+// logic          w_wlast;
 logic          w_wvalid;
 logic          w_wready;
 
@@ -46,16 +48,21 @@ logic          w_bvalid;
 always #(CYCLE / 2) w_aclk = ~w_aclk;
 
 initial begin
+    w_rw_type  = 1'b1;
+
     w_aclk     = 1'b0;
     w_areset_n = 1'b0;
     w_rready   = 1'b1;
     #(CYCLE * 1);
     w_areset_n = 1'b1;
+    #(CYCLE * 5);
+    w_rw_type  = 1'b0;
     #(CYCLE * 100);
     $finish;
 end
 
 sram_axi4_m u_sram_axi4_m(
+    .i_rw_type (w_rw_type),
     .i_aclk    (w_aclk),
     .i_areset_n(w_areset_n),
     .i_arready (w_arready),
@@ -68,7 +75,6 @@ sram_axi4_m u_sram_axi4_m(
     .i_wready  (w_wready),
     .o_wdata   (w_wdata),
     .o_wstrb   (w_wstrb),
-    // .o_wlast   (),
     .o_wvalid  (w_wvalid),
     .i_bvalid  (w_bvalid),
     .o_bready  (w_bready)
