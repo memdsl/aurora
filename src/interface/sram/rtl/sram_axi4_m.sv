@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-09-08 20:06:49
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-09 10:21:53
+ * @LastEditTime: 2024-09-09 10:38:43
  * @FilePath    : /memdsl/aurora/src/interface/sram/rtl/sram_axi4_m.sv
  * @Description : SRAM with AXI4 master interface.
  *
@@ -68,13 +68,13 @@ module sram_axi4_m(
             r_arshake <= 1'b0;
         end
         else begin
-            // Read
+            // Run read transcation
             if (!r_arvalid && !i_rw_type && !r_arshake) begin
                 r_araddr  <= r_araddr;
                 r_arvalid <= 1'b1;
                 r_arshake <= r_arshake;
             end
-            // Write
+            // Run Write transcation
             else if (r_arvalid && i_rw_type && !r_arshake) begin
                 r_araddr  <= r_araddr;
                 r_arvalid <= 1'b0;
@@ -108,7 +108,7 @@ module sram_axi4_m(
             r_awshake <= 1'b0;
         end
         else begin
-            // Write
+            // Run Write transcation
             if (!r_awvalid && i_rw_type && !r_awshake) begin
                 r_awaddr  <= r_awaddr;
                 r_awvalid <= 1'b1;
@@ -117,7 +117,7 @@ module sram_axi4_m(
                 r_wvalid  <= r_wvalid;
                 r_awshake <= r_awshake;
             end
-            // Read
+            // Run read transcation
             else if (r_awvalid && !i_rw_type && !r_awshake) begin
                 r_awaddr  <= r_awaddr;
                 r_awvalid <= 1'b0;

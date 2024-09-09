@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-09-05 14:17:09
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-09 01:45:38
+ * @LastEditTime: 2024-09-09 10:40:56
  * @FilePath    : /memdsl/aurora/src/interface/sram/rtl/sram_axi4.sv
  * @Description : SRAM with AXI4 slave interface
  *
@@ -353,8 +353,8 @@ module sram_axi4(
                     r_awsize  <=  3'd0;
                     r_awburst <=  2'd0;
                     r_awready <=  1'b1;
-                    r_wdata   <= 64'd0;
-                    r_wstrb   <=  8'd0;
+                    r_wdata   <=  r_wdata;
+                    r_wstrb   <=  r_wstrb;
                     r_wlast   <=  1'b0;
                     r_wready  <=  1'b1;
                     r_bresp   <= 2'b00;

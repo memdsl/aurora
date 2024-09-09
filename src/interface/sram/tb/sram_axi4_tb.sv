@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-09-08 04:02:30
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-09 09:42:36
+ * @LastEditTime: 2024-09-09 10:39:39
  * @FilePath    : /memdsl/aurora/src/interface/sram/tb/sram_axi4_tb.sv
  * @Description : SRAM with AXI4 slave interface testbench.
  *
@@ -55,7 +55,7 @@ initial begin
     w_rready   = 1'b1;
     #(CYCLE * 1);
     w_areset_n = 1'b1;
-    #(CYCLE * 5);
+    #(CYCLE * 50);
     w_rw_type  = 1'b0;
     #(CYCLE * 100);
     $finish;
