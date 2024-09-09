@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-09-05 14:17:09
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-09 18:30:14
+ * @LastEditTime: 2024-09-09 18:32:19
  * @FilePath    : /memdsl/aurora/src/interface/sram/rtl/sram_axi4.sv
  * @Description : SRAM with AXI4 slave interface
  *
@@ -452,7 +452,6 @@ module sram_axi4(
             for (int i = 0; i < 64 / 8; i = i + 1) begin
                 if ((r_awburst !== 2'b00 || r_awlen_cnt >= 1) &&
                     !r_wlast && r_wstrb[i]) begin
-                    test <= 1'b1;
                     r_ram[r_awaddr][i * 8 + 7 -: 8] <= r_wdata[i * 8 + 7 -: 8];
                 end
                 else begin
