@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-09-08 04:02:30
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-08 20:37:50
+ * @LastEditTime: 2024-09-09 01:58:02
  * @FilePath    : /memdsl/aurora/src/interface/sram/tb/sram_axi4_tb.sv
  * @Description : SRAM with AXI4 slave interface testbench.
  *
@@ -25,16 +25,23 @@ logic          w_areset_n;
 
 logic [ 7 : 0] w_araddr;
 logic          w_arvalid;
+logic          w_arready;
+
 logic          w_rready;
 logic          w_rlast;
 
 logic [ 7 : 0] w_awaddr;
 logic          w_awvalid;
-logic          w_wvalid;
+logic          w_awready;
+
 logic [63 : 0] w_wdata;
 logic [ 7 : 0] w_wstrb;
 logic          w_wlast;
+logic          w_wvalid;
+logic          w_wready;
+
 logic          w_bready;
+logic          w_bvalid;
 
 always #(CYCLE / 2) w_aclk = ~w_aclk;
 
@@ -48,12 +55,23 @@ initial begin
     $finish;
 end
 
-sram_addr u_sram_addr(
+sram_axi4_m u_sram_axi4_m(
     .i_aclk    (w_aclk),
     .i_areset_n(w_areset_n),
-    .i_rlast   (w_rlast),
+    .i_arready (w_arready),
     .o_araddr  (w_araddr),
-    .o_arvalid (w_arvalid)
+    .o_arvalid (w_arvalid),
+    .i_rlast   (w_rlast),
+    .i_awready (w_awready),
+    .o_awaddr  (w_awaddr),
+    .o_awvalid (w_awvalid),
+    .i_wready  (w_wready),
+    .o_wdata   (w_wdata),
+    .o_wstrb   (w_wstrb),
+    // .o_wlast   (),
+    .o_wvalid  (w_wvalid),
+    .i_bvalid  (w_bvalid),
+    .o_bready  (w_bready)
 );
 
 sram_axi4 u_sram_axi4(
@@ -61,7 +79,7 @@ sram_axi4 u_sram_axi4(
     .i_areset_n(w_areset_n),
     .i_arid    (4'd1),
     .i_araddr  (w_araddr),
-    .i_arlen   (8'd0),
+    .i_arlen   (8'd1),
     .i_arsize  (3'd0),
     .i_arburst (2'b00),
     .i_arlock  (2'd0),
@@ -71,7 +89,7 @@ sram_axi4 u_sram_axi4(
     .i_arregion(4'd0),
     .i_aruser  (4'd0),
     .i_arvalid (w_arvalid),
-    .o_arready (),
+    .o_arready (w_arready),
     .i_rready  (w_rready),
     .o_rid     (),
     .o_rdata   (),
@@ -81,7 +99,7 @@ sram_axi4 u_sram_axi4(
     .o_rvalid  (),
     .i_awid    (4'd1),
     .i_awaddr  (w_awaddr),
-    .i_awlen   (8'd0),
+    .i_awlen   (8'd1),
     .i_awsize  (3'd0),
     .i_awburst (2'd0),
     .i_awlock  (2'd0),
@@ -91,19 +109,19 @@ sram_axi4 u_sram_axi4(
     .i_awregion(4'd0),
     .i_awuser  (4'd0),
     .i_awvalid (w_awvalid),
-    .o_awready (),
+    .o_awready (w_awready),
     .i_wid     (4'd1),
     .i_wdata   (w_wdata),
     .i_wstrb   (w_wstrb),
-    .i_wlast   (w_wlast),
+    .i_wlast   (),
     .i_wuser   (4'd0),
     .i_wvalid  (w_wvalid),
-    .o_wready  (),
+    .o_wready  (w_wready),
     .i_bready  (w_bready),
     .o_bid     (),
     .o_bresp   (),
     .o_buser   (),
-    .o_bvalid  ()
+    .o_bvalid  (w_bvalid)
 );
 
 endmodule
