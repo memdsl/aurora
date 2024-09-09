@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-09-05 14:17:09
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-09 10:40:56
+ * @LastEditTime: 2024-09-09 18:30:14
  * @FilePath    : /memdsl/aurora/src/interface/sram/rtl/sram_axi4.sv
  * @Description : SRAM with AXI4 slave interface
  *
@@ -66,7 +66,7 @@ module sram_axi4(
 );
 
     // ========================================================================
-    //
+    // AXI4 I/O variables
     // ========================================================================
     // AXI4 read address
     logic [ 7 : 0] r_araddr;
@@ -115,7 +115,7 @@ module sram_axi4(
     assign o_bvalid  = r_bvalid;
 
     // ========================================================================
-    //
+    // AXI4 temporary variables
     // ========================================================================
     logic [ 7 : 0] r_arlen_cnt;
     logic          w_arwrap_en;
@@ -128,6 +128,7 @@ module sram_axi4(
     logic [ 7 : 0] r_awlen_cnt;
     logic          w_awwrap_en;
     logic [ 7 : 0] w_awwrap_size;
+    logic [ 7 : 0] r_awsize_byts;
     logic          w_awshake;
 
     logic          w_wshake;
@@ -148,17 +149,16 @@ module sram_axi4(
     assign w_bshake      = r_bvalid  && i_bready;
 
     // ========================================================================
-    //
+    // Local parameters and variables
     // ========================================================================
-    localparam integer ADDR_LSB = (64 / 32)+ 1;
+    localparam integer P_ADDR_LSB = (64 / 32)+ 1;
 
     // 2KB
     logic [63 : 0] r_ram[255 : 0];
 
     // ========================================================================
-    //
+    // AXI4 state machine
     // ========================================================================
-
     parameter S_IDLE    = 4'b0000;
     parameter S_RD_ADDR = 4'b0001;
     parameter S_RD_DATA = 4'b0011;
@@ -282,16 +282,16 @@ module sram_axi4(
                                 r_araddr <= r_araddr;
                             end
                             2'b01: begin
-                                r_araddr[7 : ADDR_LSB]     <= r_araddr[7 : ADDR_LSB] + 1'b1;
-                                r_araddr[ADDR_LSB - 1 : 0] <= {ADDR_LSB{1'b0}};
+                                r_araddr[7 : P_ADDR_LSB]     <= r_araddr[7 : P_ADDR_LSB] + 1'b1;
+                                r_araddr[P_ADDR_LSB - 1 : 0] <= {P_ADDR_LSB{1'b0}};
                             end
                             2'b10: begin
                                 if (w_arwrap_en) begin
                                     r_araddr <= r_araddr - w_arwrap_size;
                                 end
                                 else begin
-                                    r_araddr[7 : ADDR_LSB]     <= r_araddr[7 : ADDR_LSB] + 1'b1;
-                                    r_araddr[ADDR_LSB - 1 : 0] <= {ADDR_LSB{1'b0}};
+                                    r_araddr[7 : P_ADDR_LSB]     <= r_araddr[7 : P_ADDR_LSB] + 1'b1;
+                                    r_araddr[P_ADDR_LSB - 1 : 0] <= {P_ADDR_LSB{1'b0}};
                                 end
                             end
                             default: begin
@@ -307,8 +307,11 @@ module sram_axi4(
                         r_rvalid <= 1'b0;
                         r_arlen_cnt <= r_arlen_cnt;
                     end
-                    r_rdata  <= r_ram[r_araddr];
-                    r_rresp  <= 2'b00;
+
+                    if (r_arlen_cnt >= 1) begin
+                        r_rdata  <= r_ram[r_araddr];
+                        r_rresp  <= 2'b00;
+                    end
                 end
                 default: begin
                     r_araddr  <= r_araddr;
@@ -328,46 +331,56 @@ module sram_axi4(
         end
     end
 
-    always @(posedge i_aclk) begin
+    always_ff @(posedge i_aclk) begin
         if (!i_areset_n) begin
-            r_awaddr  <=  8'd0;
-            r_awlen   <=  8'd0;
-            r_awsize  <=  3'd0;
-            r_awburst <=  2'd0;
-            r_awready <=  1'b1;
-            r_wdata   <= 64'd0;
-            r_wstrb   <=  8'd0;
-            r_wlast   <=  1'b0;
-            r_wready  <=  1'b1;
-            r_bresp   <= 2'b00;
-            r_buser   <=  4'd0;
-            r_bvalid  <=  1'b0;
+            r_awaddr      <=  8'd0;
+            r_awlen       <=  8'd0;
+            r_awsize_byts <= 8'd0;
+            r_awburst     <=  2'd0;
+            r_awready     <=  1'b1;
+            r_wdata       <= 64'd0;
+            r_wstrb       <=  8'd0;
+            r_wlast       <=  1'b0;
+            r_wready      <=  1'b1;
+            r_bresp       <= 2'b00;
+            r_buser       <=  4'd0;
+            r_bvalid      <=  1'b0;
 
             r_awlen_cnt <= 8'd0;
         end
         else begin
             case (r_state_curr)
                 S_IDLE: begin
-                    r_awaddr  <=  r_awaddr;
-                    r_awlen   <=  8'd0;
-                    r_awsize  <=  3'd0;
-                    r_awburst <=  2'd0;
-                    r_awready <=  1'b1;
-                    r_wdata   <=  r_wdata;
-                    r_wstrb   <=  r_wstrb;
-                    r_wlast   <=  1'b0;
-                    r_wready  <=  1'b1;
-                    r_bresp   <= 2'b00;
-                    r_buser   <=  4'd0;
-                    r_bvalid  <=  1'b0;
+                    r_awaddr      <=  r_awaddr;
+                    r_awlen       <=  8'd0;
+                    r_awsize_byts <= 8'd0;
+                    r_awburst     <=  2'd0;
+                    r_awready     <=  1'b1;
+                    r_wdata       <=  r_wdata;
+                    r_wstrb       <=  r_wstrb;
+                    r_wlast       <=  1'b0;
+                    r_wready      <=  1'b1;
+                    r_bresp       <= 2'b00;
+                    r_buser       <=  4'd0;
+                    r_bvalid      <=  1'b0;
 
                     r_awlen_cnt <= 8'd0;
                 end
                 S_WR_ADDR: begin
                     r_awaddr  <= i_awaddr[7 : 0];
                     r_awlen   <= i_awlen;
-                    r_awsize  <= i_awsize;
+                    r_awsize_byts <= (i_awsize === 3'b000) ?   8'd1 :
+                                     (i_awsize === 3'b001) ?   8'd2 :
+                                     (i_awsize === 3'b010) ?   8'd4 :
+                                     (i_awsize === 3'b011) ?   8'd8 :
+                                     (i_awsize === 3'b100) ?  8'd16 :
+                                     (i_awsize === 3'b101) ?  8'd32 :
+                                     (i_awsize === 3'b110) ?  8'd64 :
+                                     (i_awsize === 3'b111) ? 8'd128 :
+                                                               8'd1;
                     r_awburst <= i_awburst;
+                    r_wdata   <= i_wdata;
+                    r_wstrb   <= i_wstrb;
                 end
                 S_WR_DATA: begin
                     if (!w_wend) begin
@@ -376,16 +389,14 @@ module sram_axi4(
                                 r_awaddr <= r_awaddr;
                             end
                             2'b01: begin
-                                r_awaddr[7 : ADDR_LSB]     <= r_awaddr[7 : ADDR_LSB] + 1'b1;
-                                r_awaddr[ADDR_LSB - 1 : 0] <= {ADDR_LSB{1'b0}};
+                                r_awaddr <= r_awaddr + r_awsize_byts;
                             end
                             2'b10: begin
                                 if (w_awwrap_en) begin
                                     r_awaddr <= r_awaddr - w_awwrap_size;
                                 end
                                 else begin
-                                    r_awaddr[7 : ADDR_LSB]     <= r_awaddr[7 : ADDR_LSB] + 1'b1;
-                                    r_awaddr[ADDR_LSB - 1 : 0] <= {ADDR_LSB{1'b0}};
+                                    r_awaddr <= r_awaddr + r_awsize_byts;
                                 end
                             end
                             default: begin
@@ -428,6 +439,9 @@ module sram_axi4(
         end
     end
 
+    // ========================================================================
+    // User RTL
+    // ========================================================================
     always_ff @(posedge i_aclk) begin
         if (!i_areset_n) begin
             for (int i = 0; i < 256; i = i + 1) begin
@@ -436,7 +450,9 @@ module sram_axi4(
         end
         else begin
             for (int i = 0; i < 64 / 8; i = i + 1) begin
-                if (r_awlen_cnt >= 1 && !r_wlast && r_wstrb[i]) begin
+                if ((r_awburst !== 2'b00 || r_awlen_cnt >= 1) &&
+                    !r_wlast && r_wstrb[i]) begin
+                    test <= 1'b1;
                     r_ram[r_awaddr][i * 8 + 7 -: 8] <= r_wdata[i * 8 + 7 -: 8];
                 end
                 else begin

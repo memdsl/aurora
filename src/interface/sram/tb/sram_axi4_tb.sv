@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-09-08 04:02:30
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-09 10:39:39
+ * @LastEditTime: 2024-09-09 18:00:11
  * @FilePath    : /memdsl/aurora/src/interface/sram/tb/sram_axi4_tb.sv
  * @Description : SRAM with AXI4 slave interface testbench.
  *
@@ -26,6 +26,9 @@ logic          w_aclk;
 logic          w_areset_n;
 
 logic [ 7 : 0] w_araddr;
+logic [ 7 : 0] w_arlen;
+logic [ 1 : 0] w_arburst;
+
 logic          w_arvalid;
 logic          w_arready;
 
@@ -33,12 +36,14 @@ logic          w_rready;
 logic          w_rlast;
 
 logic [ 7 : 0] w_awaddr;
+logic [ 7 : 0] w_awlen;
+logic [ 2 : 0] w_awsize;
+logic [ 1 : 0] w_awburst;
 logic          w_awvalid;
 logic          w_awready;
 
 logic [63 : 0] w_wdata;
 logic [ 7 : 0] w_wstrb;
-// logic          w_wlast;
 logic          w_wvalid;
 logic          w_wready;
 
@@ -52,12 +57,19 @@ initial begin
 
     w_aclk     = 1'b0;
     w_areset_n = 1'b0;
+
+    w_arlen    = 8'd1;
+    w_arburst  = 2'b00;
     w_rready   = 1'b1;
+
+    w_awlen    = 8'd8;
+    w_awsize   = 3'b011;
+    w_awburst  = 2'b01;
     #(CYCLE * 1);
     w_areset_n = 1'b1;
-    #(CYCLE * 50);
-    w_rw_type  = 1'b0;
     #(CYCLE * 100);
+    w_rw_type  = 1'b0;
+    #(CYCLE * 200);
     $finish;
 end
 
@@ -85,9 +97,9 @@ sram_axi4 u_sram_axi4(
     .i_areset_n(w_areset_n),
     .i_arid    (4'd1),
     .i_araddr  (w_araddr),
-    .i_arlen   (8'd1),
+    .i_arlen   (w_arlen),
     .i_arsize  (3'd0),
-    .i_arburst (2'b00),
+    .i_arburst (w_arburst),
     .i_arlock  (2'd0),
     .i_arcache (4'd0),
     .i_arprot  (3'd0),
@@ -105,9 +117,9 @@ sram_axi4 u_sram_axi4(
     .o_rvalid  (),
     .i_awid    (4'd1),
     .i_awaddr  (w_awaddr),
-    .i_awlen   (8'd1),
-    .i_awsize  (3'd0),
-    .i_awburst (2'd0),
+    .i_awlen   (w_awlen),
+    .i_awsize  (w_awsize),
+    .i_awburst (w_awburst),
     .i_awlock  (2'd0),
     .i_awcache (4'd0),
     .i_awprot  (3'd0),
