@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-09-08 20:06:49
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-09 09:36:48
+ * @LastEditTime: 2024-09-09 10:21:53
  * @FilePath    : /memdsl/aurora/src/interface/sram/rtl/sram_axi4_m.sv
  * @Description : SRAM with AXI4 master interface.
  *
@@ -61,7 +61,7 @@ module sram_axi4_m(
 
     assign o_bready  = 1'b1;
 
-    always @(posedge i_aclk) begin
+    always_ff @(posedge i_aclk) begin
         if (!i_areset_n) begin
             r_araddr  <= 8'd1;
             r_arvalid <= 1'b0;
@@ -80,7 +80,7 @@ module sram_axi4_m(
                 r_arvalid <= 1'b0;
                 r_arshake <= r_arshake;
             end
-            if (r_arvalid && i_arready) begin
+            else if (r_arvalid && i_arready) begin
                 r_araddr  <= r_araddr;
                 r_arvalid <= 1'b0;
                 r_arshake <= 1'b1;
@@ -98,7 +98,7 @@ module sram_axi4_m(
         end
     end
 
-    always @(posedge i_aclk) begin
+    always_ff @(posedge i_aclk) begin
         if (!i_areset_n) begin
             r_awaddr  <= 8'd1;
             r_awvalid <= 1'b0;
@@ -132,6 +132,7 @@ module sram_axi4_m(
                 r_wdata   <= r_wdata;
                 r_wstrb   <= r_wstrb;
                 r_wvalid  <= 1'b1;
+                r_awshake <= 1'b1;
             end
             else if (r_wvalid && i_wready) begin
                 r_awaddr  <= r_awaddr;
@@ -139,6 +140,7 @@ module sram_axi4_m(
                 r_wdata   <= r_wdata;
                 r_wstrb   <= r_wstrb;
                 r_wvalid  <= 1'b0;
+                r_awshake <= r_awshake;
             end
             else if (i_bvalid && o_bready) begin
                 r_awaddr  <= r_awaddr + 1'b1;
@@ -146,6 +148,7 @@ module sram_axi4_m(
                 r_wdata   <= r_wdata + 1'b1;
                 r_wstrb   <= r_wstrb;
                 r_wvalid  <= r_wvalid;
+                r_awshake <= 1'b0;
             end
             else begin
                 r_awaddr  <= r_awaddr;
@@ -153,6 +156,7 @@ module sram_axi4_m(
                 r_wdata   <= r_wdata;
                 r_wstrb   <= r_wstrb;
                 r_wvalid  <= r_wvalid;
+                r_awshake <= r_awshake;
             end
         end
     end
