@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-09-08 04:02:30
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-09 18:00:11
+ * @LastEditTime: 2024-09-09 19:04:56
  * @FilePath    : /memdsl/aurora/src/interface/sram/tb/sram_axi4_tb.sv
  * @Description : SRAM with AXI4 slave interface testbench.
  *
@@ -62,7 +62,7 @@ initial begin
     w_arburst  = 2'b00;
     w_rready   = 1'b1;
 
-    w_awlen    = 8'd8;
+    w_awlen    = 8'd4;
     w_awsize   = 3'b011;
     w_awburst  = 2'b01;
     #(CYCLE * 1);

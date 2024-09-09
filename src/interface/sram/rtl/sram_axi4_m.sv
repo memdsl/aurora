@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-09-08 20:06:49
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-09 17:51:43
+ * @LastEditTime: 2024-09-09 19:38:46
  * @FilePath    : /memdsl/aurora/src/interface/sram/rtl/sram_axi4_m.sv
  * @Description : SRAM with AXI4 master interface.
  *
@@ -68,13 +68,13 @@ module sram_axi4_m(
             r_arshake <= 1'b0;
         end
         else begin
-            // Run read transcation
+            // Run read transaction
             if (!r_arvalid && !i_rw_type && !r_arshake && r_bshake) begin
                 r_araddr  <= r_araddr;
                 r_arvalid <= 1'b1;
                 r_arshake <= r_arshake;
             end
-            // Run Write transcation
+            // Run Write transaction
             else if (r_arvalid && i_rw_type && !r_arshake) begin
                 r_araddr  <= r_araddr;
                 r_arvalid <= 1'b0;
@@ -109,7 +109,7 @@ module sram_axi4_m(
             r_bshake  <= 1'b0;
         end
         else begin
-            // Run Write transcation
+            // Run Write transaction
             if (!r_awvalid && i_rw_type && !r_awshake) begin
                 r_awaddr  <= r_awaddr;
                 r_awvalid <= 1'b1;
@@ -119,14 +119,16 @@ module sram_axi4_m(
                 r_awshake <= r_awshake;
                 r_bshake  <= 1'b0;
             end
-            // Run read transcation
+            // Run read transaction (if write transcatio is not currently in
+            // IDLE state, write the current data first before execute read
+            // transaction.
             else if (r_awvalid && !i_rw_type && !r_awshake) begin
                 r_awaddr  <= r_awaddr;
                 r_awvalid <= 1'b0;
                 r_wdata   <= r_wdata;
                 r_wstrb   <= r_wstrb;
-                r_wvalid  <= r_wvalid;
-                r_awshake <= r_awshake;
+                r_wvalid  <= 1'b1;
+                r_awshake <= 1'b1;
                 r_bshake  <= r_bshake;
             end
             else if (r_awvalid && i_awready) begin
