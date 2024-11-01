@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-`define DELAY_CYCLE 0
+`include "cfg.sv"
 
 module reg_check_data_x #(
     parameter DATA_WIDTH = 32
@@ -106,7 +106,6 @@ module reg_rst_y_mode_s_en_n #(
 `endif
 
 endmodule
-
 
 module reg_rst_y_mode_s_en_y #(
     parameter DATA_WIDTH = 32
