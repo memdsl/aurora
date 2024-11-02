@@ -5,9 +5,11 @@ INCS     = $(addprefix -I, $(INCS_DIR))
 
 SRCS = $(addsuffix .sv, $(addprefix rtl/, $(SRC)))
 
+ARGS = -g2005-sv -gno-assertions
+
 run:
 	mkdir -p build
-	iverilog -g2005-sv -o build/${TOP} ${INCS} $(SRCS) tb/${TOP}_tb.sv
+	iverilog ${ARGS} -o build/${TOP} ${INCS} $(SRCS) tb/${TOP}_tb.sv
 	vvp -n build/${TOP} -lxt2
 sim: run
 	gtkwave build/${TOP}.vcd
