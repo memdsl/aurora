@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-11-01 18:55:16
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-11-02 15:21:47
+ * @LastEditTime: 2024-11-02 15:36:39
  * @Description : Registers.
  *
  * Copyright (c) 2024 by MEMDSL, All Rights Reserved.
@@ -220,6 +220,31 @@ module reg_rst_y_mode_a_en_y #(
         .i_clk (i_clk),
         .i_data(i_data)
     );
+`endif
+
+endmodule
+
+module reg_lch #(
+    parameter DATA_WIDTH = 32
+) (
+    input  logic                      i_en,
+    input  logic [DATA_WIDTH - 1 : 0] i_data,
+    output logic [DATA_WIDTH - 1 : 0] o_data
+);
+
+    reg [DATA_WIDTH - 1 : 0] r_data;
+
+    always_comb begin
+        if (i_en) begin
+            r_data = i_data;
+        end
+    end
+
+    assign o_data = r_data;
+
+`ifndef RTL_SYN
+    assert property (i_en !== 1'bx)
+    else $fatal("\nError! X value is detected! This should never happen.\n");
 `endif
 
 endmodule
