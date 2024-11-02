@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-11-02 15:41:19
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-11-02 16:00:42
+ * @LastEditTime: 2024-11-02 16:23:17
  * @Description : Tools.
  *
  * Copyright (c) 2024 by MEMDSL, All Rights Reserved.
@@ -28,9 +28,8 @@ module tool_gry_2_bin #(
 
     assign o_bin[DATA_WIDTH - 1] = i_gry[DATA_WIDTH - 1];
 
-    genvar i;
     generate
-        for (i = 0; i <= DATA_WIDTH - 2; i++) begin
+        for (genvar i = 0; i < DATA_WIDTH - 1; i++) begin
             assign o_bin[i] = o_bin[i + 1] ^ i_gry[i];
         end
     endgenerate

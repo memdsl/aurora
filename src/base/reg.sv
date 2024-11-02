@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-11-01 18:55:16
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-11-02 15:36:39
+ * @LastEditTime: 2024-11-02 18:01:59
  * @Description : Registers.
  *
  * Copyright (c) 2024 by MEMDSL, All Rights Reserved.
@@ -85,7 +85,8 @@ module reg_rst_n_mode_n_en_y #(
 endmodule
 
 module reg_rst_y_mode_s_en_n #(
-    parameter DATA_WIDTH = 32
+    parameter DATA_WIDTH = 32,
+    parameter FIFO_DEPTH =  1
 ) (
     input  logic                      i_clk,
     input  logic                      i_rst_n,
@@ -93,14 +94,17 @@ module reg_rst_y_mode_s_en_n #(
     output logic [DATA_WIDTH - 1 : 0] o_data
 );
 
-    logic [DATA_WIDTH - 1 : 0] r_data;
+    integer i;
+    logic [DATA_WIDTH - 1 : 0] r_data[FIFO_DEPTH - 1 : 0];
 
     always_ff @(posedge i_clk) begin
         if (!i_rst_n) begin
-            r_data <= {DATA_WIDTH{1'b0}};
+            for (i = 0; i < FIFO_DEPTH; i++) begin
+                r_data[i] <= {DATA_WIDTH{1'b0}};
+            end
         end
         else begin
-            r_data <= i_data;
+            r_data <= #`DELAY_CYCLE i_data;
         end
     end
 
@@ -118,7 +122,8 @@ module reg_rst_y_mode_s_en_n #(
 endmodule
 
 module reg_rst_y_mode_s_en_y #(
-    parameter DATA_WIDTH = 32
+    parameter DATA_WIDTH = 32,
+    parameter FIFO_DEPTH =  1
 ) (
     input  logic                      i_clk,
     input  logic                      i_rst_n,
@@ -127,17 +132,20 @@ module reg_rst_y_mode_s_en_y #(
     output logic [DATA_WIDTH - 1 : 0] o_data
 );
 
-    logic [DATA_WIDTH - 1 : 0] r_data;
+    integer i;
+    logic [DATA_WIDTH - 1 : 0] r_data[FIFO_DEPTH - 1 : 0];
 
     always_ff @(posedge i_clk) begin
         if (!i_rst_n) begin
-            r_data <= {DATA_WIDTH{1'b0}};
+            for (i = 0; i < FIFO_DEPTH; i++) begin
+                r_data[i] <= {DATA_WIDTH{1'b0}};
+            end
         end
         else if (i_en) begin
-            r_data <= i_data;
+            r_data <= #`DELAY_CYCLE i_data;
         end
         else begin
-            r_data <= r_data;
+            r_data <= #`DELAY_CYCLE r_data;
         end
     end
 
@@ -155,7 +163,8 @@ module reg_rst_y_mode_s_en_y #(
 endmodule
 
 module reg_rst_y_mode_a_en_n #(
-    parameter DATA_WIDTH = 32
+    parameter DATA_WIDTH = 32,
+    parameter FIFO_DEPTH =  1
 ) (
     input  logic                      i_clk,
     input  logic                      i_rst_n,
@@ -163,14 +172,17 @@ module reg_rst_y_mode_a_en_n #(
     output logic [DATA_WIDTH - 1 : 0] o_data
 );
 
-    logic [DATA_WIDTH - 1 : 0] r_data;
+    integer i;
+    logic [DATA_WIDTH - 1 : 0] r_data[FIFO_DEPTH - 1 : 0];
 
     always_ff @(posedge i_clk or negedge i_rst_n) begin
         if (!i_rst_n) begin
-            r_data <= {DATA_WIDTH{1'b0}};
+            for (i = 0; i < FIFO_DEPTH; i++) begin
+                r_data[i] <= {DATA_WIDTH{1'b0}};
+            end
         end
         else begin
-            r_data <= i_data;
+            r_data <= #`DELAY_CYCLE i_data;
         end
     end
 
@@ -188,7 +200,8 @@ module reg_rst_y_mode_a_en_n #(
 endmodule
 
 module reg_rst_y_mode_a_en_y #(
-    parameter DATA_WIDTH = 32
+    parameter DATA_WIDTH = 32,
+    parameter FIFO_DEPTH =  1
 ) (
     input  logic                      i_clk,
     input  logic                      i_rst_n,
@@ -197,17 +210,20 @@ module reg_rst_y_mode_a_en_y #(
     output logic [DATA_WIDTH - 1 : 0] o_data
 );
 
-    logic [DATA_WIDTH - 1 : 0] r_data;
+    integer i;
+    logic [DATA_WIDTH - 1 : 0] r_data[FIFO_DEPTH - 1 : 0];
 
     always_ff @(posedge i_clk or negedge i_rst_n) begin
         if (!i_rst_n) begin
-            r_data <= {DATA_WIDTH{1'b0}};
+            for (i = 0; i < FIFO_DEPTH; i++) begin
+                r_data[i] <= {DATA_WIDTH{1'b0}};
+            end
         end
         else if (i_en) begin
-            r_data <= i_data;
+            r_data <= #`DELAY_CYCLE i_data;
         end
         else begin
-            r_data <= r_data;
+            r_data <= #`DELAY_CYCLE r_data;
         end
     end
 
