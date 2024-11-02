@@ -1,3 +1,13 @@
+/*
+ * @Author      : myyerrol
+ * @Date        : 2024-11-01 18:55:16
+ * @LastEditors : myyerrol
+ * @LastEditTime: 2024-11-02 15:21:47
+ * @Description : Registers.
+ *
+ * Copyright (c) 2024 by MEMDSL, All Rights Reserved.
+ */
+
 `timescale 1ns / 1ps
 
 `include "cfg.sv"
