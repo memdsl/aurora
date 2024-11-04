@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-11-02 15:22:27
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-11-02 18:05:22
+ * @LastEditTime: 2024-11-02 19:20:06
  * @Description : First Input First Out
  *
  * Copyright (c) 2024 by MEMDSL, All Rights Reserved.
@@ -30,7 +30,7 @@ module fifo_mode_a #(
     output logic                      o_rd_empty
 );
 
-    logic [DATA_WIDTH - 1 : 0] r_ram[FIFO_DEPTH - 1 : 0];
+    logic [DATA_WIDTH - 1 : 0] r_sram[FIFO_DEPTH - 1 : 0];
 
     logic [ADDR_WIDTH - 1 : 0] w_wr_addr;
     logic [ADDR_WIDTH - 1 : 0] w_rd_addr;
@@ -47,8 +47,7 @@ module fifo_mode_a #(
 
     // Write operations
     reg_rst_y_mode_a_en_y #(
-        .DATA_WIDTH(PTRS_WIDTH),
-        .FIFO_DEPTH(1)
+        .DATA_WIDTH(PTRS_WIDTH)
     ) u_reg_wr_ptr(
         .i_clk  (i_wr_clk),
         .i_rst_n(i_wr_rst_n),
@@ -87,21 +86,24 @@ module fifo_mode_a #(
                        ? 1'b1 : 1'b0;
     assign w_wr_addr = r_wr_ptr[PTRS_WIDTH - 2 : 0];
 
-    reg_rst_y_mode_a_en_y #(
-        .DATA_WIDTH(DATA_WIDTH),
-        .FIFO_DEPTH(FIFO_DEPTH)
-    ) u_reg_rd_data(
-        .i_clk  (i_wr_clk),
-        .i_rst_n(i_wr_rst_n),
-        .i_en   (i_wr_en && !o_wr_full),
-        .i_data (i_wr_data),
-        .o_data (r_ram[w_wr_addr])
-    );
+    integer i;
+    always_ff @(posedge i_wr_clk or negedge i_wr_rst_n) begin
+        if (!i_wr_rst_n) begin
+            for (i = 0; i < FIFO_DEPTH; i++) begin
+                r_sram[i] <= {DATA_WIDTH{1'b0}};
+            end
+        end
+        else if (i_wr_en && !o_wr_full) begin
+            r_sram[w_wr_addr] <= i_wr_data;
+        end
+        else begin
+            r_sram[w_wr_addr] <= r_sram[w_wr_addr];
+        end
+    end
 
     // Read operations
     reg_rst_y_mode_a_en_y #(
-        .DATA_WIDTH(PTRS_WIDTH),
-        .FIFO_DEPTH(1)
+        .DATA_WIDTH(PTRS_WIDTH)
     ) u_reg_rd_ptr(
         .i_clk  (i_rd_clk),
         .i_rst_n(i_rd_rst_n),
@@ -139,13 +141,12 @@ module fifo_mode_a #(
     assign w_rd_addr  = r_rd_ptr[PTRS_WIDTH - 2 : 0];
 
     reg_rst_y_mode_a_en_y #(
-        .DATA_WIDTH(DATA_WIDTH),
-        .FIFO_DEPTH(1)
+        .DATA_WIDTH(DATA_WIDTH)
     ) u_reg_rd_data(
         .i_clk  (i_rd_clk),
         .i_rst_n(i_rd_rst_n),
         .i_en   (i_rd_en && !o_rd_empty),
-        .i_data (r_ram[w_rd_addr]),
+        .i_data (r_sram[w_rd_addr]),
         .o_data (o_rd_data)
     );
 endmodule
