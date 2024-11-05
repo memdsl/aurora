@@ -1,23 +1,24 @@
 [*]
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Thu Nov  7 09:11:16 2024
+[*] Fri Nov  8 01:46:34 2024
 [*]
 [dumpfile] "/home/myyerrol/Workspaces/memdsl-new/aurora/src/base/build/fifo.vcd"
-[dumpfile_mtime] "Thu Nov  7 09:10:38 2024"
+[dumpfile_mtime] "Fri Nov  8 01:46:12 2024"
 [dumpfile_size] 8334
 [savefile] "/home/myyerrol/Workspaces/memdsl-new/aurora/src/base/tb/fifo_tb.gtkw"
 [timestart] 0
 [size] 1428 819
 [pos] 30 0
-*-18.000000 681000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-16.000000 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] fifo_tb.
 [treeopen] fifo_tb.u_async_fifo.
 [sst_width] 214
 [signals_width] 248
 [sst_expanded] 1
 [sst_vpaned_height] 229
-@28
+@29
 fifo_tb.u_async_fifo.i_wr_clk[0]
+@28
 fifo_tb.u_async_fifo.i_wr_rst_n[0]
 fifo_tb.u_async_fifo.i_wr_en[0]
 @22
@@ -45,7 +46,6 @@ fifo_tb.u_async_fifo.o_rd_data[15:0]
 fifo_tb.u_async_fifo.o_rd_empty[0]
 [color] 2
 fifo_tb.u_async_fifo.r_rd_ptr[3:0]
-@29
 [color] 2
 fifo_tb.u_async_fifo.w_rd_ptr_gry[3:0]
 @22
