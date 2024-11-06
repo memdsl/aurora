@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-11-02 15:22:27
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-11-02 19:20:06
+ * @LastEditTime: 2024-11-07 17:00:12
  * @Description : First Input First Out
  *
  * Copyright (c) 2024 by MEMDSL, All Rights Reserved.
@@ -66,8 +66,8 @@ module fifo_mode_a #(
     reg_rst_y_mode_a_en_n #(
         .DATA_WIDTH(PTRS_WIDTH)
     ) u_reg_wr_ptr_gry_d1(
-        .i_clk  (i_wr_clk),
-        .i_rst_n(i_wr_rst_n),
+        .i_clk  (i_rd_clk),
+        .i_rst_n(i_rd_rst_n),
         .i_data (w_wr_ptr_gry),
         .o_data (r_wr_ptr_gry_d1)
     );
@@ -75,14 +75,15 @@ module fifo_mode_a #(
     reg_rst_y_mode_a_en_n #(
         .DATA_WIDTH(PTRS_WIDTH)
     ) u_reg_wr_ptr_gry_d2(
-        .i_clk  (i_wr_clk),
-        .i_rst_n(i_wr_rst_n),
+        .i_clk  (i_rd_clk),
+        .i_rst_n(i_rd_rst_n),
         .i_data (r_wr_ptr_gry_d1),
         .o_data (r_wr_ptr_gry_d2)
     );
 
-    assign o_wr_full = (w_wr_ptr_gry == {~r_rd_ptr_gry_d2[PTRS_WIDTH - 1],
-                                          r_rd_ptr_gry_d2[PTRS_WIDTH - 2 : 0]})
+    assign o_wr_full = (w_wr_ptr_gry == {~r_rd_ptr_gry_d2[PTRS_WIDTH - 1:
+                                                          PTRS_WIDTH - 2],
+                                          r_rd_ptr_gry_d2[PTRS_WIDTH - 3 : 0]})
                        ? 1'b1 : 1'b0;
     assign w_wr_addr = r_wr_ptr[PTRS_WIDTH - 2 : 0];
 
@@ -122,8 +123,8 @@ module fifo_mode_a #(
     reg_rst_y_mode_a_en_n #(
         .DATA_WIDTH(PTRS_WIDTH)
     ) u_reg_rd_ptr_gry_d1(
-        .i_clk  (i_rd_clk),
-        .i_rst_n(i_rd_rst_n),
+        .i_clk  (i_wr_clk),
+        .i_rst_n(i_wr_rst_n),
         .i_data (w_rd_ptr_gry),
         .o_data (r_rd_ptr_gry_d1)
     );
@@ -131,8 +132,8 @@ module fifo_mode_a #(
     reg_rst_y_mode_a_en_n #(
         .DATA_WIDTH(PTRS_WIDTH)
     ) u_reg_rd_ptr_gry_d2(
-        .i_clk  (i_rd_clk),
-        .i_rst_n(i_rd_rst_n),
+        .i_clk  (i_wr_clk),
+        .i_rst_n(i_wr_rst_n),
         .i_data (r_rd_ptr_gry_d1),
         .o_data (r_rd_ptr_gry_d2)
     );

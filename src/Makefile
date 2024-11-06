@@ -12,6 +12,6 @@ run:
 	iverilog ${ARGS} -o build/${TOP} ${INCS} $(SRCS) tb/${TOP}_tb.sv
 	vvp -n build/${TOP} -lxt2
 sim: run
-	gtkwave build/${TOP}.vcd
+	gtkwave build/${TOP}.vcd tb/${TOP}_tb.gtkw
 clean:
 	rm -rf build

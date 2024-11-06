@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-11-02 18:09:48
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-11-07 15:35:29
+ * @LastEditTime: 2024-11-07 17:06:58
  * @Description : Tools testbench.
  *
  * Copyright (c) 2024 by MEMDSL, All Rights Reserved.
@@ -26,10 +26,11 @@ logic [DATA_WIDTH - 1 : 0] w_wr_data;
 logic                      w_rd_clk;
 logic                      w_rd_en;
 
-// Cycle =  3ns, Freq = 300MHz
+// Cycle =  3ns, Freq = 333MHz
 always #1.5 w_wr_clk  = ~w_wr_clk;
-// Cycle =  2ns, Freq = 200MHz
+// Cycle =  2ns, Freq = 500MHz
 always #1   w_rd_clk  = ~w_rd_clk;
+// Cycle =  6ns, Freq = 166MHz
 always #3   w_wr_data = {$random} % {DATA_WIDTH{1'b1}};
 
 initial begin
@@ -45,21 +46,18 @@ initial begin
     # 1 w_rst_n = 0;
     # 2 w_rst_n = 1;
 
-
-
-    #20 w_wr_en = 1'b1;
+    #30 w_wr_en = 1'b1;
         w_rd_en = 1'b0;
-    #40 w_wr_en = 1'b0;
+    #30 w_wr_en = 1'b0;
         w_rd_en = 1'b1;
     #30 w_wr_en = 1'b1;
         w_rd_en = 1'b0;
-    #13 w_rd_en = 1'b1;
-    #10
+    #30 w_rd_en = 1'b1;
+    #30
 
-    repeat(100)
-    begin
-    #5 w_wr_en = {$random}%2 ;
-        w_rd_en = {$random}%2 ;
+    repeat(100) begin
+        #5 w_wr_en = {$random} % 2 ;
+           w_rd_en = {$random} % 2 ;
     end
 
     #1000 $finish;
