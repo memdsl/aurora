@@ -1,16 +1,17 @@
 [*]
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Thu Nov  7 08:43:06 2024
+[*] Thu Nov  7 09:11:16 2024
 [*]
 [dumpfile] "/home/myyerrol/Workspaces/memdsl-new/aurora/src/base/build/fifo.vcd"
-[dumpfile_mtime] "Thu Nov  7 08:27:43 2024"
-[dumpfile_size] 14658
+[dumpfile_mtime] "Thu Nov  7 09:10:38 2024"
+[dumpfile_size] 8334
 [savefile] "/home/myyerrol/Workspaces/memdsl-new/aurora/src/base/tb/fifo_tb.gtkw"
-[timestart] 31890
+[timestart] 0
 [size] 1428 819
 [pos] 30 0
-*-13.000000 46500 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-18.000000 681000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] fifo_tb.
+[treeopen] fifo_tb.u_async_fifo.
 [sst_width] 214
 [signals_width] 248
 [sst_expanded] 1

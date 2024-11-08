@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-11-02 18:09:48
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-11-07 17:06:58
+ * @LastEditTime: 2024-11-07 17:10:18
  * @Description : Tools testbench.
  *
  * Copyright (c) 2024 by MEMDSL, All Rights Reserved.
@@ -55,12 +55,12 @@ initial begin
     #30 w_rd_en = 1'b1;
     #30
 
-    repeat(100) begin
-        #5 w_wr_en = {$random} % 2 ;
-           w_rd_en = {$random} % 2 ;
+    repeat (100) begin
+        #5 w_wr_en = {$random} % 2;
+           w_rd_en = {$random} % 2;
     end
 
-    #1000 $finish;
+    #100 $finish;
 end
 
 fifo_mode_a #(
