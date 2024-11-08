@@ -1,60 +1,103 @@
 [*]
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Fri Nov  8 01:46:34 2024
+[*] Fri Nov  8 16:48:54 2024
 [*]
 [dumpfile] "/home/myyerrol/Workspaces/memdsl-new/aurora/src/base/build/fifo.vcd"
-[dumpfile_mtime] "Fri Nov  8 01:46:12 2024"
-[dumpfile_size] 8334
+[dumpfile_mtime] "Fri Nov  8 16:39:29 2024"
+[dumpfile_size] 12183
 [savefile] "/home/myyerrol/Workspaces/memdsl-new/aurora/src/base/tb/fifo_tb.gtkw"
-[timestart] 0
+[timestart] 17800
 [size] 1428 819
 [pos] 30 0
-*-16.000000 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-14.000000 30500 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] fifo_tb.
-[treeopen] fifo_tb.u_async_fifo.
 [sst_width] 214
-[signals_width] 248
+[signals_width] 294
 [sst_expanded] 1
 [sst_vpaned_height] 229
+@200
+-fifo_s
+@28
+[color] 1
+fifo_tb.u_fifo_s.i_clk[0]
+[color] 1
+fifo_tb.u_fifo_s.i_rst_n[0]
+[color] 2
+fifo_tb.u_fifo_s.i_wr_en[0]
+@24
+[color] 2
+fifo_tb.u_fifo_s.i_wr_data[15:0]
+@28
+[color] 2
+fifo_tb.u_fifo_s.o_wr_full[0]
+@24
+[color] 2
+fifo_tb.u_fifo_s.r_wr_ptr[2:0]
+@28
+[color] 3
+fifo_tb.u_fifo_s.i_rd_en[0]
+@24
+[color] 3
+fifo_tb.u_fifo_s.o_rd_data[15:0]
+@28
+[color] 3
+fifo_tb.u_fifo_s.o_rd_empty[0]
+@24
+[color] 3
+fifo_tb.u_fifo_s.r_rd_ptr[2:0]
+@22
+fifo_tb.u_fifo_s.r_cnt[3:0]
+@200
+-
+-fifo_a
+@28
+[color] 1
+fifo_tb.u_fifo_a.i_wr_clk[0]
+[color] 1
+fifo_tb.u_fifo_a.i_wr_rst_n[0]
+[color] 1
+fifo_tb.u_fifo_a.i_wr_en[0]
+@22
+[color] 1
+fifo_tb.u_fifo_a.i_wr_data[15:0]
+@28
+[color] 1
+fifo_tb.u_fifo_a.o_wr_full[0]
+@22
+[color] 1
+fifo_tb.u_fifo_a.r_wr_ptr[3:0]
+[color] 1
+fifo_tb.u_fifo_a.w_wr_ptr_gry[3:0]
+[color] 1
+fifo_tb.u_fifo_a.r_wr_ptr_gry_d1[3:0]
+[color] 1
+fifo_tb.u_fifo_a.r_wr_ptr_gry_d2[3:0]
+@28
+[color] 1
+fifo_tb.u_fifo_a.w_wr_addr[2:0]
+[color] 2
+fifo_tb.u_fifo_a.i_rd_clk[0]
+[color] 2
+fifo_tb.u_fifo_a.i_rd_rst_n[0]
+[color] 2
+fifo_tb.u_fifo_a.i_rd_en[0]
+@22
+[color] 2
+fifo_tb.u_fifo_a.o_rd_data[15:0]
 @29
-fifo_tb.u_async_fifo.i_wr_clk[0]
-@28
-fifo_tb.u_async_fifo.i_wr_rst_n[0]
-fifo_tb.u_async_fifo.i_wr_en[0]
-@22
-fifo_tb.u_async_fifo.i_wr_data[15:0]
-@28
-fifo_tb.u_async_fifo.o_wr_full[0]
-fifo_tb.u_async_fifo.r_wr_ptr[3:0]
-fifo_tb.u_async_fifo.w_wr_ptr_gry[3:0]
-@22
-fifo_tb.u_async_fifo.r_wr_ptr_gry_d1[3:0]
-fifo_tb.u_async_fifo.r_wr_ptr_gry_d2[3:0]
-@28
-fifo_tb.u_async_fifo.w_wr_addr[2:0]
 [color] 2
-fifo_tb.u_async_fifo.i_rd_clk[0]
+fifo_tb.u_fifo_a.o_rd_empty[0]
+@23
 [color] 2
-fifo_tb.u_async_fifo.i_rd_rst_n[0]
+fifo_tb.u_fifo_a.r_rd_ptr[3:0]
 [color] 2
-fifo_tb.u_async_fifo.i_rd_en[0]
-@22
+fifo_tb.u_fifo_a.w_rd_ptr_gry[3:0]
 [color] 2
-fifo_tb.u_async_fifo.o_rd_data[15:0]
-@28
+fifo_tb.u_fifo_a.r_rd_ptr_gry_d1[3:0]
 [color] 2
-fifo_tb.u_async_fifo.o_rd_empty[0]
+fifo_tb.u_fifo_a.r_rd_ptr_gry_d2[3:0]
+@29
 [color] 2
-fifo_tb.u_async_fifo.r_rd_ptr[3:0]
-[color] 2
-fifo_tb.u_async_fifo.w_rd_ptr_gry[3:0]
-@22
-[color] 2
-fifo_tb.u_async_fifo.r_rd_ptr_gry_d1[3:0]
-[color] 2
-fifo_tb.u_async_fifo.r_rd_ptr_gry_d2[3:0]
-@28
-[color] 2
-fifo_tb.u_async_fifo.w_rd_addr[2:0]
+fifo_tb.u_fifo_a.w_rd_addr[2:0]
 [pattern_trace] 1
 [pattern_trace] 0
