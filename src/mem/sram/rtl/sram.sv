@@ -2,14 +2,13 @@
  * @Author      : myyerrol
  * @Date        : 2024-09-05 14:17:09
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-09 19:02:19
- * @FilePath    : /memdsl/aurora/src/interface/sram/rtl/sram_axi4.sv
+ * @LastEditTime: 2024-12-10 15:03:13
  * @Description : SRAM with AXI4 slave interface
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
 
-module sram_axi4(
+module sram(
     // AXI4 clock
     input  logic          i_aclk,
     input  logic          i_areset_n,

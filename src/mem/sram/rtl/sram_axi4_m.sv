@@ -2,8 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-09-08 20:06:49
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-09 19:38:46
- * @FilePath    : /memdsl/aurora/src/interface/sram/rtl/sram_axi4_m.sv
+ * @LastEditTime: 2024-12-10 15:01:58
  * @Description : SRAM with AXI4 master interface.
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
