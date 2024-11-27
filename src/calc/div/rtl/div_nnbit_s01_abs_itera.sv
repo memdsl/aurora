@@ -2,8 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-16 20:05:41
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-17 23:05:47
- * @FilePath    : /memdsl/aurora/src/sv/common/div/rtl/div_nnbit_s01_abs_itera.sv
+ * @LastEditTime: 2024-12-10 15:01:03
  * @Description : 01bit absolute value iterative divider
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.

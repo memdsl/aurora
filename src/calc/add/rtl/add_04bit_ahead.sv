@@ -3,7 +3,6 @@
  * @Date        : 2024-06-28 14:41:49
  * @LastEditors : myyerrol
  * @LastEditTime: 2024-07-08 20:56:56
- * @FilePath    : /memdsl/aurora/src/sv/common/adder/rtl/add_04bit_ahead.sv
  * @Description : 04bit ahead carry adder
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.

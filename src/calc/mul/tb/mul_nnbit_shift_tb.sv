@@ -2,8 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-02 19:01:58
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-08 18:24:31
- * @FilePath    : /memdsl/aurora/src/common/mul/tb/mul_nnbit_shift_tb.sv
+ * @LastEditTime: 2024-12-10 15:01:54
  * @Description : nnbit shfit multiplier testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.

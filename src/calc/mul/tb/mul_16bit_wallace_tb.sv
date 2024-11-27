@@ -2,8 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-05 08:45:17
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-08 18:24:24
- * @FilePath    : /memdsl/aurora/src/common/mul/tb/mul_16bit_wallace_tb.sv
+ * @LastEditTime: 2024-12-10 15:01:51
  * @Description : 16bit wallace tree multiplier testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.

@@ -2,8 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-03 19:53:31
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-08 18:23:04
- * @FilePath    : /memdsl/aurora/src/common/adder/tb/add_nnbit_ahead_serial_tb.sv
+ * @LastEditTime: 2024-12-10 15:00:55
  * @Description :nnbit ahead carry adder testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.

@@ -3,7 +3,6 @@
  * @Date        : 2024-06-24 01:15:01
  * @LastEditors : myyerrol
  * @LastEditTime: 2024-09-08 18:22:18
- * @FilePath    : /memdsl/aurora/src/common/adder/rtl/add_nnbit_serial.sv
  * @Description : nnbit serial carry adder
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.

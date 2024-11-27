@@ -2,8 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-03 18:18:33
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-08 18:22:10
- * @FilePath    : /memdsl/aurora/src/common/adder/rtl/add_nnbit_ahead_serial.sv
+ * @LastEditTime: 2024-12-10 15:00:36
  * @Description : nnbit ahead carry serial adder
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.

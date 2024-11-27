@@ -2,8 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-28 14:52:18
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-08 18:22:47
- * @FilePath    : /memdsl/aurora/src/common/adder/tb/add_04bit_ahead_tb.sv
+ * @LastEditTime: 2024-12-10 15:01:43
  * @Description : 04bit ahead carry adder testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.

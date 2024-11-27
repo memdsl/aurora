@@ -2,8 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-02 12:49:46
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-07 22:30:11
- * @FilePath    : /memdsl/aurora/src/sv/common/mul/rtl/mul_nnbit_shift.sv
+ * @LastEditTime: 2024-12-10 15:01:28
  * @Description : nnbit shift multiplier
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.

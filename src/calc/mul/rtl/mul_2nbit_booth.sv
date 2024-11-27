@@ -2,8 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-02 18:48:41
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-08 18:23:20
- * @FilePath    : /memdsl/aurora/src/common/mul/rtl/mul_2nbit_booth.sv
+ * @LastEditTime: 2024-12-10 15:01:18
  * @Description : 2nbit booth multiplier
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
