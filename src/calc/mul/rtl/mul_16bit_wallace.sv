@@ -9,7 +9,7 @@
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
 
-`include "adder_nnbit_serial.sv"
+`include "add_nnbit_serial.sv"
 `include "mul_01bitx08_wallace.sv"
 `include "mul_02bit_booth.sv"
 
@@ -118,20 +118,20 @@ module mul_16bit_wallace(
 
     /* ===================================================================== */
 
-    logic [31 : 0] r_adder_num_a;
-    logic [31 : 0] r_adder_num_b;
-    logic          r_adder_cry;
+    logic [31 : 0] r_add_num_a;
+    logic [31 : 0] r_add_num_b;
+    logic          r_add_cry;
 
     always_ff @(posedge i_clk) begin
         if (!i_rst_n) begin
-            r_adder_num_a <= 32'h0000_0000;
-            r_adder_num_b <= 32'h0000_0000;
-            r_adder_cry   <= 1'b0;
+            r_add_num_a <= 32'h0000_0000;
+            r_add_num_b <= 32'h0000_0000;
+            r_add_cry   <= 1'b0;
         end
         else begin
-            r_adder_num_a <= (w_wallace_cry[30 : 0] << 1) | w_switch_cry[6];
-            r_adder_num_b <= w_wallace_res;
-            r_adder_cry   <= w_switch_cry[7];
+            r_add_num_a <= (w_wallace_cry[30 : 0] << 1) | w_switch_cry[6];
+            r_add_num_b <= w_wallace_res;
+            r_add_cry   <= w_switch_cry[7];
         end
     end
 
@@ -153,20 +153,20 @@ module mul_16bit_wallace(
         end
     end
 
-    logic [31 : 0] w_adder_num_a;
-    logic [31 : 0] w_adder_num_b;
-    logic          w_adder_cry;
+    logic [31 : 0] w_add_num_a;
+    logic [31 : 0] w_add_num_b;
+    logic          w_add_cry;
 
-    assign w_adder_num_a = (count == 32'h3) ? r_adder_num_a : 32'h0000_0000;
-    assign w_adder_num_b = (count == 32'h3) ? r_adder_num_b : 32'h0000_0000;
-    assign w_adder_cry   = (count == 32'h3) ? r_adder_cry   : 1'b0;
+    assign w_add_num_a = (count == 32'h3) ? r_add_num_a : 32'h0000_0000;
+    assign w_add_num_b = (count == 32'h3) ? r_add_num_b : 32'h0000_0000;
+    assign w_add_cry   = (count == 32'h3) ? r_add_cry   : 1'b0;
 
-    adder_nnbit_serial #(
+    add_nnbit_serial #(
         .DATA_WIDTH(32)
-    ) u_adder_nnbit_serial(
-        .i_num_a(w_adder_num_a),
-        .i_num_b(w_adder_num_b),
-        .i_cry(w_adder_cry),
+    ) u_add_nnbit_serial(
+        .i_num_a(w_add_num_a),
+        .i_num_b(w_add_num_b),
+        .i_cry(w_add_cry),
         .o_res(o_res),
         .o_cry(o_cry)
     );

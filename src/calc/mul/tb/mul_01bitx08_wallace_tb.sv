@@ -11,7 +11,7 @@
 
 `timescale 1ns / 1ps
 
-`include "adder_01bit_full.sv"
+`include "add_01bit_full.sv"
 
 module mul_01bitx08_wallace_tb();
 
