@@ -3,13 +3,13 @@
  * @Date        : 2024-07-03 18:18:33
  * @LastEditors : myyerrol
  * @LastEditTime: 2024-09-08 18:22:10
- * @FilePath    : /memdsl/aurora/src/common/adder/rtl/adder_nnbit_ahead_serial.sv
+ * @FilePath    : /memdsl/aurora/src/common/adder/rtl/add_nnbit_ahead_serial.sv
  * @Description : nnbit ahead carry serial adder
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
 
-`include "adder_04bit_ahead.sv"
+`include "add_04bit_ahead.sv"
 
 /**
  * @description: 04bit ahead carry serial adder
@@ -19,7 +19,7 @@
  * @param {logic} o_res  : Result
  * @param {logic} o_cry  : Carry to highest bit
  */
-module adder_nnbit_ahead_serial #(
+module add_nnbit_ahead_serial #(
     parameter DATA_WIDTH = 8
 ) (
     input  logic [DATA_WIDTH - 1 : 0] i_num_a,
@@ -37,7 +37,7 @@ module adder_nnbit_ahead_serial #(
     generate
         genvar i;
         for (i = 0; i < DATA_WIDTH / 4; i = i + 1) begin
-            adder_04bit_ahead u_adder_04bit_ahead(
+            add_04bit_ahead u_add_04bit_ahead(
                 .i_num_a(i_num_a[i * 4 + 3 : i * 4]),
                 .i_num_b(i_num_b[i * 4 + 3 : i * 4]),
                 .i_cry((i == 0) ? i_cry : w_cry[i - 1]),

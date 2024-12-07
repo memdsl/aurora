@@ -3,7 +3,7 @@
  * @Date        : 2024-06-28 14:52:18
  * @LastEditors : myyerrol
  * @LastEditTime: 2024-09-08 18:22:56
- * @FilePath    : /memdsl/aurora/src/common/adder/tb/adder_nnbit_serial_tb.sv
+ * @FilePath    : /memdsl/aurora/src/common/adder/tb/add_nnbit_serial_tb.sv
  * @Description : nnbit serial carry adder testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -11,11 +11,11 @@
 
 `timescale 1ns / 1ps
 
-module adder_nnbit_serial_tb();
+module add_nnbit_serial_tb();
 
 initial begin
-    $dumpfile("build/adder_nnbit_serial.vcd");
-    $dumpvars(0, adder_nnbit_serial_tb);
+    $dumpfile("build/add_nnbit_serial.vcd");
+    $dumpvars(0, add_nnbit_serial_tb);
 end
 
 parameter DATA_WIDTH = 4;
@@ -36,9 +36,9 @@ initial begin
     #10 $finish;
 end
 
-adder_nnbit_serial #(
+add_nnbit_serial #(
     .DATA_WIDTH(DATA_WIDTH)
-) u_adder_nnbit_serial(
+) u_add_nnbit_serial(
     .i_num_a(w_num_a),
     .i_num_b(w_num_b),
     .i_cry(w_cry),

@@ -3,7 +3,7 @@
  * @Date        : 2024-06-28 14:41:49
  * @LastEditors : myyerrol
  * @LastEditTime: 2024-07-08 20:56:56
- * @FilePath    : /memdsl/aurora/src/sv/common/adder/rtl/adder_04bit_ahead.sv
+ * @FilePath    : /memdsl/aurora/src/sv/common/adder/rtl/add_04bit_ahead.sv
  * @Description : 04bit ahead carry adder
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -17,7 +17,7 @@
  * @param {logic} o_res  : Result
  * @param {logic} o_cry  : Carry to highest bit
  */
-module adder_04bit_ahead(
+module add_04bit_ahead(
     input  logic [3 : 0] i_num_a,
     input  logic [3 : 0] i_num_b,
     input  logic         i_cry,

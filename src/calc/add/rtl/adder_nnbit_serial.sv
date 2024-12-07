@@ -3,13 +3,13 @@
  * @Date        : 2024-06-24 01:15:01
  * @LastEditors : myyerrol
  * @LastEditTime: 2024-09-08 18:22:18
- * @FilePath    : /memdsl/aurora/src/common/adder/rtl/adder_nnbit_serial.sv
+ * @FilePath    : /memdsl/aurora/src/common/adder/rtl/add_nnbit_serial.sv
  * @Description : nnbit serial carry adder
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
 
-`include "adder_01bit_full.sv"
+`include "add_01bit_full.sv"
 
 /**
  * @description: nnbit serial carry adder
@@ -19,7 +19,7 @@
  * @param {logic} o_res  : Result
  * @param {logic} o_cry  : Carry to highest bit
  */
-module adder_nnbit_serial #(
+module add_nnbit_serial #(
     parameter DATA_WIDTH = 8
 ) (
     input  logic [DATA_WIDTH - 1 : 0] i_num_a,
@@ -43,7 +43,7 @@ module adder_nnbit_serial #(
     generate
         genvar i;
         for (i = 0; i < DATA_WIDTH; i = i + 1) begin
-            adder_01bit_full u_adder_01bit_full(
+            add_01bit_full u_add_01bit_full(
                 .i_num_a(i_num_a[i]),
                 .i_num_b(i_num_b[i]),
                 .i_cry((i == 0) ? i_cry : w_cry[i - 1]),

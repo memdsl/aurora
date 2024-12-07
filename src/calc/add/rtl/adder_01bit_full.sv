@@ -3,7 +3,7 @@
  * @Date        : 2024-06-22 20:56:57
  * @LastEditors : myyerrol
  * @LastEditTime: 2024-07-07 17:06:17
- * @FilePath    : /memdsl/aurora/src/sv/common/adder/rtl/adder_01bit_full.sv
+ * @FilePath    : /memdsl/aurora/src/sv/common/adder/rtl/add_01bit_full.sv
  * @Description : 01bit full adder
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -17,7 +17,7 @@
  * @param {logic} o_res  : Result
  * @param {logic} o_cry  : Carry to high bit
  */
-module adder_01bit_full(
+module add_01bit_full(
     input  logic i_num_a,
     input  logic i_num_b,
     input  logic i_cry,

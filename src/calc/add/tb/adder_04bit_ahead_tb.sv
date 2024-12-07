@@ -3,7 +3,7 @@
  * @Date        : 2024-06-28 14:52:18
  * @LastEditors : myyerrol
  * @LastEditTime: 2024-09-08 18:22:47
- * @FilePath    : /memdsl/aurora/src/common/adder/tb/adder_04bit_ahead_tb.sv
+ * @FilePath    : /memdsl/aurora/src/common/adder/tb/add_04bit_ahead_tb.sv
  * @Description : 04bit ahead carry adder testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -11,11 +11,11 @@
 
 `timescale 1ns / 1ps
 
-module adder_04bit_ahead_tb();
+module add_04bit_ahead_tb();
 
 initial begin
-    $dumpfile("build/adder_04bit_ahead.vcd");
-    $dumpvars(0, adder_04bit_ahead_tb);
+    $dumpfile("build/add_04bit_ahead.vcd");
+    $dumpvars(0, add_04bit_ahead_tb);
 end
 
 logic [3 : 0] w_num_a;
@@ -34,7 +34,7 @@ initial begin
     #10 $finish;
 end
 
-adder_04bit_ahead u_adder_04bit_ahead(
+add_04bit_ahead u_add_04bit_ahead(
     .i_num_a(w_num_a),
     .i_num_b(w_num_b),
     .i_cry(w_cry),
