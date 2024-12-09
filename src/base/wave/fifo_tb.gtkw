@@ -5,7 +5,7 @@
 [dumpfile] "/home/myyerrol/Workspaces/memdsl-new/aurora/src/base/build/fifo.vcd"
 [dumpfile_mtime] "Fri Nov  8 16:39:29 2024"
 [dumpfile_size] 12183
-[savefile] "/home/myyerrol/Workspaces/memdsl-new/aurora/src/base/tb/fifo_tb.gtkw"
+[savefile] "/home/myyerrol/Workspaces/memdsl-new/aurora/src/base/wave/fifo_tb.gtkw"
 [timestart] 17800
 [size] 1428 819
 [pos] 30 0
