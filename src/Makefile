@@ -6,7 +6,7 @@ INCS     = $(addprefix -I, $(INCS_DIR))
 SRCS = $(addsuffix .sv, $(addprefix rtl/, $(SRC)))
 
 ARGS = -g2005-sv -gno-assertions
-GTKW = tb/${TOP}_tb.gtkw
+GTKW = wave/${TOP}_tb.gtkw
 
 ifeq ($(shell find ${GTKW} -type f  >/dev/null 2>&1 && echo yes || echo no), no)
     GTKW =
