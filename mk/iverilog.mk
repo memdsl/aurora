@@ -5,9 +5,9 @@ IVERILOG_VVP  = vvp
 IVERILOG_ARGS = -g2005-sv       \
                 -gno-assertions \
                 -o $(BUILD_BIN)
-IVERILOG_ARGS_VVP   = $(BUILD_BIN) \
-                      -n           \
-                      -lxt2
+IVERILOG_ARGS_VVP = $(BUILD_BIN) \
+                    -n           \
+                    -lxt2
 
 INCS_DIR = $(shell find $(AURORA_HOME)/src/ -type d -name "rtl")
 INCS     = $(addprefix -I, $(INCS_DIR))
