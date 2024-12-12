@@ -1,4 +1,4 @@
-TOOL := verilator
+TOOL ?= verilator
 
 ifeq ($(TOOL), verilator)
     include $(AURORA_HOME)/mk/verilator.mk

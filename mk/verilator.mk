@@ -1,11 +1,4 @@
-define PARSE_CFG
-    $(shell $(AURORA_HOME)/tool/parse_cfg.py $(shell pwd)/cfg/$(TEST).yaml)
-endef
-$(eval $(PARSE_CFG))
-
-TOOL_EMPTY :=
-TOOL_SPACE := $(TOOL_EMPTY) $(TOOL_EMPTY)
-TOOL_COMMA := ,$(TOOL_SPACE)
+include $(AURORA_HOME)/mk/base.mk
 
 TEST     ?=
 TEST_LIST = $(shell find tb -type f | sed "s|.*/||; s|_tb\.sv$$||")
@@ -15,14 +8,6 @@ ifeq ($(filter $(TEST_LIST), $(TEST)),)
        [$(subst $(TOOL_SPACE),$(TOOL_COMMA),$(TEST_LIST))])
     endif
 endif
-
- TOP = $(TEST)_tb
-VTOP = V$(TOP)
-
-BUILD_DIR = $(shell pwd)/build
-BUILD_MK  = $(VTOP).mk
-BUILD_BIN = $(BUILD_DIR)/$(TOP)
-BUILD_VCD = $(BUILD_DIR)/$(TOP).vcd
 
 VERILATOR      = verilator
 VERILATOR_ARGS = --cc                \
@@ -67,12 +52,6 @@ SRCS_SV               = $(filter-out $(SRCS_SV_BLACKLIST), $(SRCS_SV_WHITELIST))
 SRCS_CXX =
 SRCS     = $(SRCS_SV) $(SRCS_CXX)
 
-GTKW = wave/$(TOP).gtkw
-
-ifeq ($(shell find ${GTKW} -type f  >/dev/null 2>&1 && echo yes || echo no), no)
-    GTKW =
-endif
-
 $(BUILD_MK):
 	$(VERILATOR) $(VERILATOR_ARGS)         \
 	$(INCS) $(SRCS)                        \
@@ -83,8 +62,6 @@ $(BUILD_BIN): $(BUILD_MK)
 
 .PHONY: clean run sim
 
-all:
-	@echo $(SRCS)
 run: $(BUILD_BIN)
 	$(BUILD_BIN)
 sim: run
