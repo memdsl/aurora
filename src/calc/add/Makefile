@@ -1,4 +1,4 @@
-TOP ?= add_nnbit_ahead_serial
-SRC ?= ${TOP}
+TEST ?= add_01bit_half
+SRCS ?= ${TEST}
 
 include ${AURORA_HOME}/src/Makefile

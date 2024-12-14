@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-28 14:52:06
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-10 15:00:43
+ * @LastEditTime: 2024-12-18 03:36:41
  * @Description : 01bit full adder testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -13,7 +13,7 @@
 module add_01bit_full_tb();
 
 initial begin
-    $dumpfile("build/add_01bit_full.vcd");
+    $dumpfile("build/add_01bit_full_tb.vcd");
     $dumpvars(0, add_01bit_full_tb);
 end
 

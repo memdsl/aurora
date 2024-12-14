@@ -2,11 +2,13 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-22 20:56:45
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-07 15:25:35
+ * @LastEditTime: 2024-12-18 03:57:16
  * @Description : 01bit half adder
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
+
+`timescale 1ns / 1ps
 
 /**
  * @description: 01bit half adder

@@ -1,0 +1,25 @@
+[*]
+[*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
+[*] Tue Dec 17 21:49:07 2024
+[*]
+[dumpfile] "/home/myyerrol/Workspaces/memdsl-new/aurora/src/calc/add/build/add_01bit_half_tb.vcd"
+[dumpfile_mtime] "Tue Dec 17 21:46:45 2024"
+[dumpfile_size] 484
+[savefile] "/home/myyerrol/Workspaces/memdsl-new/aurora/src/calc/add/wave/add_01bit_half_tb.gtkw"
+[timestart] 0
+[size] 1428 819
+[pos] 30 -49
+*-14.000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TOP.
+[treeopen] TOP.add_01bit_half_tb.
+[sst_width] 214
+[signals_width] 86
+[sst_expanded] 1
+[sst_vpaned_height] 229
+@28
+TOP.add_01bit_half_tb.u_add_01bit_half.i_num_a
+TOP.add_01bit_half_tb.u_add_01bit_half.i_num_b
+TOP.add_01bit_half_tb.u_add_01bit_half.o_cry
+TOP.add_01bit_half_tb.u_add_01bit_half.o_res
+[pattern_trace] 1
+[pattern_trace] 0

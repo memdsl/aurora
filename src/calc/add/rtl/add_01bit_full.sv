@@ -2,11 +2,13 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-22 20:56:57
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-10 15:00:22
+ * @LastEditTime: 2024-12-18 03:38:23
  * @Description : 01bit full adder
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
+
+`timescale 1ns / 1ps
 
 /**
  * @description: 01bit full adder

@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-28 14:52:17
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-08 18:22:39
+ * @LastEditTime: 2024-12-18 03:57:22
  * @Description : 01bit half adder testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -13,7 +13,7 @@
 module add_01bit_half_tb();
 
 initial begin
-    $dumpfile("build/add_01bit_half.vcd");
+    $dumpfile("build/add_01bit_half_tb.vcd");
     $dumpvars(0, add_01bit_half_tb);
 end
 
