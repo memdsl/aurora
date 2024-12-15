@@ -1,4 +1,4 @@
-TOP ?= sram_axi4
-SRC ?= ${TOP} sram_axi4_m
+TOP ?= sram
+SRC ?= ${TOP}
 
 include ${AURORA_HOME}/src/Makefile
