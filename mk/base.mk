@@ -5,10 +5,7 @@ define PARSE_CFG
 endef
 $(eval $(PARSE_CFG))
 
-GTKW = wave/$(TOP).gtkw
-ifeq ($(shell find ${GTKW} -type f  >/dev/null 2>&1 && echo yes || echo no), no)
-    GTKW =
-endif
+GTKW = $(shell pwd)/wave/$(TOP).gtkw
 
 TOOL_EMPTY :=
 TOOL_SPACE := $(TOOL_EMPTY) $(TOOL_EMPTY)

@@ -1,5 +1,9 @@
 include $(AURORA_HOME)/mk/base.mk
 
+ifeq ($(shell find $(GTKW) -type f > /dev/null 2>&1 && echo yes || echo no), no)
+    GTKW =
+endif
+
 IVERILOG      = iverilog
 IVERILOG_VVP  = vvp
 IVERILOG_ARGS = -g2005-sv       \

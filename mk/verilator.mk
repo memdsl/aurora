@@ -1,5 +1,9 @@
 include $(AURORA_HOME)/mk/base.mk
 
+ifeq ($(shell find $(GTKW) -type f > /dev/null 2>&1 && echo yes || echo no), no)
+    GTKW =
+endif
+
 TEST     ?=
 TEST_LIST = $(shell find tb -type f | sed "s|.*/||; s|_tb\.sv$$||")
 ifeq ($(filter $(TEST_LIST), $(TEST)),)
@@ -59,8 +63,6 @@ $(BUILD_MK):
 	$(addprefix -LDFLAGS , $(CXX_LDFLAGS))
 $(BUILD_BIN): $(BUILD_MK)
 	make -C build -f $(BUILD_MK) CXX=$(CXX)
-
-.PHONY: clean run sim
 
 run: $(BUILD_BIN)
 	$(BUILD_BIN)
