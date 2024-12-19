@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-11-02 18:10:12
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-11-02 18:59:29
+ * @LastEditTime: 2024-12-19 16:24:06
  * @Description : Registers testbench.
  *
  * Copyright (c) 2024 by MEMDSL, All Rights Reserved.
@@ -13,7 +13,7 @@
 module reg_tb();
 
 initial begin
-    $dumpfile("build/reg.vcd");
+    $dumpfile("build/reg_tb.vcd");
     $dumpvars(0, reg_tb);
 end
 

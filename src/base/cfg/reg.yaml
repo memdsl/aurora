@@ -1,0 +1,3 @@
+FILE:
+    - rtl/reg.sv
+    - rtl/def.sv

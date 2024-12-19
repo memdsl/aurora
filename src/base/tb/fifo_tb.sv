@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-11-02 18:09:48
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-11-09 00:48:50
+ * @LastEditTime: 2024-12-19 18:31:42
  * @Description : Tools testbench.
  *
  * Copyright (c) 2024 by MEMDSL, All Rights Reserved.
@@ -10,10 +10,11 @@
 
 `timescale 1ns / 1ps
 
+// verilator lint_off WIDTHTRUNC
 module fifo_tb();
 
 initial begin
-    $dumpfile("build/fifo.vcd");
+    $dumpfile("build/fifo_tb.vcd");
     $dumpvars(0, fifo_tb);
 end
 
@@ -29,7 +30,8 @@ logic                      w_rd_en_s;
 // Cycle = 1ns Freq = 1000MHz
 always #0.5 w_clk_s     = ~w_clk_s;
 // Cycle = 2ns Freq =  500MHz
-always #1   w_wr_data_s = {$random} % 10;
+
+always #1   w_wr_data_s = $random % 10;
 
 initial begin
     w_rst_n_s = 1'b1;
@@ -52,8 +54,8 @@ initial begin
     #10
 
     repeat(100) begin
-        #5 w_wr_en_s = {$random} % 2;
-           w_rd_en_s = {$random} % 2;
+        #5 w_wr_en_s = $random % 2;
+           w_rd_en_s = $random % 2;
     end
 
     #100 $finish;
@@ -89,7 +91,7 @@ always #1.5 w_wr_clk_a  = ~w_wr_clk_a;
 // Cycle = 2ns, Freq = 500MHz
 always #1   w_rd_clk_a  = ~w_rd_clk_a;
 // Cycle = 6ns, Freq = 166MHz
-always #3   w_wr_data_a = {$random} % {DATA_WIDTH{1'b1}};
+always #3   w_wr_data_a = $random;
 
 initial begin
     w_rst_n_a  = 1'b1;
@@ -114,8 +116,8 @@ initial begin
     #30
 
     repeat (100) begin
-        #5 w_wr_en_a = {$random} % 2;
-           w_rd_en_a = {$random} % 2;
+        #5 w_wr_en_a = $random % 2;
+           w_rd_en_a = $random % 2;
     end
 
     #100 $finish;

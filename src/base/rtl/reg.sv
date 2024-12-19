@@ -2,15 +2,13 @@
  * @Author      : myyerrol
  * @Date        : 2024-11-01 18:55:16
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-10 14:52:25
+ * @LastEditTime: 2024-12-19 16:39:17
  * @Description : Registers.
  *
  * Copyright (c) 2024 by MEMDSL, All Rights Reserved.
  */
 
 `timescale 1ns / 1ps
-
-`include "def.sv"
 
 module reg_check_data_x #(
     parameter DATA_WIDTH = 32
@@ -19,8 +17,10 @@ module reg_check_data_x #(
     input logic [DATA_WIDTH - 1 : 0] i_data
 );
 
+`ifdef TOOL_CHECK
     assert property (@(posedge i_clk) ((^i_data) !== 1'bx))
     else $fatal("\nError! X value is detected! This should never happen.\n");
+`endif
 
 endmodule
 
@@ -40,7 +40,7 @@ module reg_rst_n_mode_n_en_n #(
 
     assign o_data = r_data;
 
-`ifndef RTL_SYN
+`ifdef TOOL_CHECK
     reg_check_data_x #(
         .DATA_WIDTH(DATA_WIDTH)
     ) u_reg_check_data_x(
@@ -73,7 +73,7 @@ module reg_rst_n_mode_n_en_y #(
 
     assign o_data = r_data;
 
-`ifndef RTL_SYN
+`ifdef TOOL_CHECK
     reg_check_data_x #(
         .DATA_WIDTH(DATA_WIDTH)
     ) u_reg_check_data_x(
@@ -106,7 +106,7 @@ module reg_rst_y_mode_s_en_n #(
 
     assign o_data = r_data;
 
-`ifndef RTL_SYN
+`ifdef TOOL_CHECK
     reg_check_data_x #(
         .DATA_WIDTH(DATA_WIDTH)
     ) u_reg_check_data_x(
@@ -143,7 +143,7 @@ module reg_rst_y_mode_s_en_y #(
 
     assign o_data = r_data;
 
-`ifndef RTL_SYN
+`ifdef TOOL_CHECK
     reg_check_data_x #(
         .DATA_WIDTH(DATA_WIDTH)
     ) u_reg_check_data_x(
@@ -176,7 +176,7 @@ module reg_rst_y_mode_a_en_n #(
 
     assign o_data = r_data;
 
-`ifndef RTL_SYN
+`ifdef TOOL_CHECK
     reg_check_data_x #(
         .DATA_WIDTH(DATA_WIDTH)
     ) u_reg_check_data_x(
@@ -213,7 +213,7 @@ module reg_rst_y_mode_a_en_y #(
 
     assign o_data = r_data;
 
-`ifndef RTL_SYN
+`ifdef TOOL_CHECK
     reg_check_data_x #(
         .DATA_WIDTH(DATA_WIDTH)
     ) u_reg_check_data_x(
@@ -224,6 +224,7 @@ module reg_rst_y_mode_a_en_y #(
 
 endmodule
 
+// verilator lint_off LATCH
 module reg_lch #(
     parameter DATA_WIDTH = 32
 ) (
@@ -242,7 +243,7 @@ module reg_lch #(
 
     assign o_data = r_data;
 
-`ifndef RTL_SYN
+`ifdef TOOL_CHECK
     assert property (i_en !== 1'bx)
     else $fatal("\nError! X value is detected! This should never happen.\n");
 `endif

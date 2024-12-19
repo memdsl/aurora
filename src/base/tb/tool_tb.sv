@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-11-02 18:10:19
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-11-02 18:24:48
+ * @LastEditTime: 2024-12-19 16:37:56
  * @Description : Tools testbench.
  *
  * Copyright (c) 2024 by MEMDSL, All Rights Reserved.
@@ -13,7 +13,7 @@
 module tool_tb();
 
 initial begin
-    $dumpfile("build/tool.vcd");
+    $dumpfile("build/tool_tb.vcd");
     $dumpvars(0, tool_tb);
 end
 

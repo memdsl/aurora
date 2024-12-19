@@ -2,33 +2,13 @@
  * @Author      : myyerrol
  * @Date        : 2024-11-02 15:22:27
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-11-09 00:47:25
+ * @LastEditTime: 2024-12-19 17:49:25
  * @Description : First Input First Out
  *
  * Copyright (c) 2024 by MEMDSL, All Rights Reserved.
  */
 
-`include "reg.sv"
-`include "tool.sv"
-
-interface fifo_io();
-    // logic                      en;
-    // logic [DATA_WIDTH - 1 : 0] data;
-
-    // modport wr(
-    //     input  rst_n,
-    //     input  en,
-    //     input  data,
-    //     output full
-    // );
-
-    // modport rd(
-    //     input  rst_n,
-    //     input  en,
-    //     output data,
-    //     output empty
-    // );
-endinterface
+`timescale 1ns / 1ps
 
 // FIFO Synchronization
 module fifo_mode_s #(

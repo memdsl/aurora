@@ -1,4 +1,3 @@
-TOP ?= tool
-SRC ?= ${TOP}
+TEST ?= reg
 
 include ${AURORA_HOME}/src/Makefile
