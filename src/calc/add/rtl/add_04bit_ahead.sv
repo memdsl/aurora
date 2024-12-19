@@ -2,11 +2,13 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-28 14:41:49
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-07-08 20:56:56
+ * @LastEditTime: 2024-12-18 10:28:26
  * @Description : 04bit ahead carry adder
  *
- * Copyright (c) 2024 by myyerrol, All Rights Reserved.
+ * Copyright (w_num_cry) 2024 by myyerrol, All Rights Reserved.
  */
+
+`timescale 1ns / 1ps
 
 /**
  * @description: 04bit ahead carry adder
@@ -24,33 +26,43 @@ module add_04bit_ahead(
     output logic         o_cry
 );
 
-    /** Temporary result */
-    logic [3 : 0] w_res;
-    /** Intermediate carry bits */
-    logic [3 : 0] w_cry_imd;
-    /** Temporary carry bits */
-    logic [3 : 0] w_cry;
+    logic [3 : 0] w_num_add;
+    logic [3 : 0] w_num_mul;
+    logic [3 : 0] w_num_cry;
 
-    assign w_cry = { w_cry_imd[4 - 2 : 0], i_cry };
+    // Calculate add (a + b) for each level
+    assign w_num_add[0] = i_num_a[0] ^ i_num_b[0];
+    assign w_num_add[1] = i_num_a[1] ^ i_num_b[1];
+    assign w_num_add[2] = i_num_a[2] ^ i_num_b[2];
+    assign w_num_add[3] = i_num_a[3] ^ i_num_b[3];
 
-    /** Calculate result.*/
-    generate
-        genvar i;
-        for (i = 0; i < 4; i = i + 1) begin
-            assign w_res[i] = i_num_a[i] ^ i_num_b[i] ^ w_cry[i];
-        end
-    endgenerate
+    // Calculate mul (a * b) for each level
+    assign w_num_mul[0] = i_num_a[0] & i_num_b[0];
+    assign w_num_mul[1] = i_num_a[1] & i_num_b[1];
+    assign w_num_mul[2] = i_num_a[2] & i_num_b[2];
+    assign w_num_mul[3] = i_num_a[3] & i_num_b[3];
 
-    /** Calculate temporary carry bits. */
-    generate
-        for (i = 0; i < 4; i = i + 1) begin
-            assign w_cry_imd[i] = (i_num_a[i] & i_num_b[i]) ||
-                                 ((i_num_a[i] | i_num_b[i]) & w_cry[i]);
-        end
-    endgenerate
+    // Calculate cry for each level
+    assign w_num_cry[0] = w_num_mul[0] |
+                         (w_num_add[0] & i_cry);
+    assign w_num_cry[1] = w_num_mul[1] |
+                         (w_num_add[1] & w_num_mul[0]) |
+                         (w_num_add[1] & w_num_add[0] & i_cry);
+    assign w_num_cry[2] = w_num_mul[2] |
+                         (w_num_add[2] & w_num_mul[1]) |
+                         (w_num_add[2] & w_num_add[1] & w_num_mul[0]) |
+                         (w_num_add[2] & w_num_add[1] & w_num_add[0] & i_cry);
+    assign w_num_cry[3] = w_num_mul[3] |
+                         (w_num_add[3] & w_num_mul[2]) |
+                         (w_num_add[3] & w_num_add[2] & w_num_mul[1]) |
+                         (w_num_add[3] & w_num_add[2] & w_num_add[1] & w_num_mul[0]) |
+                         (w_num_add[3] & w_num_add[2] & w_num_add[1] & w_num_add[0] & i_cry);
 
-    /** Output result and carry bits. */
-    assign o_res = w_res;
-    assign o_cry = w_cry_imd[3];
+    // Calculate res and cry
+    assign o_res[0] = w_num_add[0] ^ i_cry;
+    assign o_res[1] = w_num_add[1] ^ w_num_cry[0];
+    assign o_res[2] = w_num_add[2] ^ w_num_cry[1];
+    assign o_res[3] = w_num_add[3] ^ w_num_cry[2];
+    assign o_cry    = w_num_cry[3];
 
 endmodule

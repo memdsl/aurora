@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-28 14:52:18
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-10 15:00:59
+ * @LastEditTime: 2024-12-18 08:45:57
  * @Description : nnbit serial carry adder testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -13,7 +13,7 @@
 module add_nnbit_serial_tb();
 
 initial begin
-    $dumpfile("build/add_nnbit_serial.vcd");
+    $dumpfile("build/add_nnbit_serial_tb.vcd");
     $dumpvars(0, add_nnbit_serial_tb);
 end
 

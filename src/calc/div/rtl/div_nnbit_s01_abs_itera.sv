@@ -2,11 +2,13 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-16 20:05:41
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-10 15:01:03
+ * @LastEditTime: 2024-12-19 09:37:46
  * @Description : 01bit absolute value iterative divider
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
+
+`timescale 1ns / 1ps
 
 module div_nnbit_s01_abs_itera #(
     parameter DATA_WIDTH = 8
@@ -36,7 +38,7 @@ module div_nnbit_s01_abs_itera #(
     logic                          r_rem_pos;
     logic [DATA_WIDTH * 2 - 1 : 0] r_num_x_abs;
     logic [DATA_WIDTH * 2 - 1 : 0] r_num_y_abs;
-    logic [DATA_WIDTH - 1 : 0]     r_res;
+    logic [DATA_WIDTH     - 1 : 0] r_res;
     logic [DATA_WIDTH * 2 - 1 : 0] r_rem;
 
     logic [DATA_WIDTH * 2 - 1 : 0] w_num_t;
@@ -143,18 +145,18 @@ module div_nnbit_s01_abs_itera #(
         if (!i_rst_n) begin
             r_res_pos   <= 1'b0;
             r_rem_pos   <= 1'b0;
-            r_num_x_abs <= {(DATA_WIDTH * 2 - 1){1'b0}};
-            r_num_y_abs <= {(DATA_WIDTH * 2 - 1){1'b0}};
-            r_res       <= {DATA_WIDTH{1'b0}};
-            r_rem       <= {DATA_WIDTH{1'b0}};
+            r_num_x_abs <= {(DATA_WIDTH * 2){1'b0}};
+            r_num_y_abs <= {(DATA_WIDTH * 2){1'b0}};
+            r_res       <= {(DATA_WIDTH){1'b0}};
+            r_rem       <= {(DATA_WIDTH * 2){1'b0}};
         end
         else begin
             case (r_state_curr)
                 S_IDLE: begin
                     r_res_pos   <= 1'b0;
                     r_rem_pos   <= 1'b0;
-                    r_num_x_abs <= {(DATA_WIDTH * 2 - 1){1'b0}};
-                    r_num_y_abs <= {(DATA_WIDTH * 2 - 1){1'b0}};
+                    r_num_x_abs <= {(DATA_WIDTH * 2){1'b0}};
+                    r_num_y_abs <= {(DATA_WIDTH * 2){1'b0}};
                 end
                 S_DATA_IN: begin
                     if (i_signed) begin

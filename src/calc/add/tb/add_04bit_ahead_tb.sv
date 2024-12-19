@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-28 14:52:18
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-10 15:01:43
+ * @LastEditTime: 2024-12-18 10:13:44
  * @Description : 04bit ahead carry adder testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -13,7 +13,7 @@
 module add_04bit_ahead_tb();
 
 initial begin
-    $dumpfile("build/add_04bit_ahead.vcd");
+    $dumpfile("build/add_04bit_ahead_tb.vcd");
     $dumpvars(0, add_04bit_ahead_tb);
 end
 
