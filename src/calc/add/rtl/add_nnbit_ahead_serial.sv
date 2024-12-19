@@ -2,12 +2,13 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-03 18:18:33
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-19 10:24:57
+ * @LastEditTime: 2024-12-19 14:21:43
  * @Description : nnbit ahead carry serial adder
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
 
+`timescale 1ns / 1ps
 `include "add_04bit_ahead.sv"
 
 /**

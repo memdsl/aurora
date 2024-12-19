@@ -2,12 +2,13 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-02 18:48:41
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-19 14:12:00
+ * @LastEditTime: 2024-12-19 15:11:05
  * @Description : 2nbit booth multiplier
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
 
+`timescale 1ns / 1ps
 `include "mul_02bit_booth.sv"
 
 module mul_2nbit_booth #(
@@ -30,7 +31,7 @@ module mul_2nbit_booth #(
     logic [DATA_WIDTH * 2 - 1 : 0] w_res;
     logic                          w_cry;
 
-    int count;
+    int c_cnt;
 
     always_ff @(posedge i_clk) begin
         if (!i_rst_n) begin
@@ -38,15 +39,15 @@ module mul_2nbit_booth #(
             r_num_y <= {i_num_y, 1'b0};
             r_res   <= {(DATA_WIDTH * 2){1'b0}};
             r_cry   <= 1'b0;
-            count   <= 0;
+            c_cnt   <= 0;
         end
         else begin
-            if (count == (DATA_WIDTH / 2) ||
+            if (c_cnt == (DATA_WIDTH / 2) ||
                 r_num_y == {(DATA_WIDTH + 1){1'b0}}) begin
                 o_end <= 1'b1;
                 o_res <= r_res;
                 o_cry <= r_cry;
-                count <= count;
+                c_cnt <= c_cnt;
             end
             else begin
                 o_end          <= 1'b0;
@@ -55,7 +56,7 @@ module mul_2nbit_booth #(
                 {r_cry, r_res} <= r_res + w_res + {{(DATA_WIDTH * 2 - 1){1'b0}}, w_cry};
                 r_num_x        <= (r_num_x << 2);
                 r_num_y        <= (r_num_y >> 2);
-                count          <= count + 1'b1;
+                c_cnt          <= c_cnt + 1'b1;
             end
         end
     end

@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-16 20:05:41
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-19 09:37:46
+ * @LastEditTime: 2024-12-19 15:10:36
  * @Description : 01bit absolute value iterative divider
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -29,7 +29,7 @@ module div_nnbit_s01_abs_itera #(
     parameter S_CALC     = 4'b0100;
     parameter S_DATA_OUT = 4'b1000;
 
-    int count;
+    int c_cnt;
 
     logic [3 : 0] r_state_curr;
     logic [3 : 0] r_state_next;
@@ -45,14 +45,14 @@ module div_nnbit_s01_abs_itera #(
 
     always_ff @(posedge i_clk) begin
         if (!i_rst_n) begin
-            count <= 0;
+            c_cnt <= 0;
         end
         else begin
-            if (count == 1 + DATA_WIDTH + 1) begin
-                count <= count;
+            if (c_cnt == 1 + DATA_WIDTH + 1) begin
+                c_cnt <= c_cnt;
             end
             else begin
-                count <= count + 1;
+                c_cnt <= c_cnt + 1;
             end
         end
     end
@@ -80,7 +80,7 @@ module div_nnbit_s01_abs_itera #(
                 r_state_next = S_CALC;
             end
             S_CALC: begin
-                if (count == 1 + DATA_WIDTH) begin
+                if (c_cnt == 1 + DATA_WIDTH) begin
                     r_state_next = S_DATA_OUT;
                 end
                 else begin

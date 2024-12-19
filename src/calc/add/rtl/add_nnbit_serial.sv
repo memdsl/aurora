@@ -8,6 +8,7 @@
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
 
+`timescale 1ns / 1ps
 `include "add_01bit_full.sv"
 
 /**

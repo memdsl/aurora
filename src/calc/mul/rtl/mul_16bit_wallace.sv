@@ -2,12 +2,13 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-05 08:43:24
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-19 10:27:01
+ * @LastEditTime: 2024-12-19 15:11:15
  * @Description : 16bit wallace tree multiplier
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
 
+`timescale 1ns / 1ps
 `include "add_nnbit_serial.sv"
 `include "mul_01bitx08_wallace.sv"
 `include "mul_02bit_booth.sv"
@@ -128,7 +129,7 @@ module mul_16bit_wallace(
             r_add_cry   <= 1'b0;
         end
         else begin
-            r_add_num_a <= (w_wallace_cry[30 : 0] << 1) | w_switch_cry[6];
+            r_add_num_a <= ({1'b0, w_wallace_cry[30 : 0]} << 1) | {31'b0, w_switch_cry[6]};
             r_add_num_b <= w_wallace_res;
             r_add_cry   <= w_switch_cry[7];
         end
@@ -136,18 +137,18 @@ module mul_16bit_wallace(
 
     /* ===================================================================== */
 
-    int count = 0;
+    int c_cnt = 0;
 
     always_ff @(posedge i_clk) begin
         if (!i_rst_n) begin
-            count <= 32'h0000_0000;
+            c_cnt <= 32'h0000_0000;
         end
         else begin
-            if (count == 32'h3) begin
-                count <= count;
+            if (c_cnt == 32'h3) begin
+                c_cnt <= c_cnt;
             end
             else begin
-                count <= count + 1'b1;
+                c_cnt <= c_cnt + 1'b1;
             end
         end
     end
@@ -156,9 +157,9 @@ module mul_16bit_wallace(
     logic [31 : 0] w_add_num_b;
     logic          w_add_cry;
 
-    assign w_add_num_a = (count == 32'h3) ? r_add_num_a : 32'h0000_0000;
-    assign w_add_num_b = (count == 32'h3) ? r_add_num_b : 32'h0000_0000;
-    assign w_add_cry   = (count == 32'h3) ? r_add_cry   : 1'b0;
+    assign w_add_num_a = (c_cnt == 32'h3) ? r_add_num_a : 32'h0000_0000;
+    assign w_add_num_b = (c_cnt == 32'h3) ? r_add_num_b : 32'h0000_0000;
+    assign w_add_cry   = (c_cnt == 32'h3) ? r_add_cry   : 1'b0;
 
     add_nnbit_serial #(
         .DATA_WIDTH(32)
@@ -170,5 +171,5 @@ module mul_16bit_wallace(
         .o_cry  (o_cry)
     );
 
-    assign o_end = (count == 32'h3) ? 1'b1 : 1'b0;
+    assign o_end = (c_cnt == 32'h3) ? 1'b1 : 1'b0;
 endmodule

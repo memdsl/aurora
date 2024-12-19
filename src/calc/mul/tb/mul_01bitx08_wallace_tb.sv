@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-07 22:00:52
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-19 10:27:32
+ * @LastEditTime: 2024-12-19 14:13:53
  * @Description : 01bit wallace tree for adding 8 numbers testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -10,12 +10,10 @@
 
 `timescale 1ns / 1ps
 
-`include "add_01bit_full.sv"
-
 module mul_01bitx08_wallace_tb();
 
 initial begin
-    $dumpfile("build/mul_01bitx08_wallace.vcd");
+    $dumpfile("build/mul_01bitx08_wallace_tb.vcd");
     $dumpvars(0, mul_01bitx08_wallace_tb);
 end
 

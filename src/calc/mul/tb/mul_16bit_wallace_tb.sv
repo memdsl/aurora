@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-05 08:45:17
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-10 15:01:51
+ * @LastEditTime: 2024-12-19 14:24:15
  * @Description : 16bit wallace tree multiplier testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -13,7 +13,7 @@
 module mul_16bit_wallace_tb();
 
 initial begin
-    $dumpfile("build/mul_16bit_wallace.vcd");
+    $dumpfile("build/mul_16bit_wallace_tb.vcd");
     $dumpvars(0, mul_16bit_wallace_tb);
 end
 
