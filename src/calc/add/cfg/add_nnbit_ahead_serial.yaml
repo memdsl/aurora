@@ -1,2 +1,3 @@
 FILE:
-    - add_nnbit_ahead_serial
+    - rtl/add_nnbit_ahead_serial.sv
+    - rtl/add_04bit_ahead.sv

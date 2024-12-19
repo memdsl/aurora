@@ -1,2 +1,2 @@
 FILE:
-    - mul_nnbit_shift
+    - rtl/mul_nnbit_shift.sv

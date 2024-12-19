@@ -1,2 +1,6 @@
 FILE:
-    - mul_16bit_wallace
+    - rtl/mul_16bit_wallace.sv
+    - ../add/rtl/add_01bit_full.sv
+    - ../add/rtl/add_nnbit_serial.sv
+    - rtl/mul_01bitx08_wallace.sv
+    - rtl/mul_02bit_booth.sv

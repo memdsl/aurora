@@ -2,14 +2,13 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-02 18:48:41
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-19 15:11:05
+ * @LastEditTime: 2024-12-19 15:33:55
  * @Description : 2nbit booth multiplier
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
 
 `timescale 1ns / 1ps
-`include "mul_02bit_booth.sv"
 
 module mul_2nbit_booth #(
     parameter DATA_WIDTH = 8

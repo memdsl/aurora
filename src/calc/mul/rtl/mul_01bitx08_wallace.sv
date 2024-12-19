@@ -2,14 +2,13 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-07 12:43:56
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-19 15:04:05
+ * @LastEditTime: 2024-12-19 15:32:34
  * @Description : 01bit wallace tree for adding 8 numbers
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
 
 `timescale 1ns / 1ps
-`include "add_01bit_full.sv"
 
 module mul_01bitx08_wallace(
     input  logic [7 : 0] i_num,

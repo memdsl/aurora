@@ -2,16 +2,13 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-05 08:43:24
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-19 15:11:15
+ * @LastEditTime: 2024-12-19 15:35:40
  * @Description : 16bit wallace tree multiplier
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
 
 `timescale 1ns / 1ps
-`include "add_nnbit_serial.sv"
-`include "mul_01bitx08_wallace.sv"
-`include "mul_02bit_booth.sv"
 
 module mul_16bit_wallace(
     input  logic          i_clk,

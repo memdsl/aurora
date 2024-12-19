@@ -13,11 +13,12 @@ IVERILOG_ARGS_VVP = $(BUILD_BIN) \
                     -n           \
                     -lxt2
 
-INCS_DIR = $(shell find $(AURORA_HOME)/src/ -type d -name "rtl")
+INCS_DIR = rtl
 INCS     = $(addprefix -I, $(INCS_DIR))
 
-SRCS = $(addprefix rtl/, $(subst ],,$(subst [,,$(FILE)))) \
-       $(addprefix tb/,  $(TOP).sv)
+SRCS_FILE = $(subst ',, $(subst $(TOOL_COMMA),$(TOOL_SPACE), $(subst ],, $(subst [,, $(FILE)))))
+SRCS      = $(SRCS_FILE) \
+            $(addprefix tb/,  $(TOP).sv)
 
 run:
 	mkdir -p build

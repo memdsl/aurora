@@ -1,2 +1,2 @@
 FILE:
-    - add_01bit_full
+    - rtl/add_01bit_full.sv

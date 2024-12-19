@@ -1,2 +1,3 @@
 FILE:
-    - mul_01bitx08_wallace
+    - rtl/mul_01bitx08_wallace.sv
+    - ../add/rtl/add_01bit_full.sv

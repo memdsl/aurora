@@ -1,2 +1,2 @@
 FILE:
-    - add_01bit_half
+    - rtl/add_01bit_half.sv

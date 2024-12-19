@@ -1,2 +1,3 @@
 FILE:
-    - mul_2nbit_booth
+    - rtl/mul_2nbit_booth.sv
+    - rtl/mul_02bit_booth.sv

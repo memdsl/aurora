@@ -49,7 +49,8 @@ SRCS_SV_SRC_BLACKLIST =
 SRCS_SV_DIR_BLACKLIST =
 SRCS_SV_BLACKLIST     = $(SRCS_SV_SRC_BLACKLIST)                            \
                         $(shell find $(SRCS_SV_DIR_BLACKLIST) -name "*.sv")
-SRCS_SV_WHITELIST    =  $(addprefix rtl/, $(subst ],,$(subst [,,$(FILE))))  \
+SRCS_SV_FILE          = $(subst ',, $(subst $(TOOL_COMMA),$(TOOL_SPACE), $(subst ],, $(subst [,, $(FILE)))))
+SRCS_SV_WHITELIST     = $(SRCS_SV_FILE) \
                         $(addprefix tb/,  $(TOP).sv)
 SRCS_SV               = $(filter-out $(SRCS_SV_BLACKLIST), $(SRCS_SV_WHITELIST))
 

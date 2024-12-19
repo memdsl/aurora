@@ -2,14 +2,11 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-22 20:56:57
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-19 15:06:18
+ * @LastEditTime: 2024-12-19 15:42:27
  * @Description : 01bit full adder
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
-
-`ifndef add_01bit_full
-`define add_01bit_full
 
 `timescale 1ns / 1ps
 
@@ -37,5 +34,3 @@ module add_01bit_full(
     assign o_cry = (i_num_a & i_num_b) | (i_num_a & i_cry) | (i_num_b & i_cry);
 
 endmodule
-
-`endif

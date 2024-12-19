@@ -2,14 +2,13 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-24 01:15:01
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-19 10:25:04
+ * @LastEditTime: 2024-12-19 15:43:36
  * @Description : nnbit serial carry adder
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
 
 `timescale 1ns / 1ps
-`include "add_01bit_full.sv"
 
 /**
  * @description: nnbit serial carry adder
