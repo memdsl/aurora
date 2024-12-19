@@ -2,11 +2,13 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-02 12:49:46
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-10 15:01:28
+ * @LastEditTime: 2024-12-19 10:09:56
  * @Description : nnbit shift multiplier
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
+
+`timescale 1ns / 1ps
 
 module mul_nnbit_shift #(
     parameter DATA_WIDTH = 8

@@ -45,13 +45,13 @@ initial begin
 end
 
 mul_16bit_wallace u_mul_16bit_wallace(
-    .i_clk(w_clk),
+    .i_clk  (w_clk),
     .i_rst_n(w_rst_n),
     .i_num_x(w_num_x),
     .i_num_y(w_num_y),
-    .o_end(),
-    .o_res(),
-    .o_cry()
+    .o_end  (),
+    .o_res  (),
+    .o_cry  ()
 );
 
 endmodule

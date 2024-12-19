@@ -33,8 +33,8 @@ end
 add_01bit_half u_add_01bit_half(
     .i_num_a(w_num_a),
     .i_num_b(w_num_b),
-    .o_res(),
-    .o_cry()
+    .o_res  (),
+    .o_cry  ()
 );
 
 endmodule

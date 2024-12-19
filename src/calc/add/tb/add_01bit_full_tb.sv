@@ -36,9 +36,9 @@ end
 add_01bit_full u_add_01bit_full(
     .i_num_a(w_num_a),
     .i_num_b(w_num_b),
-    .i_cry(w_cry),
-    .o_res(),
-    .o_cry()
+    .i_cry  (w_cry),
+    .o_res  (),
+    .o_cry  ()
 );
 
 endmodule

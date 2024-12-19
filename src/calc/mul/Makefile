@@ -1,4 +1,3 @@
-TOP ?= mul_nnbit_shift
-SRC ?= ${TOP}
+TEST ?= mul_nnbit_shift
 
 include ${AURORA_HOME}/src/Makefile

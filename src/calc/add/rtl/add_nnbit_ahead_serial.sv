@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-03 18:18:33
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-10 15:00:36
+ * @LastEditTime: 2024-12-19 10:24:57
  * @Description : nnbit ahead carry serial adder
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -39,9 +39,9 @@ module add_nnbit_ahead_serial #(
             add_04bit_ahead u_add_04bit_ahead(
                 .i_num_a(i_num_a[i * 4 + 3 : i * 4]),
                 .i_num_b(i_num_b[i * 4 + 3 : i * 4]),
-                .i_cry((i == 0) ? i_cry : w_cry[i - 1]),
-                .o_res(w_res[i * 4 + 3 : i * 4]),
-                .o_cry(w_cry[i])
+                .i_cry  ((i == 0) ? i_cry : w_cry[i - 1]),
+                .o_res  (w_res[i * 4 + 3 : i * 4]),
+                .o_cry  (w_cry[i])
             );
         end
     endgenerate

@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-02 19:01:58
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-10 15:01:54
+ * @LastEditTime: 2024-12-19 10:27:52
  * @Description : nnbit shfit multiplier testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -13,7 +13,7 @@
 module mul_nnbit_shift_tb();
 
 initial begin
-    $dumpfile("build/mul_nnbit_shift.vcd");
+    $dumpfile("build/mul_nnbit_shift_tb.vcd");
     $dumpvars(0, mul_nnbit_shift_tb);
 end
 
@@ -47,12 +47,12 @@ end
 mul_nnbit_shift #(
     .DATA_WIDTH(DATA_WIDTH)
 ) u_mul_nnbit_shift(
-    .i_clk(w_clk),
+    .i_clk  (w_clk),
     .i_rst_n(w_rst_n),
     .i_num_x(w_num_x),
     .i_num_y(w_num_y),
-    .o_end(),
-    .o_res()
+    .o_end  (),
+    .o_res  ()
 );
 
 endmodule

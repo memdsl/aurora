@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-02 18:48:41
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-10 15:01:18
+ * @LastEditTime: 2024-12-19 14:12:00
  * @Description : 2nbit booth multiplier
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -28,6 +28,7 @@ module mul_2nbit_booth #(
     logic                          r_cry;
 
     logic [DATA_WIDTH * 2 - 1 : 0] w_res;
+    logic                          w_cry;
 
     int count;
 
@@ -51,7 +52,7 @@ module mul_2nbit_booth #(
                 o_end          <= 1'b0;
                 o_res          <= {(DATA_WIDTH * 2){1'b0}};
                 o_cry          <= 1'b0;
-                {r_cry, r_res} <= r_res + w_res + w_cry;
+                {r_cry, r_res} <= r_res + w_res + {{(DATA_WIDTH * 2 - 1){1'b0}}, w_cry};
                 r_num_x        <= (r_num_x << 2);
                 r_num_y        <= (r_num_y >> 2);
                 count          <= count + 1'b1;
@@ -64,8 +65,8 @@ module mul_2nbit_booth #(
     ) u_mul_02bit_booth(
         .i_num_x(r_num_x),
         .i_num_y(r_num_y[2 : 0]),
-        .o_res(w_res),
-        .o_cry(w_cry)
+        .o_res  (w_res),
+        .o_cry  (w_cry)
     );
 
 endmodule

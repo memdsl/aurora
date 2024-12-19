@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-05 08:43:24
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-10 15:01:22
+ * @LastEditTime: 2024-12-19 10:27:01
  * @Description : 16bit wallace tree multiplier
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -67,8 +67,8 @@ module mul_16bit_wallace(
             mul_02bit_booth #(.DATA_WIDTH(16)) u_mul_02bit_booth(
                 .i_num_x(w_num_x << (i * 2)),
                 .i_num_y(w_wallace_num_y[i][2 : 0]),
-                .o_res(w_booth_res[i]),
-                .o_cry(w_booth_cry[i])
+                .o_res  (w_booth_res[i]),
+                .o_cry  (w_booth_cry[i])
             );
         end
     endgenerate
@@ -103,11 +103,11 @@ module mul_16bit_wallace(
         for (i = 0; i < 32; i = i + 1) begin: calc_wallace
             assign w_wallace_num[i] = w_switch_res[i];
             mul_01bitx08_wallace u_mul_01bitx08_wallace(
-                .i_num(w_wallace_num[i]),
+                .i_num      (w_wallace_num[i]),
                 .i_cry_06bit(w_wallace_cry_06bit_i[i]),
                 .o_cry_06bit(w_wallace_cry_06bit_o[i]),
-                .o_res(w_wallace_res[i]),
-                .o_cry(w_wallace_cry[i])
+                .o_res      (w_wallace_res[i]),
+                .o_cry      (w_wallace_cry[i])
             );
             if (i != 31) begin
                 assign w_wallace_cry_06bit_i[i + 1] = w_wallace_cry_06bit_o[i];
@@ -165,9 +165,9 @@ module mul_16bit_wallace(
     ) u_add_nnbit_serial(
         .i_num_a(w_add_num_a),
         .i_num_b(w_add_num_b),
-        .i_cry(w_add_cry),
-        .o_res(o_res),
-        .o_cry(o_cry)
+        .i_cry  (w_add_cry),
+        .o_res  (o_res),
+        .o_cry  (o_cry)
     );
 
     assign o_end = (count == 32'h3) ? 1'b1 : 1'b0;

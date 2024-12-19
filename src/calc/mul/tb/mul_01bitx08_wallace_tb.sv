@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-07 22:00:52
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-10 15:01:37
+ * @LastEditTime: 2024-12-19 10:27:32
  * @Description : 01bit wallace tree for adding 8 numbers testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -51,11 +51,11 @@ initial begin
 end
 
 mul_01bitx08_wallace u_mul_01bitx08_wallace(
-    .i_num(w_num),
+    .i_num      (w_num),
     .i_cry_06bit(w_cry),
     .o_cry_06bit(),
-    .o_res(),
-    .o_cry()
+    .o_res      (),
+    .o_cry      ()
 );
 
 endmodule

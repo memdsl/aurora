@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-03 19:53:31
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-18 02:58:52
+ * @LastEditTime: 2024-12-19 10:25:30
  * @Description :nnbit ahead carry adder testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -40,9 +40,9 @@ add_nnbit_ahead_serial #(
 ) u_add_nnbit_ahead_serial(
     .i_num_a(w_num_a),
     .i_num_b(w_num_b),
-    .i_cry(w_cry),
-    .o_res(),
-    .o_cry()
+    .i_cry  (w_cry),
+    .o_res  (),
+    .o_cry  ()
 );
 
 endmodule

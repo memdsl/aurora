@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-28 14:52:18
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-18 08:45:57
+ * @LastEditTime: 2024-12-19 10:25:35
  * @Description : nnbit serial carry adder testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -40,9 +40,9 @@ add_nnbit_serial #(
 ) u_add_nnbit_serial(
     .i_num_a(w_num_a),
     .i_num_b(w_num_b),
-    .i_cry(w_cry),
-    .o_res(),
-    .o_cry()
+    .i_cry  (w_cry),
+    .o_res  (),
+    .o_cry  ()
 );
 
 endmodule

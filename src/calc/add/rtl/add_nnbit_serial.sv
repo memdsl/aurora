@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-24 01:15:01
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-09-08 18:22:18
+ * @LastEditTime: 2024-12-19 10:25:04
  * @Description : nnbit serial carry adder
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -45,9 +45,9 @@ module add_nnbit_serial #(
             add_01bit_full u_add_01bit_full(
                 .i_num_a(i_num_a[i]),
                 .i_num_b(i_num_b[i]),
-                .i_cry((i == 0) ? i_cry : w_cry[i - 1]),
-                .o_res(w_res[i]),
-                .o_cry(w_cry[i])
+                .i_cry  ((i == 0) ? i_cry : w_cry[i - 1]),
+                .o_res  (w_res[i]),
+                .o_cry  (w_cry[i])
             );
         end
     endgenerate

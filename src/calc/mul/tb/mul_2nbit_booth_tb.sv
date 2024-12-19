@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-03 23:00:09
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-10 15:01:33
+ * @LastEditTime: 2024-12-19 14:10:15
  * @Description : 2nbit booth multiplier testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -13,7 +13,7 @@
 module mul_2nbit_booth_tb();
 
 initial begin
-    $dumpfile("build/mul_2nbit_booth.vcd");
+    $dumpfile("build/mul_2nbit_booth_tb.vcd");
     $dumpvars(0, mul_2nbit_booth_tb);
 end
 
@@ -47,13 +47,13 @@ end
 mul_2nbit_booth #(
     .DATA_WIDTH(DATA_WIDTH)
 ) u_mul_2nbit_booth(
-    .i_clk(w_clk),
+    .i_clk  (w_clk),
     .i_rst_n(w_rst_n),
     .i_num_x(w_num_x),
     .i_num_y(w_num_y),
-    .o_end(),
-    .o_res(),
-    .o_cry()
+    .o_end  (),
+    .o_res  (),
+    .o_cry  ()
 );
 
 endmodule

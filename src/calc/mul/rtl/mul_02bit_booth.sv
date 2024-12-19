@@ -2,11 +2,13 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-07 22:20:40
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-10 15:01:14
+ * @LastEditTime: 2024-12-19 10:21:15
  * @Description : 02bit booth multiplier
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
+
+`timescale 1ns / 1ps
 
 module mul_02bit_booth #(
     parameter DATA_WIDTH = 8
