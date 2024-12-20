@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-12-26 11:29:44
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-26 14:52:06
+ * @LastEditTime: 2024-12-26 15:31:20
  * @Description : FIFO with asynchronous mode.
  *
  * Copyright (c) 2024 by MEMDSL, All Rights Reserved.
@@ -55,7 +55,7 @@ module fifo_mode_a #(
         .o_data (r_wr_ptr)
     );
 
-    tool_bin_2_gry #(
+    cvrt_bin2gry #(
         .DATA_WIDTH(PTRS_WIDTH)
     ) u_tool_wr_ptr(
         .i_bin(r_wr_ptr),
@@ -112,7 +112,7 @@ module fifo_mode_a #(
         .o_data (r_rd_ptr)
     );
 
-    tool_bin_2_gry #(
+    cvrt_bin2gry #(
         .DATA_WIDTH(PTRS_WIDTH)
     ) u_tool_rd_ptr(
         .i_bin(r_rd_ptr),

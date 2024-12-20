@@ -1,0 +1,4 @@
+FILE:
+    - rtl/fifo_mode_s.sv
+    - ../reg/rtl/reg_def.sv
+    - ../reg/rtl/reg_rst_y_mode_a_en_y.sv

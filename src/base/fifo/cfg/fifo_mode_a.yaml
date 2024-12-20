@@ -1,0 +1,6 @@
+FILE:
+    - rtl/fifo_mode_a.sv
+    - ../reg/rtl/reg_def.sv
+    - ../reg/rtl/reg_rst_y_mode_a_en_n.sv
+    - ../reg/rtl/reg_rst_y_mode_a_en_y.sv
+    - ../cvrt/rtl/cvrt_bin2gry.sv
