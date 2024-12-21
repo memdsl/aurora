@@ -20,22 +20,22 @@ end
 parameter CYCLE      = 10;
 parameter DATA_WIDTH = 8;
 
-logic                      w_clk;
-logic                      w_rst_n;
+logic                      r_clk;
+logic                      r_rst_n;
 logic                      w_valid_i;
 logic [DATA_WIDTH - 1 : 0] w_num_x;
 logic [DATA_WIDTH - 1 : 0] w_num_y;
 logic                      w_valid_o;
 
-always #(CYCLE / 2) w_clk = ~w_clk;
+always #(CYCLE / 2) r_clk = ~r_clk;
 
 initial begin
-    w_clk   = 1'b0;
-    w_rst_n = 1'b0;
+    r_clk   = 1'b0;
+    r_rst_n = 1'b0;
     w_num_x = 8'b10010101;
     w_num_y = 8'b00011101;
     #(CYCLE * 1)
-    w_rst_n = 1'b1;
+    r_rst_n = 1'b1;
     #(CYCLE * 50);
     $finish;
 end
@@ -43,8 +43,8 @@ end
 div_nnbit_s01_abs_itera #(
     .DATA_WIDTH(8)
 ) u_div_nnbit_s01_abs_itera(
-    .i_clk   (w_clk),
-    .i_rst_n (w_rst_n),
+    .i_clk   (r_clk),
+    .i_rst_n (r_rst_n),
     .i_valid (w_valid_i),
     .i_signed(1'b1),
     .i_num_x (w_num_x),
