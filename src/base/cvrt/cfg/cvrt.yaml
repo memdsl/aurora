@@ -1,3 +1,2 @@
 FILE:
-    - rtl/reg_def.sv
     - rtl/$this.sv
