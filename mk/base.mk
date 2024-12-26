@@ -1,7 +1,7 @@
 .PHONY: run sim clean
 
 define PARSE_CFG
-    $(shell $(AURORA_HOME)/tool/parse_cfg.py $(shell pwd)/cfg/$(TEST).yaml)
+    $(shell $(AURORA_HOME)/script/parse_cfg.py $(shell pwd)/cfg/$(TEST).yaml)
 endef
 $(eval $(PARSE_CFG))
 

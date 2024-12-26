@@ -2,19 +2,19 @@
  * @Author      : myyerrol
  * @Date        : 2024-11-02 18:10:19
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-19 16:37:56
- * @Description : Tools testbench.
+ * @LastEditTime: 2024-12-26 15:06:47
+ * @Description : Testbench.
  *
  * Copyright (c) 2024 by MEMDSL, All Rights Reserved.
  */
 
 `timescale 1ns / 1ps
 
-module tool_tb();
+module cvrt_gry2bin_tb();
 
 initial begin
-    $dumpfile("build/tool_tb.vcd");
-    $dumpvars(0, tool_tb);
+    $dumpfile("build/cvrt_gry2bin_tb.vcd");
+    $dumpvars(0, cvrt_gry2bin_tb);
 end
 
 parameter DATA_WIDTH = 4;
@@ -42,16 +42,9 @@ initial begin
     #10 $finish;
 end
 
-tool_bin_2_gry #(
+cvrt_gry2bin #(
     .DATA_WIDTH(DATA_WIDTH)
-) u_tool_bin_2_gry(
-    .i_bin(w_bin),
-    .o_gry(w_gry)
-);
-
-tool_gry_2_bin #(
-    .DATA_WIDTH(DATA_WIDTH)
-) u_tool_gry_2_bin(
+) u_cvrt_gry2bin(
     .i_gry(w_gry),
     .o_bin()
 );
