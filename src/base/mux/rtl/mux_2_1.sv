@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2025-02-02 19:13:44
  * @LastEditors : myyerrol
- * @LastEditTime: 2025-02-02 19:21:33
+ * @LastEditTime: 2025-02-02 19:53:53
  * @Description : Multiplexer 2 to 1.
  *
  * Copyright (c) 2025 by MEMDSL, All Rights Reserved.
@@ -10,7 +10,7 @@
 
 `timescale 1ns / 1ps
 
-module mux_2to1 #(
+module mux_2_1 #(
     parameter DATA_WIDTH = 32
 ) (
     input  logic                      i_key,

@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2025-02-02 19:14:02
  * @LastEditors : myyerrol
- * @LastEditTime: 2025-02-02 19:21:50
+ * @LastEditTime: 2025-02-02 19:53:47
  * @Description : Multiplexer 4 to 1.
  *
  * Copyright (c) 2025 by MEMDSL, All Rights Reserved.
@@ -10,7 +10,7 @@
 
 `timescale 1ns / 1ps
 
-module mux_4to1 #(
+module mux_4_1 #(
     parameter DATA_WIDTH = 32
 ) (
     input  logic        [1              : 0] i_key,
