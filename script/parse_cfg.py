@@ -17,6 +17,8 @@ def main():
         yaml_file = yaml_dirs + "/cvrt.yaml"
     elif (yaml_file.find("reg") != -1):
         yaml_file = yaml_dirs + "/reg.yaml"
+    elif (yaml_file.find("mux") != -1):
+        yaml_file = yaml_dirs + "/mux.yaml"
 
     with open(yaml_file, "r") as file:
         cfgs = yaml.safe_load(file)
