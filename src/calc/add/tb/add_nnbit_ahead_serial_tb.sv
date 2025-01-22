@@ -2,8 +2,8 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-03 19:53:31
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-19 10:25:30
- * @Description :nnbit ahead carry adder testbench
+ * @LastEditTime: 2025-02-02 19:37:30
+ * @Description : nnbit ahead carry adder testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
  */
