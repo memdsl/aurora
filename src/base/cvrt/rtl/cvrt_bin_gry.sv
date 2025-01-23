@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-11-02 15:41:19
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-26 15:04:58
+ * @LastEditTime: 2025-02-02 19:55:09
  * @Description : Convert binary to gray code.
  *
  * Copyright (c) 2024 by MEMDSL, All Rights Reserved.
@@ -10,7 +10,7 @@
 
 `timescale 1ns / 1ps
 
-module cvrt_bin2gry #(
+module cvrt_bin_gry #(
     parameter DATA_WIDTH = 32
 ) (
     input  logic [DATA_WIDTH - 1 : 0] i_bin,
