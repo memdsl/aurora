@@ -1,0 +1,5 @@
+FILE:
+    - rtl/mux.sv
+    - rtl/mux_key.sv
+    - rtl/mux_key_def.sv
+    - rtl/$this.sv
