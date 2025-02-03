@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-28 14:52:06
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-18 03:36:41
+ * @LastEditTime: 2025-02-03 14:24:27
  * @Description : 01bit full adder testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -17,26 +17,26 @@ initial begin
     $dumpvars(0, add_01bit_full_tb);
 end
 
-logic w_num_a;
-logic w_num_b;
-logic w_cry;
+logic r_num_a;
+logic r_num_b;
+logic r_cry;
 
 initial begin
-        w_num_a = 0; w_num_b = 0; w_cry = 0;
-    #10 w_num_a = 0; w_num_b = 1; w_cry = 0;
-    #10 w_num_a = 1; w_num_b = 0; w_cry = 0;
-    #10 w_num_a = 1; w_num_b = 1; w_cry = 0;
-    #10 w_num_a = 0; w_num_b = 0; w_cry = 1;
-    #10 w_num_a = 0; w_num_b = 1; w_cry = 1;
-    #10 w_num_a = 1; w_num_b = 0; w_cry = 1;
-    #10 w_num_a = 1; w_num_b = 1; w_cry = 1;
+        r_num_a = 0; r_num_b = 0; r_cry = 0;
+    #10 r_num_a = 0; r_num_b = 1; r_cry = 0;
+    #10 r_num_a = 1; r_num_b = 0; r_cry = 0;
+    #10 r_num_a = 1; r_num_b = 1; r_cry = 0;
+    #10 r_num_a = 0; r_num_b = 0; r_cry = 1;
+    #10 r_num_a = 0; r_num_b = 1; r_cry = 1;
+    #10 r_num_a = 1; r_num_b = 0; r_cry = 1;
+    #10 r_num_a = 1; r_num_b = 1; r_cry = 1;
     #10 $finish;
 end
 
 add_01bit_full u_add_01bit_full(
-    .i_num_a(w_num_a),
-    .i_num_b(w_num_b),
-    .i_cry  (w_cry),
+    .i_num_a(r_num_a),
+    .i_num_b(r_num_b),
+    .i_cry  (r_cry),
     .o_res  (),
     .o_cry  ()
 );

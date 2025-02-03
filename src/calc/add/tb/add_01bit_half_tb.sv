@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-06-28 14:52:17
  * @LastEditors : myyerrol
- * @LastEditTime: 2024-12-18 03:57:22
+ * @LastEditTime: 2025-02-03 14:24:29
  * @Description : 01bit half adder testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -17,22 +17,22 @@ initial begin
     $dumpvars(0, add_01bit_half_tb);
 end
 
-logic w_num_a;
-logic w_num_b;
+logic r_num_a;
+logic r_num_b;
 
 initial begin
-    w_num_a = 0;
-    w_num_b = 0;
-    #10 w_num_a = 0; w_num_b = 0;
-    #10 w_num_a = 0; w_num_b = 1;
-    #10 w_num_a = 1; w_num_b = 0;
-    #10 w_num_a = 1; w_num_b = 1;
+    r_num_a = 0;
+    r_num_b = 0;
+    #10 r_num_a = 0; r_num_b = 0;
+    #10 r_num_a = 0; r_num_b = 1;
+    #10 r_num_a = 1; r_num_b = 0;
+    #10 r_num_a = 1; r_num_b = 1;
     #10 $finish;
 end
 
 add_01bit_half u_add_01bit_half(
-    .i_num_a(w_num_a),
-    .i_num_b(w_num_b),
+    .i_num_a(r_num_a),
+    .i_num_b(r_num_b),
     .o_res  (),
     .o_cry  ()
 );

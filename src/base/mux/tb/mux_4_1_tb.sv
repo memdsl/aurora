@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-11-02 18:10:12
  * @LastEditors : myyerrol
- * @LastEditTime: 2025-02-02 19:54:19
+ * @LastEditTime: 2025-02-03 14:23:10
  * @Description : Testbench.
  *
  * Copyright (c) 2024 by MEMDSL, All Rights Reserved.
@@ -19,29 +19,29 @@ end
 
 parameter DATA_WIDTH = 32;
 
-logic        [             1 : 0] w_key;
-logic [3 : 0][DATA_WIDTH - 1 : 0] w_val;
+logic        [             1 : 0] r_key;
+logic [3 : 0][DATA_WIDTH - 1 : 0] r_val;
 
 initial begin
-    w_key    = 2'b00;
-    w_val[0] = 32'h00000001;
-    w_val[1] = 32'h00000002;
-    w_val[2] = 32'h00000003;
-    w_val[3] = 32'h00000004;
+    r_key    = 2'b00;
+    r_val[0] = 32'h00000001;
+    r_val[1] = 32'h00000002;
+    r_val[2] = 32'h00000003;
+    r_val[3] = 32'h00000004;
     #20;
-    w_key    = 2'b01;
+    r_key    = 2'b01;
     #20;
-    w_key    = 2'b10;
+    r_key    = 2'b10;
     #20;
-    w_key    = 2'b11;
+    r_key    = 2'b11;
     #20 $finish;
 end
 
 mux_4_1 #(
     .DATA_WIDTH(DATA_WIDTH)
 ) u_mux_4_1(
-    .i_key(w_key),
-    .i_val(w_val),
+    .i_key(r_key),
+    .i_val(r_val),
     .o_val()
 );
 

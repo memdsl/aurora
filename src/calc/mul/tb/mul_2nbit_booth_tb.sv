@@ -22,22 +22,22 @@ parameter DATA_WIDTH = 4;
 
 logic                      r_clk;
 logic                      r_rst_n;
-logic [DATA_WIDTH - 1 : 0] w_num_x;
-logic [DATA_WIDTH - 1 : 0] w_num_y;
+logic [DATA_WIDTH - 1 : 0] r_num_x;
+logic [DATA_WIDTH - 1 : 0] r_num_y;
 
 always #(CYCLE / 2) r_clk = ~r_clk;
 
 initial begin
     r_clk   = 1'b0;
     r_rst_n = 1'b0;
-    w_num_x = 4'b1010;
-    w_num_y = 4'b1001;
+    r_num_x = 4'b1010;
+    r_num_y = 4'b1001;
     #(CYCLE * 1);
     r_rst_n = 1'b1;
     #(CYCLE * 10);
     r_rst_n = 1'b0;
-    w_num_x = 4'b1010;
-    w_num_y = 4'b0101;
+    r_num_x = 4'b1010;
+    r_num_y = 4'b0101;
     #(CYCLE * 1);
     r_rst_n = 1'b1;
     #(CYCLE * 10);
@@ -49,8 +49,8 @@ mul_2nbit_booth #(
 ) u_mul_2nbit_booth(
     .i_clk  (r_clk),
     .i_rst_n(r_rst_n),
-    .i_num_x(w_num_x),
-    .i_num_y(w_num_y),
+    .i_num_x(r_num_x),
+    .i_num_y(r_num_y),
     .o_end  (),
     .o_res  (),
     .o_cry  ()

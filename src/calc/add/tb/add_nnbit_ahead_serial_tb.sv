@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-07-03 19:53:31
  * @LastEditors : myyerrol
- * @LastEditTime: 2025-02-02 19:37:30
+ * @LastEditTime: 2025-02-03 14:24:37
  * @Description : nnbit ahead carry adder testbench
  *
  * Copyright (c) 2024 by myyerrol, All Rights Reserved.
@@ -19,28 +19,28 @@ end
 
 parameter DATA_WIDTH = 8;
 
-logic [DATA_WIDTH - 1 : 0] w_num_a;
-logic [DATA_WIDTH - 1 : 0] w_num_b;
-logic                      w_cry;
+logic [DATA_WIDTH - 1 : 0] r_num_a;
+logic [DATA_WIDTH - 1 : 0] r_num_b;
+logic                      r_cry;
 
 initial begin
-        w_num_a = 8'b11110000; w_num_b = 8'b11110000; w_cry = 0;
-    #10 w_num_a = 8'b11111111; w_num_b = 8'b11111111; w_cry = 0;
-    #10 w_num_a = 8'b11111100; w_num_b = 8'b11111001; w_cry = 0;
-    #10 w_num_a = 8'b11110111; w_num_b = 8'b11110110; w_cry = 0;
-    #10 w_num_a = 8'b11110101; w_num_b = 8'b11110101; w_cry = 1;
-    #10 w_num_a = 8'b11111110; w_num_b = 8'b11111001; w_cry = 1;
-    #10 w_num_a = 8'b11110010; w_num_b = 8'b11110110; w_cry = 1;
-    #10 w_num_a = 8'b11110110; w_num_b = 8'b11111100; w_cry = 1;
+        r_num_a = 8'b11110000; r_num_b = 8'b11110000; r_cry = 0;
+    #10 r_num_a = 8'b11111111; r_num_b = 8'b11111111; r_cry = 0;
+    #10 r_num_a = 8'b11111100; r_num_b = 8'b11111001; r_cry = 0;
+    #10 r_num_a = 8'b11110111; r_num_b = 8'b11110110; r_cry = 0;
+    #10 r_num_a = 8'b11110101; r_num_b = 8'b11110101; r_cry = 1;
+    #10 r_num_a = 8'b11111110; r_num_b = 8'b11111001; r_cry = 1;
+    #10 r_num_a = 8'b11110010; r_num_b = 8'b11110110; r_cry = 1;
+    #10 r_num_a = 8'b11110110; r_num_b = 8'b11111100; r_cry = 1;
     #10 $finish;
 end
 
 add_nnbit_ahead_serial #(
     .DATA_WIDTH(DATA_WIDTH)
 ) u_add_nnbit_ahead_serial(
-    .i_num_a(w_num_a),
-    .i_num_b(w_num_b),
-    .i_cry  (w_cry),
+    .i_num_a(r_num_a),
+    .i_num_b(r_num_b),
+    .i_cry  (r_cry),
     .o_res  (),
     .o_cry  ()
 );
