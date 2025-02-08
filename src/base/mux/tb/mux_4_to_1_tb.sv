@@ -10,11 +10,11 @@
 
 `timescale 1ns / 1ps
 
-module mux_4_1_tb();
+module mux_4_to_1_tb();
 
 initial begin
-    $dumpfile("build/mux_4_1_tb.vcd");
-    $dumpvars(0, mux_4_1_tb);
+    $dumpfile("build/mux_4_to_1_tb.vcd");
+    $dumpvars(0, mux_4_to_1_tb);
 end
 
 parameter DATA_WIDTH = 32;
@@ -37,7 +37,7 @@ initial begin
     #20 $finish;
 end
 
-mux_4_1 #(
+mux_4_to_1 #(
     .DATA_WIDTH(DATA_WIDTH)
 ) u_mux_4_1(
     .i_key(r_key),

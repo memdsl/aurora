@@ -10,11 +10,11 @@
 
 `timescale 1ns / 1ps
 
-module mux_2_1_tb();
+module mux_2_to_1_tb();
 
 initial begin
-    $dumpfile("build/mux_2_1_tb.vcd");
-    $dumpvars(0, mux_2_1_tb);
+    $dumpfile("build/mux_2_to_1_tb.vcd");
+    $dumpvars(0, mux_2_to_1_tb);
 end
 
 parameter DATA_WIDTH = 32;
@@ -38,7 +38,7 @@ initial begin
     #20 $finish;
 end
 
-mux_2_1 #(
+mux_2_to_1 #(
     .DATA_WIDTH(DATA_WIDTH)
 ) u_mux_2_1(
     .i_key  (r_key),

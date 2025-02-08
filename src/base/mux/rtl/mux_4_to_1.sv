@@ -10,7 +10,7 @@
 
 `timescale 1ns / 1ps
 
-module mux_4_1 #(
+module mux_4_to_1 #(
     parameter DATA_WIDTH = 32
 ) (
     input  logic        [1              : 0] i_key,

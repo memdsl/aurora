@@ -2,7 +2,7 @@
  * @Author      : myyerrol
  * @Date        : 2024-11-02 18:10:19
  * @LastEditors : myyerrol
- * @LastEditTime: 2025-02-03 14:20:07
+ * @LastEditTime: 2025-02-08 09:45:04
  * @Description : Testbench.
  *
  * Copyright (c) 2024 by MEMDSL, All Rights Reserved.
@@ -10,11 +10,11 @@
 
 `timescale 1ns / 1ps
 
-module cvrt_bin_gry_tb();
+module cvrt_bin_to_gry_tb();
 
 initial begin
-    $dumpfile("build/cvrt_bin_gry_tb.vcd");
-    $dumpvars(0, cvrt_bin_gry_tb);
+    $dumpfile("build/cvrt_bin_to_gry_tb.vcd");
+    $dumpvars(0, cvrt_bin_to_gry_tb);
 end
 
 parameter DATA_WIDTH = 4;
@@ -41,9 +41,9 @@ initial begin
     #10 $finish;
 end
 
-cvrt_bin_gry #(
+cvrt_bin_to_gry #(
     .DATA_WIDTH(DATA_WIDTH)
-) u_cvrt_bin_gry(
+) u_cvrt_bin_to_gry(
     .i_bin(r_bin),
     .o_gry()
 );

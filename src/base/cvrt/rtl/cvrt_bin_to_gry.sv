@@ -10,7 +10,7 @@
 
 `timescale 1ns / 1ps
 
-module cvrt_bin_gry #(
+module cvrt_bin_to_gry #(
     parameter DATA_WIDTH = 32
 ) (
     input  logic [DATA_WIDTH - 1 : 0] i_bin,
